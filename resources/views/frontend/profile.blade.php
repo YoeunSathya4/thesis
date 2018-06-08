@@ -20,6 +20,9 @@
             display: table-cell;
             max-width: 220px;
         }
+        #profileMenu{
+        	color: #ffffff;font-size: 18px;text-align: center;
+        }
     </style>
 @endsection
 
@@ -156,13 +159,23 @@
 							<ul class="s-arthor-list">
 								
 								<li class="@yield('my-profile')">
-									<a id="hover-id" href="#">
-									<h6 style="color: #ffffff;">My Profile</h6>
+									<a id="hover-id" href="{{route('profile',$locale)}}">
+									<h6 id="profileMenu">My Profile</h6>
 									</a>
 								</li>
 								<li>
 									<a  href="#">
-										<h6 style="color: #ffffff;">Order History</h6>
+										<h6 id="profileMenu">Favorite Product</h6>
+									</a>
+								</li>
+								<li>
+									<a  href="#">
+										<h6 id="profileMenu">Panding Order</h6>
+									</a>
+								</li>
+								<li>
+									<a  href="#">
+										<h6 id="profileMenu">Order History</h6>
 									</a>
 								</li>
 								
@@ -172,7 +185,7 @@
 
 					</aside>
 					<!-- Aside -->
-
+					
 				</div>
 			</div>
 		</div>

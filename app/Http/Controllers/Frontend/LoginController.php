@@ -18,9 +18,12 @@ class LoginController extends FrontendController
     protected $redirectTo = 'en/profile';
 
     public function showFormLogin($locale) {
+
     	if(Auth::guard('customer')->user() == ''){
+
     		return view('frontend.login',['locale'=>$locale]);
     	}else{
+            
     		return redirect('en/profile');
     	}
         
@@ -30,7 +33,8 @@ class LoginController extends FrontendController
     {
         $credentials = $request->only($this->username(), 'password'); 
         //$credentials['status'] = 1; 
-        return $credentials;
+
+            return $credentials;
     }
 
     protected function sendLoginResponse(Request $request)
@@ -38,6 +42,19 @@ class LoginController extends FrontendController
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
+            $agent      = new Agent;
+            $info       = $agent::showInfo();
+            $ipAddress  = new IpAddress;
+            $ip         = $ipAddress::getIP(); 
+            //Save Logs
+            $log = new Log; 
+            //echo Auth::guard('customer')->id;die;
+            $log->customer_id   = Auth::guard('customer')->user()->id;
+            $log->ip        = $ip;
+            $log->os        = $info['os'];
+            $log->broswer   = $info['browser'];
+            $log->version   = $info['version'];
+            $log->save();
 
         return $this->authenticated($request, $this->guard('customer')->user())
                 ?: redirect()->intended($this->redirectPath());

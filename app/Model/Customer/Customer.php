@@ -35,6 +35,9 @@ class Customer extends Authenticatable
     public function logs() {
         return $this->hasMany('App\Model\Customer\Log', 'customer_id');
     }
+    public function codes() {
+        return $this->hasMany('App\Model\Customer\Code', 'customer_id');
+    }
     public function orders() {
         return $this->hasMany('App\Model\Order\Order', 'customer_id');
     }
@@ -47,5 +50,9 @@ class Customer extends Authenticatable
     // public function staffProperties() {
     //     return $this->hasMany('App\Model\Property\PropertyStaff', 'staff_id');
     // }
+
+    public function Favorites(){
+        return $this->hasMany('App\Model\Product\Product');
+    }
 
 }

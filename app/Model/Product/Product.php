@@ -22,4 +22,8 @@ class Product extends Model
     public function orderDetails(){
         return $this->hasMany('App\Model\Order\orderDetails');
     }
+
+    public function Favorites(){
+        return $this->hasMany('App\Model\Product\Product');
+    }
 }

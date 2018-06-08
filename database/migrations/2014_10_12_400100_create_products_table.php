@@ -25,12 +25,14 @@ class CreateProductsTable extends Migration
             $table->string('en_name', 250)->default('')->nullable();
             $table->string('kh_name', 250)->default('')->nullable();
             $table->integer('unit_price')->index()->nullable();
+            $table->integer('product_qty')->index()->nullable();
             $table->string('en_description', 550)->default('')->nullable();
             $table->string('kh_description', 550)->default('')->nullable();
             $table->text('en_content');
             $table->text('kh_content');
             $table->string('image', 250)->default('')->nullable();
             $table->boolean('is_published')->default(0);
+            $table->boolean('is_featured')->default(0);
              //The field that will appear for almost tables
             $table->integer('creator_id')->unsigned()->index()->nullable();
             $table->foreign('creator_id')->references('id')->on('users');
