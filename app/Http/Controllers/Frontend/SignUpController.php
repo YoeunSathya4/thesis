@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -15,6 +14,7 @@ use Illuminate\Validation\Rule;
 use Session ;
 
 use App\Model\Customer\Customer as Customer;
+use App\Model\Customer\Code as Code;
 
 class SignUpController extends Controller
 {
@@ -57,7 +57,6 @@ class SignUpController extends Controller
 
         event(new Registered($customer = $this->create($request->all())));
         $this->guard()->login($customer);
-
         return $this->registered($request, $customer) ?: redirect($this->redirectPath());
     }
 
@@ -95,7 +94,11 @@ class SignUpController extends Controller
     protected function create(array $data)
     {
         Session::flash('msg', 'Your account has been created. Please log in. ' );
-        
+        $code = str_random(4);
+        $code_data = new Code;
+        $code_data->customer_id = 1;
+        $code_data->code        = $code;
+        $code_data->save();
         return Customer::create(
             [
                 'name' => $data['name'],
@@ -110,5 +113,8 @@ class SignUpController extends Controller
         return Auth::guard('customer');
     }
 
+    public function verifyCodeForm($locale ){
+        return view('frontend.verify-code', ['locale'=>$locale]);
+    }
 
 }

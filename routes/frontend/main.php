@@ -19,3 +19,4 @@ Route::get('{locale}/forgot-password', 	['as' => 'forgot-password', 			'uses' =>
 Route::post('{locale}/forgot-password', 	['as' => 'make-forgot-password-code', 	'uses' => 'ForgotPasswordController@sendResetLinkEmail']); 
 Route::get('{locale}/reset-password/{token}', 	['as' => 'reset-password', 				'uses' => 'ResetPasswordController@showResetForm']); //After verify the code, a form of reseting new password is here
 Route::post('{locale}/password/reset', 			['as' => 'reset', 						'uses' => 'ResetPasswordController@reset']); // Get new password from the form and change
+Route::get('{locale}/verify-code', 				[ 'as' => 'verify-code',			'uses' => 'SignUpController@verifyCodeForm']);
