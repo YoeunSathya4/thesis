@@ -19,7 +19,7 @@ class CustomersTableSeeder extends Seeder
                     'image' => 'public/user/img/ppl.png',
                     'email' => 'system3@camcyber.com',
                     'phone' => '012345675',
-                    'is_email_verified' => 1,
+                    //'is_email_verified' => 1,
                     'is_phone_verified'=>1,
                     'password' => bcrypt('xxxxxx'),
                     'address' => "Phnom Penh",

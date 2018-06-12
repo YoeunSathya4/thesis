@@ -15,6 +15,7 @@ use Session ;
 
 use App\Model\Customer\Customer as Customer;
 use App\Model\Customer\Code as Code;
+use Nexmo\Laravel\Facade\Nexmo;
 
 class SignUpController extends Controller
 {
@@ -36,7 +37,7 @@ class SignUpController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'en/login';
+    protected $redirectTo = 'en/verify-code';
 
     /**
      * Create a new controller instance.
@@ -53,11 +54,25 @@ class SignUpController extends Controller
     }
 
     public function register(Request $request, $locale){
-        $this->validator($request->all())->validate();
+        //$this->validator($request->all())->validate();
+        $input = $request->all();
+        $customer = $this->create($input)->toArray();
+        
+            //event(new Registered($customer = $this->create($request->all())));
+            //$customer = $this->create($input)->toArray();
+            $code = new Code;
+            $code->code           = rand();
+            $code->customer_id    = $customer['id'];
+            $code->save();
+            Nexmo::message()->send([
+                'to'   => '85570454047',
+                'from' => '85570454047',
+                'text' => 'Your verify code is:'.$code->code
+            ]); 
 
-        event(new Registered($customer = $this->create($request->all())));
-        $this->guard()->login($customer);
-        return $this->registered($request, $customer) ?: redirect($this->redirectPath());
+            //$this->guard()->login($customer);
+            return view('frontend.verify-code', ['locale'=>$locale]);
+        
     }
 
     /**
@@ -94,11 +109,6 @@ class SignUpController extends Controller
     protected function create(array $data)
     {
         Session::flash('msg', 'Your account has been created. Please log in. ' );
-        $code = str_random(4);
-        $code_data = new Code;
-        $code_data->customer_id = 1;
-        $code_data->code        = $code;
-        $code_data->save();
         return Customer::create(
             [
                 'name' => $data['name'],
