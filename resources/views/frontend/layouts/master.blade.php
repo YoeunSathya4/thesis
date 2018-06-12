@@ -148,7 +148,7 @@
     </main>
     <!-- Main Content -->
     <!-- Footer -->
-    <footer id="footer"> 
+    <footer style="background-image: url({{ asset ('public/frontend/images/footer.png')}})" id="footer"> 
 
         <!-- Footer columns -->
         <div class="footer-columns">
