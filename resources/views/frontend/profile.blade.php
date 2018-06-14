@@ -60,9 +60,6 @@
 					<!-- Content -->
 					<div class="col-lg-9 col-md-8 col-xs-12 pull-right pull-none">
 						<h1 style="padding-left: 50%;"> My Profile </h1><br/>
-						<div class="alert alert-warning" role="alert">
-						  Your Account have not verify yet. <button type="submit" class="btn btn-primary"> <i class="fa fa-check"></i> Click Here</button>
-						</div>	
 
 						<form style="padding-left: 40px;" id="form" action="{{ route('update-profile') }}" name="form" method="POST"  enctype="multipart/form-data">
 					        {{ csrf_field() }}

@@ -417,6 +417,12 @@
 toastr.success("{!!Session::get('msg')!!}");
 </script>
 @endif
+
+@if(Session::has('error'))
+<script type="text/JavaScript">
+toastr.error("{!!Session::get('error')!!}");
+</script>
+@endif
   
 </body>
 </html>

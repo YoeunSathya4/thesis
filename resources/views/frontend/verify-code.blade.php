@@ -28,7 +28,7 @@
                                         </ul>
                                     </div>
                                 @endif
-                                <form style="padding: 20px;" action="{{ route('register', $locale) }}" method="POST" class="sending-form">
+                                <form style="padding: 20px;" action="{{ route('submit-code', $locale) }}" method="POST" class="sending-form">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
                                         <input class="form-control" type="text" required="required" name="code" placeholder="Code">

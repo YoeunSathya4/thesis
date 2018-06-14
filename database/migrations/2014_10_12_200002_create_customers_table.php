@@ -24,7 +24,7 @@ class CreateCustomersTable extends Migration
             $table->string('location', 550)->default('')->nullable();
             $table->rememberToken();
             //$table->boolean('is_email_verified')->default(1);
-            $table->boolean('is_phone_verified')->default(1);
+            $table->boolean('is_phone_verified')->default(0);
 
             $table->integer('creator_id')->unsigned()->index()->nullable();
             $table->integer('updater_id')->unsigned()->index()->nullable();

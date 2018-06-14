@@ -64,9 +64,11 @@ class SignUpController extends Controller
             $code->code           = rand();
             $code->customer_id    = $customer['id'];
             $code->save();
+            $numberPhone = '855'.substr( $customer['phone'], 1 );
+            //echo $numberPhone;die;
             Nexmo::message()->send([
-                'to'   => '85570454047',
-                'from' => '85570454047',
+                'to'   => $numberPhone,
+                'from' => $numberPhone,
                 'text' => 'Your verify code is:'.$code->code
             ]); 
 
@@ -108,7 +110,7 @@ class SignUpController extends Controller
      */
     protected function create(array $data)
     {
-        Session::flash('msg', 'Your account has been created. Please log in. ' );
+        Session::flash('msg', 'Your account has been created. Please verify your code. ' );
         return Customer::create(
             [
                 'name' => $data['name'],
@@ -125,6 +127,41 @@ class SignUpController extends Controller
 
     public function verifyCodeForm($locale ){
         return view('frontend.verify-code', ['locale'=>$locale]);
+    }
+
+    public function submitCode(Request $request) {
+        
+        $this->validate($request, [
+            'code' => 'required|min:6',
+        ]);
+        
+        $code = $request->input('code'); 
+        
+
+        $data = Code::where(['code'=>$code])->orderBy('id', 'DESC')->first(); 
+      
+        if($data){
+            
+                $customer = Customer::findOrFail($data->customer_id);
+                if($customer){
+                    $customer->is_phone_verified = 1;
+                    $customer->save();
+
+                    Auth::guard('customer')->loginUsingId($customer->id, true);
+                    return redirect('en/profile');
+                    
+                }else{
+                    
+                     Session::flash('error', 'User Not Found!');
+                     return redirect('en/verify-code');
+                }
+                
+        }else{
+           
+            Session::flash('error', 'Code Not Valid!');
+            return redirect('en/verify-code');
+        }
+       
     }
 
 }
