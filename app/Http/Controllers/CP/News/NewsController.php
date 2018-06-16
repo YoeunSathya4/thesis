@@ -95,7 +95,7 @@ class NewsController extends Controller
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
-            Image::make($image->getRealPath())->resize(420, 420)->save(public_path('uploads/news/image/'.$imagename));
+            Image::make($image->getRealPath())->resize(262, 205)->save(public_path('uploads/news/image/'.$imagename));
             $data['image']=$imagename;
         }
 
@@ -146,7 +146,7 @@ class NewsController extends Controller
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
-            Image::make($image->getRealPath())->resize(420, 420)->save(public_path('uploads/news/image/'.$imagename));
+            Image::make($image->getRealPath())->resize(262, 205)->save(public_path('uploads/news/image/'.$imagename));
             $data['image']=$imagename;
         }
         Model::where('id', $id)->update($data);

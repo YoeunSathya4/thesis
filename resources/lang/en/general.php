@@ -4,37 +4,14 @@ return [
 
    
 //**********===========******* Manu
-    'home' => 'Homepage',
-    'properties' => 'Properties',
+    'home' => 'Home',
+    'product' => 'Product',
     'contact-us' => 'Contact Us',
-    'our-service' => 'Our Service',
-    'our-team' => 'Our Team',
+    'promotion' => 'Promotion',
+    'about-us' => 'About Us',
     'news' => 'News',
-    'about-yao' => 'About PI Realty',
-    'customer-require' => 'Customer Enquiry',
-    'properties-for-sale' => 'Properties for sale',
-    'properties-for-rent' => 'Properties for rent',
-    'detail' => 'Detail',
-    'quick-links' => 'Quick Links',
-    'quick-search' => 'Quick Search',
-    
-    'contact-details' => 'contact details',
-    'useful-link' => 'Useful Link',
-    'dont-miss-out' => 'DON’T MISS OUT',
-    'email-address' => 'Email address',
-    'enter-your-email' => 'Enter your email here',
-    'phone' => 'Phone',
-    'mail' => 'Mail',
-    'office' => 'Office ',
-    'type-here' => 'Type Here',
-    'subcribe-now' => 'Subcribe Now',
-    
-    'copyright' => '© 2018  |  PI Realty |  All Rights Reserved',
-
-    'call-us-anytime'  => 'Call us anytime',
-    'drop-us-a-line'  => 'Drop us a line',
-    'sign-up-for-our-newsletter' => 'Sign up for our newsletter.',
-    'latest-properties'  => 'PI Realty will send you weekly list of latest properties.',
+    'sign-in' => 'Sign Up',
+    'LOGIN' => 'Customer Enquiry',
     'your-email'  => 'Your email',
     //=============================// Property Search
     'find-your' => 'FIND YOUR',

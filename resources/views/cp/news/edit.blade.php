@@ -40,7 +40,7 @@
 		    removeTitle: 'Cancel or reset changes',
 		    elErrorContainer: '#kv-avatar-errors-2',
 		    msgErrorClass: 'alert alert-block alert-danger',
-		    defaultPreviewContent: '<img src="{{ asset('public/uploads/news/image/'.$data->image) }}" alt="Missing Image" class="img img-responsive"><span class="text-muted">Click to select <br /><i style="font-size:12px">Image dimesion must be 870x429 with .jpg or .png type</i></span>',
+		    defaultPreviewContent: '<img src="{{ asset('public/uploads/news/image/'.$data->image) }}" alt="Missing Image" class="img img-responsive"><span class="text-muted">Click to select <br /><i style="font-size:12px">Image dimesion must be 262x205 with .jpg or .png type</i></span>',
 		    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
 		    allowedFileExtensions: ["jpg", "png", "gif"]
 		});

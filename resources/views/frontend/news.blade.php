@@ -25,188 +25,28 @@
                     <!-- Content -->
                     <div class="col-lg-9 col-md-8 col-xs-12">
 
+                        @foreach($data as $row)
                         <!-- List Blog -->
                         <div class="blog-list">
                             <div class="list-blog">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-12">
-                                        <img src="{{ asset ('public/frontend/images/list-blog/img-01.jpg')}}" alt="">
+                                        <img src="{{ asset ('public/uploads/news/image/'.$row->image)}}" alt="">
                                     </div>
                                     <div class="col-lg-8 col-md-12">
                                         <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
+                                            <h3>{{$row->title}}</h3>
+                                            
+                                            <p>{{$row->description}}</p>
                                             <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="list-blog">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <img src="{{ asset ('public/frontend/images/list-blog/img-02.jpg')}}" alt="">
-                                    </div>
-                                    <div class="col-lg-8 col-md-12">
-                                        <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-blog">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <img src="{{ asset ('public/frontend/images/list-blog/img-03.jpg')}}" alt="">
-                                    </div>
-                                    <div class="col-lg-8 col-md-12">
-                                        <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-blog">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <img src="{{ asset ('public/frontend/images/list-blog/img-01.jpg')}}" alt="">
-                                    </div>
-                                    <div class="col-lg-8 col-md-12">
-                                        <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-blog">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <img src="{{ asset ('public/frontend/images/list-blog/img-02.jpg')}}" alt="">
-                                    </div>
-                                    <div class="col-lg-8 col-md-12">
-                                        <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-blog">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <img src="{{ asset ('public/frontend/images/list-blog/img-03.jpg')}}" alt="">
-                                    </div>
-                                    <div class="col-lg-8 col-md-12">
-                                        <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-blog">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <img src="images/list-blog/img-01.jpg" alt="">
-                                    </div>
-                                    <div class="col-lg-8 col-md-12">
-                                        <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-blog">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <img src="{{ asset ('public/frontend/images/list-blog/img-02.jpg')}}" alt="">
-                                    </div>
-                                    <div class="col-lg-8 col-md-12">
-                                        <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-blog">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <img src="{{ asset ('public/frontend/images/list-blog/img-03.jpg')}}" alt="">
-                                    </div>
-                                    <div class="col-lg-8 col-md-12">
-                                        <div class="blog-detail">
-                                            <h3>24 Images About Bookstores That Every</h3>
-                                            <ul class="meta-post">
-                                                <li><i class="fa fa-share-alt"></i><span>470</span> Share</li>
-                                                <li><i class="fa fa-comments"></i><span>78</span> comments</li>
-                                            </ul>
-                                            <p>The cash wrap is composed out of old hardcovers at The Last Boottkstore in Los Angeles. (While in LA I also learned about the Portland, OR, store tradition of handing you a beer while you browse records...</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pagination-holder">
-                                <ul class="pagination">
-                                    <li><a href="#" aria-label="Previous">Prev</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li class="active"><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">6</a></li>
-                                    <li><a href="#">7</a></li>
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#">23</a></li>
-                                    <li><a href="#" aria-label="Next">Next</a></li>
-                                </ul>
-                            </div>
+                            {{ $data->links('vendor.pagination.frontend-html') }}
                         </div>
                         <!-- List Blog -->
-
+                        @endforeach
                     </div>
                     <!-- Content -->
 

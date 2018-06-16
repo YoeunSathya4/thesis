@@ -1,18 +1,20 @@
 @if ($paginator->hasPages())
-        <div class="findhome-pagination">
-                <ul class="page-numbers">
+        <div class="pagination-holder">
+               <ul class="pagination">
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())
-                        <li class="disabled button small grey"><span><i class="fa fa-angle-left"></i></span></li>
+                        <!-- <li><span><i class="fa fa-angle-left"></i></span></li> -->
+                        <li><a href="#" aria-label="Previous">Prev</a></li>
                     @else
-                        <li><a class="button small grey" href="{{ $paginator->previousPageUrl() }}" rel="prev"><i class="fa fa-angle-left"></i></a></li>
+                        <!-- <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev"><i class="fa fa-angle-left"></i></a></li> -->
+                        <li><a href="{{ $paginator->previousPageUrl() }}" aria-label="Previous">Prev</a></li>
                     @endif
 
                     {{-- Pagination Elements --}}
                     @foreach ($elements as $element)
                         {{-- "Three Dots" Separator --}}
                         @if (is_string($element))
-                            <li class="disabled"><span>{{ $element }}</span></li>
+                            <li><a href="#">{{ $element }}</a></li>
                         @endif
 
                         {{-- Array Of Links --}}
@@ -20,10 +22,10 @@
                             @foreach ($element as $page => $url)
                                 @if ($page == $paginator->currentPage())
                                     
-                                    <li><span class="page-numbers current">{{ $page }}</span></li>
+                                    <li class="active"><a href="#">{{ $page }}</a></li>
                                 @else
                                     <!-- <li><a class="button small grey" href="{{ $url }}">{{ $page }}</a></li> -->
-                                    <li><span class="page-numbers">{{ $page }}</span></li>
+                                    <li><a href="#">{{ $page }}</a></li>
 
                                 @endif
                             @endforeach
@@ -32,9 +34,11 @@
 
                     {{-- Next Page Link --}}
                     @if ($paginator->hasMorePages())
-                        <li><a class="button small grey" href="{{ $paginator->nextPageUrl() }}" rel="next"><i class="fa fa-angle-right"></i></a></li>
+                        <!-- <li><a href="{{ $paginator->nextPageUrl() }}" rel="next"><i class="fa fa-angle-right"></i></a></li> -->
+                        <li><a href="{{ $paginator->nextPageUrl() }}" aria-label="Next">Next</a></li>
                     @else
-                        <li class="disabled button small grey"><span><i class="fa fa-angle-right"></i></span></li>
+                        <!-- <li><span><i class="fa fa-angle-right"></i></span></li> -->
+                        <li><a href="#" aria-label="Next">Next</a></li>
                     @endif
                 </ul>
         </div>
