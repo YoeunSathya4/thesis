@@ -32,7 +32,42 @@
         <section class="book-collection">
             <div class="container">
                 <div class="row">
-                            <div class="collection">
+                        <!-- collection Name -->
+                        <div class="col-lg-3 col-sm-12">
+                            <div class="sidebar">
+                                <h4>Top Books Catagories</h4>
+                                <ul>
+                                    <li><a href="#">Science fiction</a></li>
+                                    <li><a href="#">Satire</a></li>
+                                    <li><a href="#">Drama</a></li>
+                                    <li><a href="#">Action and Adventure</a></li>
+                                    <li><a href="#">Self help</a></li>
+                                    <li><a href="#">Health</a></li>
+                                    <li><a href="#">Guide</a></li>
+                                    <li><a href="#">Religion, Spirituality &amp; New Age</a></li>
+                                    <li><a href="#">Encyclopedias</a></li>
+                                    <li><a href="#">Dictionaries</a></li>
+                                    <li><a href="#">Cookbooks</a></li>
+                                    <li><a href="#">Autobiographies</a></li>
+                                    <li><a href="#">Biographies</a></li>
+                                    <li><a href="#">Fantasy</a></li>
+                                    <li><a href="#">Horror</a></li>
+                                    <li><a href="#">Mystery</a></li>
+                                    <li><a href="#">Solipsist</a></li>
+                                    <li><a href="#">The Zombie Survival</a></li>
+                                    <li><a href="#">I Am Legend</a></li>
+                                    <li><a href="#">Everything i Never Told</a></li>
+                                    <li><a href="#">Big Little Lies</a></li>
+                                    <li><a href="#">The Bone Clocks</a></li>
+                                    <li><a href="#">Revival</a></li>
+                                    <li><a href="#">Station Eleven</a></li>
+                                    <li><a href="#">The American Lady</a></li>
+                                </ul>
+                            </div>
+                        
+                    </div>
+                        <div class="col-xs-9">
+                           <div class="collection">
 
                                 <!-- Secondary heading -->
                                 <div class="sec-heading">
@@ -200,7 +235,7 @@
 
                             </div>
 
-                    
+                        </div>
                     <!-- Book Collections Tabs -->
 
                 </div>
