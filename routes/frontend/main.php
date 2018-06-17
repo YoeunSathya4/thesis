@@ -4,6 +4,7 @@ Route::get('{locale}/about-us', 			[ 'as' => 'about-us',			'uses' => 'AboutUsCon
 Route::get('{locale}/product', 				[ 'as' => 'product',			'uses' => 'ProductController@index']);
 Route::get('{locale}/promotion', 			[ 'as' => 'promotion',			'uses' => 'PromotionController@index']);
 Route::get('{locale}/news', 				[ 'as' => 'news',			'uses' => 'NewsController@index']);
+Route::get('{locale}/news-detail/{slug}', 				[ 'as' => 'news-detail',			'uses' => 'NewsController@detail']);
 Route::get('{locale}/contact-us', 			[ 'as' => 'contact-us',			'uses' => 'ContactUsController@index']);
 Route::put('{locale}/submit-contact-us', 	[ 'as' => 'submit-contact',			'uses' => 'ContactUsController@submitContact']);
 

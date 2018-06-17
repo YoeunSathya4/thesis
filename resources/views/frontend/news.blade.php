@@ -38,7 +38,7 @@
                                             <h3>{{$row->title}}</h3>
                                             
                                             <p>{{$row->description}}</p>
-                                            <a href="#" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
+                                            <a href="{{route('news-detail',['locale'=>$locale, 'slug'=>$row->slug])}}" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
                                         </div>
                                     </div>
                                 </div>
