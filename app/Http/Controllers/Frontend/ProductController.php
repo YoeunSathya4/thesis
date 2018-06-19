@@ -14,7 +14,8 @@ class ProductController extends FrontendController
 {
     
     public function index($locale) {
-        return view('frontend.product',['locale'=>$locale]);
+    	$defaultData = $this->defaultData($locale);
+        return view('frontend.product',['defaultData'=>$defaultData, 'locale'=>$locale]);
     }
    
 }

@@ -21,6 +21,11 @@
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/responsive.css')}}">
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/transition.css')}}">
         @yield('css')
+         @if($locale=="kh")
+            <link href="https://fonts.googleapis.com/css?family=Hanuman" rel="stylesheet">
+            <link href="{{ asset ('public/frontend/css/kh_laugauges.css')}}" rel="stylesheet">
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        @endif
         <!-- Online Lib -->
         <link rel="stylesheet" href="{{ asset ('public/frontend/../../../../www.atlasestateagents.co.uk/css/tether.min.css')}}">
         <script src="{{ asset ('public/frontend/../../../../www.atlasestateagents.co.uk/javascript/tether.min.js')}}"></script>
@@ -62,12 +67,12 @@
                 <div class="social-icons pull-right">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="{{route($defaultData['routeName'], $defaultData['khRouteParamenters'])}}">
                                 <img src="{{ asset ('public/frontend/images/khmer.png')}}">
                             </a>
                         </li>   
                         <li>
-                            <a href="#"> 
+                            <a href="{{route($defaultData['routeName'], $defaultData['enRouteParamenters'])}}"> 
                                 <img src="{{ asset ('public/frontend/images/english.png')}}">
                             </a>
                         </li>   

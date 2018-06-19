@@ -20,8 +20,8 @@ class LoginController extends FrontendController
     public function showFormLogin($locale) {
 
     	if(Auth::guard('customer')->user() == ''){
-
-    		return view('frontend.login',['locale'=>$locale]);
+            $defaultData = $this->defaultData($locale);
+    		return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
     	}else{
             
     		return redirect('en/profile');

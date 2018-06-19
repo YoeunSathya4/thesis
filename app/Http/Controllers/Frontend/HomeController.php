@@ -14,7 +14,8 @@ class HomeController extends FrontendController
 {
     
     public function index($locale) {
-        return view('frontend.home',['locale'=>$locale]);
+    	$defaultData = $this->defaultData($locale);
+        return view('frontend.home',['defaultData'=>$defaultData, 'locale'=>$locale]);
     }
    
 }

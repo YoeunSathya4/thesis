@@ -14,7 +14,7 @@ use Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
 
-class ForgotPasswordController extends Controller
+class ForgotPasswordController extends FrontendController
 {
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +43,8 @@ class ForgotPasswordController extends Controller
     //     return Password::broker('user');
     // }
     function showLinkRequestForm($locale){
-        return view('frontend.forgot-password', ['locale'=>$locale]);
+        $defaultData = $this->defaultData($locale);;
+        return view('frontend.forgot-password', ['defaultData'=>$defaultData, 'locale'=>$locale]);
     }
     public function sendResetLinkEmail(Request $request)
     {

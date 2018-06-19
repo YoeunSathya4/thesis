@@ -14,7 +14,8 @@ class PromotionController extends FrontendController
 {
     
     public function index($locale) {
-        return view('frontend.promotion',['locale'=>$locale]);
+    	$defaultData = $this->defaultData($locale);
+        return view('frontend.promotion',['defaultData'=>$defaultData ,'locale'=>$locale]);
     }
    
 }

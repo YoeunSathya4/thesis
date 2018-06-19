@@ -14,7 +14,8 @@ class AboutUsController extends FrontendController
 {
     
     public function index($locale) {
-        return view('frontend.about-us',['locale'=>$locale]);
+    	$defaultData = $this->defaultData($locale);
+        return view('frontend.about-us',['defaultData'=>$defaultData, 'locale'=>$locale]);
     }
    
 }

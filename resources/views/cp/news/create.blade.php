@@ -47,6 +47,28 @@
 
 		
 	</script>
+	<script>
+		
+		var btnCust = ''; 
+		$("#image-detail").fileinput({
+		    overwriteInitial: true,
+		    maxFileSize: 1500,
+		    showClose: false,
+		    showCaption: false,
+		    showBrowse: false,
+		    browseOnZoneClick: true,
+		    removeLabel: '',
+		    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+		    removeTitle: 'Cancel or reset changes',
+		    elErrorContainer: '#kv-avatar-errors-2',
+		    msgErrorClass: 'alert alert-block alert-danger',
+		    defaultPreviewContent: '<img src="http://via.placeholder.com/848x475" alt="Missing Image" class="img img-responsive"><span class="text-muted">Click to select <br /><i style="font-size:12px">Image dimesion must be 848x475 with .jpg or .png type</i></span>',
+		    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+		    allowedFileExtensions: ["jpg", "png", "gif"]
+		});
+
+		
+	</script>
 @endsection
 
 @section ('section-content')
@@ -142,6 +164,16 @@
 				    </div>
 				</div>
 			</div>
+
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="email">Image Detail</label>
+				<div class="col-sm-10">
+					<div class="kv-avatar center-block">
+				        <input id="image-detail" name="image-detail" type="file" class="file-loading">
+				    </div>
+				</div>
+			</div>
+
 			<div class="form-group row">
 				<label class="col-sm-2 form-control-label" for="kh_content">Status</label>
 				<div class="col-sm-10">

@@ -22,11 +22,11 @@ class ProfileController extends FrontendController
 
     public function index($locale) {
         $customer = Auth::guard('customer')->user();
-        //dd($customer);
+        $defaultData = $this->defaultData($locale);
         if($customer != ''){
-            return view('frontend.profile',['locale'=>$locale,'data'=>$customer]);
+            return view('frontend.profile',['defaultData'=>$defaultData, 'locale'=>$locale,'data'=>$customer]);
         }else{
-            return view('frontend.login',['locale'=>$locale]);
+            return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
         }
         
     }

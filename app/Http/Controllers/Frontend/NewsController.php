@@ -15,12 +15,14 @@ class NewsController extends FrontendController
     
     public function index($locale) {
     	$data = News::select('id',$locale.'_title as title',$locale.'_description as description','image','created_at', 'slug')->where('is_published',1)->orderBy('id', 'DESC')->paginate(6);
-        return view('frontend.news',['locale'=>$locale, 'data'=>$data]);
+    	$defaultData = $this->defaultData($locale);
+        return view('frontend.news',['defaultData'=>$defaultData, 'locale'=>$locale, 'data'=>$data]);
     }
 
     public function detail($locale = '', $slug = ''){
-    	$data = News::select('id', $locale.'_title as title', $locale.'_description as description',$locale.'_content as content', 'image', 'created_at')->find($slug);
-    	return view('frontend.news-detail',['locale'=>$locale, 'data'=>$data]);
+    	$data = News::select('id', $locale.'_title as title', $locale.'_description as description',$locale.'_content as content', 'image', 'created_at','image_detail')->where('slug', $slug)->first();
+    	$defaultData = $this->defaultData($locale);
+    	return view('frontend.news-detail',['defaultData'=>$defaultData, 'locale'=>$locale, 'data'=>$data]);
     }
    
 }

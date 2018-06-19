@@ -17,7 +17,7 @@ use App\Model\Customer\Customer as Customer;
 use App\Model\Customer\Code as Code;
 use Nexmo\Laravel\Facade\Nexmo;
 
-class SignUpController extends Controller
+class SignUpController extends FrontendController
 {
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +50,8 @@ class SignUpController extends Controller
     }
 
     public function showRegisterForm($locale ){
-        return view('frontend.sign-up', ['locale'=>$locale]);
+        $defaultData = $this->defaultData($locale);
+        return view('frontend.sign-up', ['defaultData'=>$defaultData ,'locale'=>$locale]);
     }
 
     public function register(Request $request, $locale){
@@ -72,8 +73,8 @@ class SignUpController extends Controller
                 'text' => 'Your verify code is:'.$code->code
             ]); 
 
-            //$this->guard()->login($customer);
-            return view('frontend.verify-code', ['locale'=>$locale]);
+            $defaultData = $this->defaultData($locale);
+            return view('frontend.verify-code', ['defaultData'=>$defaultData, 'locale'=>$locale]);
         
     }
 
@@ -126,7 +127,8 @@ class SignUpController extends Controller
     }
 
     public function verifyCodeForm($locale ){
-        return view('frontend.verify-code', ['locale'=>$locale]);
+        $defaultData = $this->defaultData($locale);
+        return view('frontend.verify-code', ['defaultData'=>$defaultData ,'locale'=>$locale]);
     }
 
     public function submitCode(Request $request) {

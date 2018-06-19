@@ -23,6 +23,7 @@ class CreateNewsTable extends Migration
             $table->text('en_content');
             $table->text('kh_content');
             $table->string('image', 250)->default('');
+            $table->string('image_detail', 250)->default('');
             $table->boolean('is_published')->default(0);
              //The field that will appear for almost tables
             $table->integer('creator_id')->unsigned()->index()->nullable();

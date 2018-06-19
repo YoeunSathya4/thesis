@@ -79,7 +79,8 @@ class NewsController extends Controller
         Validator::make(
                         $data, 
                         [
-                            
+                           'image' => 'required',
+                           'image_detail' => 'required',
                            'kh_title' => 'required',
                            'en_title' => 'required',
                            'kh_description' => 'required',
@@ -97,6 +98,13 @@ class NewsController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(262, 205)->save(public_path('uploads/news/image/'.$imagename));
             $data['image']=$imagename;
+        }
+
+        if($request->hasFile('image-detail')) {
+            $image_detail = $request->file('image-detail');
+            $imagedetailname = time().'.'.$image_detail->getClientOriginalExtension(); 
+            Image::make($image_detail->getRealPath())->resize(848, 475)->save(public_path('uploads/news/image-detail/'.$imagedetailname));
+            $data['image_detail']=$imagedetailname;
         }
 
 		$id=Model::insertGetId($data);
@@ -149,6 +157,14 @@ class NewsController extends Controller
             Image::make($image->getRealPath())->resize(262, 205)->save(public_path('uploads/news/image/'.$imagename));
             $data['image']=$imagename;
         }
+
+        if($request->hasFile('image-detail')) {
+            $image_detail = $request->file('image-detail');
+            $imagedetailname = time().'.'.$image_detail->getClientOriginalExtension(); 
+            Image::make($image_detail->getRealPath())->resize(848, 475)->save(public_path('uploads/news/image-detail/'.$imagedetailname));
+            $data['image_detail']=$imagedetailname;
+        }
+
         Model::where('id', $id)->update($data);
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
 use App\Model\Newsletter as Newsletter;
 
@@ -19,10 +20,16 @@ class FrontendController extends Controller
     }
 
     public function defaultData(){
-        //Slide Data
-        //$this->defaultData['slides'] = Slide::where('is_published', 1)->get();
-        //Partner Data
-        //$this->defaultData['partners'] = Partnership::where(['is_published'=>1, 'type_id'=>1])->get();
+        //Current Language
+        $parameters = Route::getCurrentRoute()->parameters();
+        $enRouteParamenters = $parameters;
+        $enRouteParamenters['locale'] = 'en';
+        $this->defaultData['enRouteParamenters'] = $enRouteParamenters;
+        $khRouteParamenters = $parameters;
+        $khRouteParamenters['locale'] = 'kh';
+        $this->defaultData['khRouteParamenters'] = $khRouteParamenters;
+        $this->defaultData['routeName'] = Route::currentRouteName();
+
         return $this->defaultData;
     }
     
