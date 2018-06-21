@@ -14,7 +14,8 @@ class ContactUsController extends FrontendController
 {
     
     public function index($locale) {
-        return view('frontend.contact-us',['locale'=>$locale]);
+        $defaultData = $this->defaultData($locale);
+        return view('frontend.contact-us',['defaultData'=>$defaultData,'locale'=>$locale]);
     }
 
     public function submitContact(Request $request , $locale = "en")
