@@ -37,7 +37,7 @@
 					<tr>
 						<td>{{ $i++ }}</td>
 						<td>{{ $row->kh_name }}</td>
-						<td>{{ $row->en_name }} USD</td>
+						<td>{{ $row->en_name }} </td>
 						<td style="white-space: nowrap; width: 1%;">
 							<div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
 	                           	<div class="btn-group btn-group-sm" style="float: none;">

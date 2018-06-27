@@ -6,7 +6,7 @@ Route::get('{locale}/promotion', 			[ 'as' => 'promotion',			'uses' => 'Promotio
 Route::get('{locale}/news', 				[ 'as' => 'news',			'uses' => 'NewsController@index']);
 Route::get('{locale}/news-detail/{slug}', 				[ 'as' => 'news-detail',			'uses' => 'NewsController@detail']);
 Route::get('{locale}/contact-us', 			[ 'as' => 'contact-us',			'uses' => 'ContactUsController@index']);
-Route::put('{locale}/submit-contact-us', 	[ 'as' => 'submit-contact',			'uses' => 'ContactUsController@submitContact']);
+Route::put('{locale}/submit-contact', 	[ 'as' => 'submit-contact',			'uses' => 'ContactUsController@submitContact']);
 
 //============================================ Login SignUp Process
 Route::get('{locale}/login', 				[ 'as' => 'login',			'uses' => 'LoginController@showFormLogin']);

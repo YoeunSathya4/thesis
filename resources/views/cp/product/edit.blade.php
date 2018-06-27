@@ -119,7 +119,7 @@
 							
 						@foreach( $categories as $row )
 								
-								<option value="{{ $row->id }}" @if($data->category_id == $row->id) selected @endif>{{ $row->en_name }}</option>
+								<option value="{{ $row->id }}" @if($data->category_id == $row->id) selected @endif>{{ $row->en_name }} ({{$row->kh_name}})</option>
 							
 						@endforeach
 					</select>
@@ -129,7 +129,7 @@
 				<label for="type_id" class="col-sm-2 form-control-label">Sub Category</label>
 				<div class="col-sm-10" id="subcategory-cnt">
 					<select id="subcategory_id" name="subcategory_id" class="form-control">
-						<option value="{{$data->sub_category_id}}"  >{{$sub_category->en_name}}</option>
+						<option value="{{$data->sub_category_id}}"  >{{$sub_category->en_name}}  ({{$sub_category->kh_name}})</option>
 						<option value="0"  >Please Select Category First</option>
 						
 					</select>
@@ -139,10 +139,27 @@
 				<label for="type_id" class="col-sm-2 form-control-label">Main Category</label>
 				<div class="col-sm-10" id="maincategory-cnt">
 					<select id="maincategory_id" name="maincategory_id" class="form-control">
-						<option value="{{$data->sub_sub_category_id}}"  >{{$main_category->en_name}}</option>
+						@if($data->sub_sub_category_id != null)
+						<option value="{{$data->sub_sub_category_id}}"  >{{$main_category->en_name}} ({{$main_category->kh_name}})</option>
 						<option value="0" >Please Select Sub Category First</option>
-						
+						@else
+						<option value="0" >Please Select Sub Category First</option>
+						@endif
 					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="kh_name">Code</label>
+				<div class="col-sm-10">
+					<input 	id="code"
+							name="code"
+						   	value = "{{$data->code}}"
+						   	type="text"
+						   	placeholder = "Enter Product Code"
+						   	class="form-control"
+						   	data-validation="[L>=1, L<=200]"
+							data-validation-message="$ must be between 1 and 18 characters. No special characters allowed." />
+							
 				</div>
 			</div>
 		<div class="form-group row">
@@ -173,7 +190,34 @@
 							
 				</div>
 			</div>
-
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="unit_price">Unit Price</label>
+				<div class="col-sm-10">
+					<input 	id="unit_price"
+							name="unit_price"
+						   	value = "{{$data->unit_price}}"
+						   	type="number"
+						   	placeholder = "Enter Product Unit Price"
+						   	class="form-control"
+						   	data-validation="[L>=1, L<=200]"
+							data-validation-message="$ must be between 1 and 18 characters. No special characters allowed." />
+							
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="product_qty">Quatity</label>
+				<div class="col-sm-10">
+					<input 	id="product_qty"
+							name="product_qty"
+						   	value = "{{$data->product_qty}}"
+						   	type="number"
+						   	placeholder = "Enter Product Quatity"
+						   	class="form-control"
+						   	data-validation="[L>=1, L<=200]"
+							data-validation-message="$ must be between 1 and 18 characters. No special characters allowed." />
+							
+				</div>
+			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 form-control-label" for="kh_description">Description (KH)</label>
 				<div class="col-sm-10">
@@ -208,7 +252,15 @@
 			</div>
 			
 			<div class="form-group row">
-				<label class="col-sm-2 form-control-label" for="kh_content">Status</label>
+				<label class="col-sm-2 form-control-label" for="email">Image</label>
+				<div class="col-sm-10">
+					<div class="kv-avatar center-block">
+				        <input id="image" name="image" type="file" class="file-loading">
+				    </div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="kh_content">Published</label>
 				<div class="col-sm-10">
 					<div class="checkbox-toggle">
 						<input id="status-status" type="checkbox"  @if($data->is_published ==1 ) checked @endif >
@@ -218,14 +270,15 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 form-control-label" for="email">Image</label>
+				<label class="col-sm-2 form-control-label" for="kh_content">Featured</label>
 				<div class="col-sm-10">
-					<div class="kv-avatar center-block">
-				        <input id="image" name="image" type="file" class="file-loading">
-				    </div>
+					<div class="checkbox-toggle">
+						<input id="featured-featured" type="checkbox" @if($data->is_featured ==1 ) checked @endif >
+						<label onclick="booleanForm('featured')" for="featured-featured"></label>
+					</div>
+					<input type="hidden" name="featured" id="featured" value="{{ $data->is_featured }}">
 				</div>
 			</div>
-		
 		
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label"></label>

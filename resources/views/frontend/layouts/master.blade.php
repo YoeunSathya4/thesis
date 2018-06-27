@@ -9,7 +9,7 @@
         
             <!-- Title Of Site -->
             <title>@yield('title')</title>
-            
+        <link rel="shortcut icon" href="{{ asset ('public/frontend/images/fav-icon.png')}}" type="image/x-icon">
         <!-- StyleSheets -->
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/bootstrap/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/font-awesome.min.css')}}">
@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/responsive.css')}}">
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/transition.css')}}">
         @yield('css')
-         @if($locale=="kh")
+        @if($locale=="kh")
             <link href="https://fonts.googleapis.com/css?family=Hanuman" rel="stylesheet">
             <link href="{{ asset ('public/frontend/css/kh_laugauges.css')}}" rel="stylesheet">
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -55,10 +55,7 @@
                 <!-- Online Option -->
                 <div class="online-option">
                     <ul>
-                        <li><a href="#">online store</a></li>
-                        <li><a href="#">Payment</a></li>
-                        <li><a href="#">shipping</a></li>
-                        <li><a href="#">Return</a></li>
+                        <li><a href="#" ><i class="fa fa-shopping-cart" style="font-size: 20px;"></i> Cart</a> </li>
                     </ul>
                 </div>
                 <!-- Online Option -->
@@ -87,10 +84,10 @@
                         <li><a href="#"><i class="fa fa-heart-o"></i>wish List 0 items</a></li> -->
                         @if(Auth::guard('customer')->user())
                                 <li><a href="{{ route('profile', $locale) }}" ><i class="fa fa-user"></i>{{Auth::guard('customer')->user()->name}}</a> </li>
-                                <li><a href="{{ route('logout', $locale) }}" >Logout</a> </li>
+                                <li><a href="{{ route('logout', $locale) }}" >{{__('general.logout')}}</a> </li>
                         @else
-                            <li><a href="{{ route('login', $locale) }}" ><i class="fa fa-user"></i>Login</a> </li>
-                                <li><a href="{{ route('sign-up', $locale) }}" >Sign Up</a> </li>
+                            <li><a href="{{ route('login', $locale) }}" ><i class="fa fa-user"></i>{{__('general.login')}}</a> </li>
+                                <li><a href="{{ route('sign-up', $locale) }}" >{{__('general.sign-up')}}</a> </li>
                         @endif
                     </ul>
                 </div>
@@ -127,12 +124,12 @@
                     <div class="navigation">
                         <ul>
                             
-                            <li><a href="{{ route('home', $locale) }}"><i class="fa fa-home"></i>Home</a></li>
-                            <li><a href="{{ route('about-us', $locale) }}"><i class="fa fa-user"></i>About Us</a></li>
-                            <li><a href="{{ route('product', $locale) }}"><i class="fa fa-briefcase"></i>Product</a></li>
-                            <li><a href="{{ route('promotion', $locale) }}"><i class="fa fa-bullhorn"></i>Promotion</a></li>
-                            <li><a href="{{ route('news', $locale) }}"><i class="fa fa-pencil"></i>News</a></li>
-                            <li><a href="{{ route('contact-us', $locale) }}"><i class="fa fa-fax"></i>Contact Us</a></li>
+                            <li class="@yield('home')"><a href="{{ route('home', $locale) }}"><i class="fa fa-home"></i>{{__('general.home')}}</a></li>
+                            <li class="@yield('about-us')"><a href="{{ route('about-us', $locale) }}"><i class="fa fa-user"></i>{{__('general.about-us')}}</a></li>
+                            <li class="@yield('product')"><a href="{{ route('product', $locale) }}"><i class="fa fa-briefcase"></i>{{__('general.product')}}</a></li>
+                            <li class="@yield('promotion')"><a href="{{ route('promotion', $locale) }}"><i class="fa fa-bullhorn"></i>{{__('general.promotion')}}</a></li>
+                            <li class="@yield('news')"><a href="{{ route('news', $locale) }}"><i class="fa fa-pencil"></i>{{__('general.news')}}</a></li>
+                            <li class="@yield('contact-us')"><a href="{{ route('contact-us', $locale) }}"><i class="fa fa-fax"></i>{{__('general.contact-us')}}</a></li>
                         </ul>
                     </div>
                     <!-- Navigation -->
@@ -166,11 +163,11 @@
                     <div class="col-lg-12 col-sm-12" style="text-align: center;">
                         <div class="footer-column logo-column">
                             <a href="index-1.html"><img src="{{ asset ('public/frontend/images/logo-2.png')}}" alt=""></a>
-                            <p>Find out how to prepare your book for an editor with these 4 writing tips! The editing process can be a wonderful opportunity for writers.</p>
+                            <p>{{__('general.footer-content')}}</p>
                             <ul class="address-list">
-                                <li><i class="fa fa-home"></i>888 South Avenue Street, New York City.</li>
-                                <li><i class="fa fa-phone"></i>00+123-456-789</li>
-                                <li><i class="fa fa-envelope"></i>contact@onlinbookshops.com</li>
+                                <li><i class="fa fa-home"></i>{{__('general.locations')}}</li>
+                                <li><i class="fa fa-phone"></i>012 891 522 , 012 702 122</li>
+                                <li><i class="fa fa-envelope"></i>contact@khmemaraksmey.com</li>
                             </ul>
                         </div>
                     </div>
@@ -194,7 +191,7 @@
                         <p>Copyright <i class="fa fa-copyright"></i> 2017-2018 <span class="theme-color"> Khemarareaksmey Book Center</span> All Rights Reserved.</p>
                     </div>
                     <div class="col-sm-6">
-                        <a class="back-top" href="#">Back to Top<i class="fa fa-caret-up"></i></a>
+                        <a class="back-top" href="#">{{__('general.back-to-top')}}<i class="fa fa-caret-up"></i></a>
                         <ul class="cards-list">
                             <li><img src="{{ asset ('public/frontend/images/cards/img-01.jpg')}}" alt=""></li>
                             <li><img src="{{ asset ('public/frontend/images/cards/img-02.jpg')}}" alt=""></li>

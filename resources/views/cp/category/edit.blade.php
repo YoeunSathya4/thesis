@@ -53,7 +53,27 @@
 		}
 	</script>
 
-
+	<script type="text/JavaScript">
+		
+		var btnCust = ''; 
+		$("#image").fileinput({
+		    overwriteInitial: true,
+		    maxFileSize: 1500,
+		    showClose: false,
+		    showCaption: false,
+		    showBrowse: false,
+		    browseOnZoneClick: true,
+		    removeLabel: '',
+		    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+		    removeTitle: 'Cancel or reset changes',
+		    elErrorContainer: '#kv-avatar-errors-2',
+		    msgErrorClass: 'alert alert-block alert-danger',
+		    defaultPreviewContent: '<img src="@if($data->image != '') {{ asset('public/uploads/category/image/'.$data->image) }} @else http://via.placeholder.com/263x115 @endif" alt="Missing Image" class="img img-responsive"><span class="text-muted">Click to select <br /><i style="font-size:12px">Image dimesion must be 263x115 px with .jpg or .png type</i></span>',
+		    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+		    allowedFileExtensions: ["jpg", "png", "gif"]
+		});
+	
+	</script>
 	
 @endsection
 
@@ -93,6 +113,14 @@
 							
 				</div>
 		</div>
+		<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="email">Image</label>
+				<div class="col-sm-10">
+					<div class="kv-avatar center-block">
+				        <input id="image" name="image" type="file" class="file-loading">
+				    </div>
+				</div>
+			</div>
 		<div class="form-group row">
 			<label class="col-sm-2 form-control-label"></label>
 			<div class="col-sm-10">

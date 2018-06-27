@@ -11,7 +11,8 @@
     <div class="parallax-window inner-banner tc-padding overlay-dark" data-parallax="scroll" data-image-src="{{asset('public/frontend/images/banner.jpg')}}">
         <div class="container">
             <div class="inner-page-heading h-white style-2">
-                <h2>NEWS</h2>            </div>
+                <h2>{{__('general.news')}}</h2>            
+            </div>
         </div>
     </div>
 <!-- Breadcrumb -->
@@ -36,15 +37,16 @@
                                             <h3>{{$row->title}}</h3>
                                             
                                             <p>{{$row->description}}</p>
-                                            <a href="{{route('news-detail',['locale'=>$locale, 'slug'=>$row->slug])}}" class="btn-1 shadow-0 sm">Learn more<i class="fa fa-arrow-circle-right"></i></a> 
+                                            <a href="{{route('news-detail',['locale'=>$locale, 'slug'=>$row->slug])}}" class="btn-1 shadow-0 sm">{{__('general.learn-more')}}<i class="fa fa-arrow-circle-right"></i></a> 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{ $data->links('vendor.pagination.frontend-html') }}
+                            
                         </div>
                         <!-- List Blog -->
                         @endforeach
+                        {{ $data->links('vendor.pagination.frontend-html') }}
                     </div>
                     <!-- Content -->
 
@@ -53,36 +55,18 @@
 
                         <!-- Aside Widget -->
                         <div class="aside-widget">
-                            <h6>Books of the Year</h6>
+                            <h6>{{__('general.promotion')}}</h6>
                             <ul class="books-year-list">
-                                <li>
-                                    <div class="books-post-widget">
-                                        <img src="{{ asset ('public/frontend/images/books-year-list/img-01.jpg')}}" alt="">
-                                        <h6><a href="#">My Brilliant Friend The Neapolitan Novels, Book One</a></h6>
-                                        <span>By Elena Ferrante</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="books-post-widget">
-                                        <img src="{{ asset ('public/frontend/images/books-year-list/img-02.jpg')}}" alt="">
-                                        <h6><a href="#">As night fell, something stirred the darkness.</a></h6>
-                                        <span>By Meg Caddy</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="books-post-widget">
-                                        <img src="{{ asset ('public/frontend/images/books-year-list/img-03.jpg')}}" alt="">
-                                        <h6><a href="#">The Rosie Project: Don Tillman 1</a></h6>
-                                        <span>By Graeme Simsion</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="books-post-widget">
-                                        <img src="{{ asset ('public/frontend/images/books-year-list/img-04.jpg')}}" alt="">
-                                        <h6><a href="#">Heartbreaking, joyous, traumatic, intimate and</a></h6>
-                                        <span>By Magda Szubanski</span>
-                                    </div>
-                                </li>
+                                @php($promotions = $defaultData['promotions'])
+                                @foreach($promotions as $promotion)
+                                    <li id="list-promotion">
+                                        <div class="books-post-widget">
+                                            <img src="{{ asset ('public/uploads/promotion/image/'.$promotion->image)}}" id="image-show" alt="">
+                                            <h6><a href="#">{{$promotion->title}}</a></h6>
+                                            
+                                        </div>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <!-- Aside Widget -->

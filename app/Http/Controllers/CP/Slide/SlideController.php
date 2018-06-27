@@ -87,7 +87,7 @@ class SlideController extends Controller
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
-            Image::make($image->getRealPath())->resize(1349, 516)->save(public_path('uploads/slide/image/'.$imagename));
+            Image::make($image->getRealPath())->resize(1903, 700)->save(public_path('uploads/slide/image/'.$imagename));
             $data['image']=$imagename;
         }
 		$id=Model::insertGetId($data);
@@ -132,7 +132,7 @@ class SlideController extends Controller
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
-            Image::make($image->getRealPath())->resize(1349, 516)->save(public_path('uploads/slide/image/'.$imagename));
+            Image::make($image->getRealPath())->resize(1903, 700)->save(public_path('uploads/slide/image/'.$imagename));
             $data['image']=$imagename;
         }
        

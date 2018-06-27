@@ -37,6 +37,9 @@ class ProductController extends Controller
         $data = Model::select('*');
         $limit      =   intval(isset($_GET['limit'])?$_GET['limit']:10); 
         $key       =   isset($_GET['key'])?$_GET['key']:"";
+        $category   =   intval(isset($_GET['category'])?$_GET['category']:0); 
+        $subcategory    =   intval(isset($_GET['subcategory'])?$_GET['subcategory']:0);
+        $maincategory    =   intval(isset($_GET['maincategory'])?$_GET['maincategory']:0);
         $from=isset($_GET['from'])?$_GET['from']:"";
         $till=isset($_GET['till'])?$_GET['till']:"";
         $appends=array('limit'=>$limit);
@@ -44,6 +47,21 @@ class ProductController extends Controller
             $data = $data->where('en_name', 'like', '%'.$key.'%')->orWhere('kh_name', 'like', '%'.$key.'%');
             $appends['key'] = $key;
         }
+
+        //=====================>>> Province
+        if( $category > 0 ){
+            $data = $data->where('category_id', $category);
+            $appends['category'] = $category;
+            if( $subcategory > 0){
+                $data = $data->where('sub_category_id', $subcategory);
+                $appends['subcategory'] = $subcategory;
+                if( $maincategory > 0){
+                    $data = $data->where('sub_sub_category_id', $maincategory);
+                    $appends['maincategory'] = $maincategory;
+                }
+            }
+        }
+
         if(FunctionController::isValidDate($from)){
             if(FunctionController::isValidDate($till)){
                 $appends['from'] = $from;
@@ -56,8 +74,8 @@ class ProductController extends Controller
             }
         }
         $data= $data->orderBy('id', 'DESC')->paginate($limit);
-        
-        return view($this->route.'.index', ['route'=>$this->route, 'data'=>$data,'appends'=>$appends]);
+        $categories = Category::get();
+        return view($this->route.'.index', ['route'=>$this->route, 'categories'=>$categories, 'data'=>$data,'appends'=>$appends]);
     }
    
     public function create(){
@@ -75,12 +93,16 @@ class ProductController extends Controller
                     'sub_sub_category_id' =>   $request->input('maincategory_id'),
                     'kh_name' =>   $request->input('kh_name'), 
                     'en_name' =>  $request->input('en_name'),
-                    'slug'      =>   GenerateSlug::generateSlug('news', $request->input('en_name')),
+                    'unit_price' =>   $request->input('unit_price'), 
+                    'product_qty' =>  $request->input('product_qty'),
+                    'slug'      =>   GenerateSlug::generateSlug('products', $request->input('en_name')),
                     'kh_description' =>   $request->input('kh_description'), 
                     'en_description' =>  $request->input('en_description'),
                     'kh_content' =>   $request->input('kh_content'), 
                     'en_content' =>  $request->input('en_content'),
                     'creator_id' => $user_id,
+                    'is_published' =>  $request->input('status'),
+                    'is_featured' =>  $request->input('featured'),
                     'created_at' => $now
                 );
         
@@ -90,19 +112,27 @@ class ProductController extends Controller
                         [
                             'category_id' => 'required|exists:categories,id',
                             'sub_category_id' => 'required|exists:sub_categories,id',
-                            'sub_sub_category_id' => 'required|exists:sub_sub_categories,id',
+                            //'sub_sub_category_id' => 'required|exists:sub_sub_categories,id',
                            'kh_name' => 'required',
                            'en_name' => 'required',
+                           'unit_price' => 'required',
+                           'product_qty' => 'required',
                            'kh_description' => 'required',
                            'en_description' => 'required'
                         ]);
 
-        if($request->input('status')=="")
-        {
-            $data['is_published']=0;
-        }else{
-            $data['is_published']=1;
-        }
+        // if($request->input('status')=="")
+        // {
+        //     $data['is_published']=0;
+        // }else{
+        //     $data['is_published']=1;
+        // }
+        // if($request->input('featured')=="")
+        // {
+        //     $data['is_featured']=0;
+        // }else{
+        //     $data['is_featured']=1;
+        // }
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
@@ -136,11 +166,15 @@ class ProductController extends Controller
                     'sub_sub_category_id' =>   $request->input('maincategory_id'),
                     'kh_name' =>   $request->input('kh_name'), 
                     'en_name' =>  $request->input('en_name'),
-                    'slug'      =>   GenerateSlug::generateSlug('news', $request->input('en_name')),
+                    'unit_price' =>   $request->input('unit_price'), 
+                    'product_qty' =>  $request->input('product_qty'),
+                    'slug'      =>   GenerateSlug::generateSlug('products', $request->input('en_name')),
                     'kh_description' =>   $request->input('kh_description'), 
                     'en_description' =>  $request->input('en_description'),
                     'kh_content' =>   $request->input('kh_content'), 
                     'en_content' =>  $request->input('en_content'),
+                    'is_published' =>  $request->input('status'),
+                    'is_featured' =>  $request->input('featured'),
                     'updater_id' => $user_id,
                     'updated_at' => $now
                 );
@@ -151,18 +185,26 @@ class ProductController extends Controller
 			        	[
                             'category_id' => 'required|exists:categories,id',
                             'sub_category_id' => 'required|exists:sub_categories,id',
-                            'sub_sub_category_id' => 'required|exists:sub_sub_categories,id',
+                            //'sub_sub_category_id' => 'required|exists:sub_sub_categories,id',
                            'kh_name' => 'required',
                            'en_name' => 'required',
+                           'unit_price' => 'required',
+                           'product_qty' => 'required',
                            'kh_description' => 'required',
                            'en_description' => 'required'
 						]);
-        if($request->input('status')=="")
-        {
-            $data['is_published']=0;
-        }else{
-            $data['is_published']=1;
-        }
+        // if($request->input('status')=="")
+        // {
+        //     $data['is_published']=0;
+        // }else{
+        //     $data['is_published']=1;
+        // }
+        // if($request->input('featured')=="")
+        // {
+        //     $data['is_featured']=0;
+        // }else{
+        //     $data['is_featured']=1;
+        // }
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
@@ -192,12 +234,20 @@ class ProductController extends Controller
           'msg' => 'Published status has been updated.'
       ]);
     }
-
+    function updateFeatured(Request $request){
+      $id   = $request->input('id');
+      $data = array('is_featured' => $request->input('active'));
+      Model::where('id', $id)->update($data);
+      return response()->json([
+          'status' => 'success',
+          'msg' => 'Featured status has been updated.'
+      ]);
+    }
     function getSubCategory($category_id = 0){
         $category_id = isset($_GET['category_id'])?$_GET['category_id']:'';
         if(  is_numeric ($category_id) ){
             if( $category_id != 0 ){
-                $data = SubCategory::select('id', 'en_name')->where('category_id',$category_id)->get();
+                $data = SubCategory::select('id', 'en_name','kh_name')->where('category_id',$category_id)->get();
                 return view($this->route.'.sub-category-data', ['data'=>$data]);
             }else{
                 echo '<select id="subcategory_id" name="subcategory_id" class="form-control">
@@ -215,7 +265,7 @@ class ProductController extends Controller
         $subcategory_id = isset($_GET['subcategory_id'])?$_GET['subcategory_id']:'';
         if(  is_numeric ($subcategory_id) ){
             if( $subcategory_id != 0 ){
-                $data = SubSubCategory::select('id', 'en_name')->where('sub_category_id',$subcategory_id)->get();
+                $data = SubSubCategory::select('id', 'en_name','kh_name')->where('sub_category_id',$subcategory_id)->get();
                 return view($this->route.'.main-category-data', ['data'=>$data]);
             }else{
                 echo '<select id="maincategory_id" name="maincategory_id" class="form-control">

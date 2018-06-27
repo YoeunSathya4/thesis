@@ -134,7 +134,7 @@ class UsersController extends Controller
 						],
                         [
                             'email.unique' => 'New new email address :'.$request->input('email').' can not be used. It has already been taken.',
-                            'picture.dimensions' => 'Please provide valide image dimensions 200x165.',
+                            'avatar.dimensions' => 'Please provide valide image dimensions 200x165.',
                         ])->validate();
 
 		

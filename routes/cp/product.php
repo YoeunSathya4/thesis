@@ -9,6 +9,7 @@ Route::group([], function () {
 	Route::put('/', 							['as' => 'store', 			'uses' => 'ProductController@store']);
 	Route::delete('/{id}', 						['as' => 'trash', 			'uses' => 'ProductController@trash']);
 	Route::post('update-status', 				['as' => 'update-status', 	'uses' => 'ProductController@updateStatus']);
+	Route::post('update-featured', 				['as' => 'update-featured', 	'uses' => 'ProductController@updateFeatured']);
 	Route::get('/sub-category', 						['as' => 'get-sub-category', 			'uses' => 'ProductController@getSubCategory']);
 
 	Route::get('/main-category', 						['as' => 'get-main-category', 			'uses' => 'ProductController@getMainCategory']);

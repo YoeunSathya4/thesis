@@ -56,4 +56,8 @@
 		Route::group(['as' => 'product.', 'prefix' => 'product', 'namespace' => 'Product'], function () {
 			require(__DIR__.'/product.php');
 		});
+
+		Route::group(['as' => 'content.',  'prefix' => 'content', 'namespace' => 'Content'], function () {
+			require(__DIR__.'/content.php');
+		});
 	});

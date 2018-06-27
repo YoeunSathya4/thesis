@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Session;
+use Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use App\Model\Property\P_Units as Unit;
-//use App\Model\Website\Icon as Icon;
-use App\Model\Image\Image as Image;
-use App\Model\Website\Adv as Adv;
+use App\Model\Message\Message;
 class ContactUsController extends FrontendController
 {
     
@@ -25,7 +25,6 @@ class ContactUsController extends FrontendController
                     'name' =>   $request->input('name'),
                     'phone' =>  $request->input('phone'),
                     'email' =>  $request->input('email'),
-                    'subject' =>  $request->input('subject'),
                     'message' =>  $request->input('message') 
                 );
         //dd($data);
@@ -34,10 +33,9 @@ class ContactUsController extends FrontendController
                         $request->all(), 
                         [
                             'name' => 'required|min:3|max:30',
-                            'subject' => 'required',
                             'email' => 'email',
                             'message' => 'required|max:255',
-                            'g-recaptcha-response' => 'required',
+                            // 'g-recaptcha-response' => 'required',
                         ], 
 
                         [
@@ -48,7 +46,7 @@ class ContactUsController extends FrontendController
         // $client_email = $request->input('email');
         // Mail::to($client_email)->send(new ReplyBackToClients($data)); 
         $id=Message::insertGetId($data);
-        Session::flash('msg', __('contact_us.contact-successful-sent') );
+        Session::flash('msg', __('general.contact-successful-sent') );
         return redirect(route('contact-us', ['locale'=>$locale]));
     }
 }

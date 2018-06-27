@@ -65,10 +65,7 @@ class SubCategoryController extends Controller
                         [
                             'en_name' => 'required',
                             'kh_name' => 'required',
-                            'image' => [
-                                            'required',
-                                            'mimes:jpeg,png',
-                            ]
+                            
                         ],
                         [])->validate();
         
@@ -112,11 +109,7 @@ class SubCategoryController extends Controller
                         [
                             'en_name' => 'required',
                             'kh_name' => 'required',
-                            'image' => [
-                                            'sometimes',
-                                            'required',
-                                            'mimes:jpeg,png',
-                            ]
+                            
                         ],
                         [
                         ])->validate();
@@ -195,7 +188,7 @@ class SubCategoryController extends Controller
     }
 
     public function updateMainCategory(Request $request){
-        $id = $request->input('main_id');
+        $maincategory_id = $request->input('maincategory_id');
 
         Validator::make(
                         $request->all(), 
@@ -212,12 +205,12 @@ class SubCategoryController extends Controller
         
         $data = array(
                     
-                    'sub_category_id' =>   $request->input('sub_category_id'), 
+                    'sub_category_id' =>   $request->input('subcategory_id'), 
                     'en_name' =>  $request->input('en_name'),
                     'kh_name' =>  $request->input('kh_name')
                 );
         
-        SubSubCategory::where('id', $id)->update($data);
+        SubSubCategory::where('id', $maincategory_id)->update($data);
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
     }

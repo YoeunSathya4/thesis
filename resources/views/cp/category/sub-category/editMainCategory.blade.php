@@ -39,7 +39,7 @@
 	<br />
 	<div>
 		<div class="col-md-12">
-			<a style="float: right;margin-bottom: 10px;margin-top: -10px;" href="{{ route('cp.category.sub-category.create-mainCategory',['id'=>$id, 'category_id'=>$id]) }}"  class="tabledit-delete-button btn btn-sm btn-primary" style="float: none;"><span class="fa fa-plus"></span></a>
+			<a style="float: right;margin-bottom: 10px;margin-top: -10px;" href="{{ route('cp.category.sub-category.create-mainCategory',['id'=>$subcategory_id, 'category_id'=>$id]) }}"  class="tabledit-delete-button btn btn-sm btn-primary" style="float: none;"><span class="fa fa-plus"></span></a>
 		</div>
 	</div><!--.row-->
 	@include('cp.layouts.error')
