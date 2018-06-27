@@ -106,6 +106,7 @@
 						<th>#</th>
 						<th>Name in Khmer</th>
 						<th>Name in English</th>
+						<th>Image</th>
 						<th>Updated Date</th>
 						<th></th>
 					</tr>
@@ -118,6 +119,13 @@
 							<td>{{ $i++ }}</td>
 							<td>{{ $row->en_name }}</td>
 							<td>{{ $row->kh_name }}</td>
+							<td>
+								@if($row->image!="")
+									<img src="{{asset('public/uploads/category/image/'.$row->image)}}" class="img img-responsive" />
+								@else
+									No Image Avaiable
+								@endif
+							</td>
 							<td>{{ $row->updated_at }}</td>
 							<td style="white-space: nowrap; width: 1%;">
 								<div class="tabledit-toolbar btn-toolbar" style="text-align: left;">

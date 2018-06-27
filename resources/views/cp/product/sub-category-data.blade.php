@@ -1,7 +1,7 @@
 <select id="subcategory_id" name="subcategory_id" class="form-control">
 	<option value="0" >Please Select Sub Category</option>
 	@foreach($data as $row)			
-		<option value="{{ $row->id }}">{{ $row->en_name }}</option>	
+		<option value="{{ $row->id }}">{{ $row->en_name }} ({{ $row->kh_name }})</option>	
 	@endforeach		
 </select>
 

@@ -102,7 +102,7 @@ input[type="tel"],
 input[type="color"],
 input,
 .form-control{ height: 48px; line-height: 48px; width: 100%; border-radius: 0; color: #131010; font-weight: 400; width: 100%; background: none; 
-padding: 0 20px; border: 1px solid #e7e7e7;
+padding: 0 20px; border: 1px solid #555;
 box-shadow: none;}
 textarea{ height: auto!important;}
 /****** Theme Reset Style ***********************************************************
@@ -583,7 +583,7 @@ transform: translate(0, -50%);}
 #magazine .turn-page{ background-color:#ccc; background-size:100% 100%;}
 
 /* Book Collection */
-.book-collection { float: left; width: 100%; padding: 100px 0;}
+.book-collection { float: left; width: 100%; padding: 39px 0;}
 .book-collection .nav-tabs{ float: left; width: 100%; margin: 0;}
 .sidebar{ background: #f8f8f8;}
 .sidebar h4{ font-weight: bold; border-bottom: 1px solid #f8f8f8; padding: 15px; margin: 0; background: #f8f8f8; font-size: 16px;}
@@ -601,7 +601,7 @@ transform: translate(0, -50%);}
 -moz-box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.67);
 box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.67);}
 .s-product h6{ font-size: 13px; color: #333; font-weight: bold; margin: 0 0 10px;}
-.s-product > span{ color: #999; text-transform: capitalize;}
+.s-product > span{ color: #ee383a; text-transform: capitalize;}
 .s-product-img{ position: relative; margin: 0 0 20px;}
 .s-product-hover{ position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: rgba(0,0,0,0.8);
 text-align: center; visibility: hidden; opacity: 0;}
@@ -1345,7 +1345,7 @@ box-shadow:         2px 2px 1px 0px rgba(50, 50, 50, 0.14);}
 .address-column{ text-align: center;}
 .address-column h6{ font-weight: bold;}
 .address-icon{ height: 70px; width: 70px; line-height: 70px; margin: 0 0 30px; text-align: center; border-radius: 100%; 
-background: #f8f8f8; color: #555; font-size: 20px; display: inline-block;}
+background: #ee383a; color: #fff; font-size: 20px; display: inline-block;}
 .address-column strong{ font-size: 14px; margin: 0 0 10px; display: block;}
 .address-column .social-icons{ display: inline-block;}
 .address-column .social-icons li a{ height: 23px; width: 23px; line-height: 23px; font-size: 12px;}
@@ -1398,4 +1398,26 @@ background: #f8f8f8; color: #555; font-size: 20px; display: inline-block;}
 
 .product-css{
 	width: 100%;
+}
+
+.promotion-css{
+	height: 300px;
+	width: 360px;
+}
+#promotion-text{
+	font-size: 20px;
+	padding: 10px;
+}
+
+#promotion-border{
+	padding-top: 10px;
+	border: 1px solid teal;
+}
+
+#list-promotion{
+	padding-bottom: 10px;
+}
+
+#image-show{
+	width: 65px;
 }

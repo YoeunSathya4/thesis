@@ -20,4 +20,9 @@ a,p,body{
 body h1, body h2, body h3, body h4, body h5, body h6{
 	font-family: 'Hanuman', serif !important;
 }
-
+.mission-disc strong{
+	font-family: 'Hanuman', serif !important;
+}
+.btn-success {
+  font-family: 'Hanuman', serif !important;
+}

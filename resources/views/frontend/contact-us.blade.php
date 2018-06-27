@@ -1,10 +1,70 @@
 @extends('frontend/layouts.master')
 
 @section('title', 'Contact Us')
-@section('about-us', 'active')
+@section('contact-us', 'active')
 
 @section ('appbottomjs')
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBbz45_RGsB8xrJtKSgdnL8jJTw0dX-nNw"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>    
+    <script>
+    $(document).ready(function() {
+      $("#contact-form").submit(function(event){
+        name = $("#name").val();
+        email = $("#email").val();
+        phone = $("#phone").val();
+        subject = $("#subject").val();
+        message = $("#message").val();
+        g =$('#g-recaptcha-response').val();
+        
+        if(name != ""){
+            if(email != ""){
+              if(isEmail(email)){
+                if(phone != ""){
+                if(message != ""){
+                  // if(g != ""){
+                  //   //alert('Go!');
+                  // }else{
+                  //   error(event, "g-recaptcha-response", '{{ __('general.errorrecaptcha') }}');
+                  // }
+         
+                }else{
+                  error(event, "message", '{{ __('general.errormessage') }}');
+                }
+                }else{
+                  error(event, "phone", '{{ __('general.errorphone') }}');
+                }
+              }else{
+                error(event, "email", '{{ __('general.incorrectemail') }}');
+              }
+            }else{
+              error(event, "email", '{{ __('general.erroremail') }}.');
+            }
+        }else{
+          error(event, "name", '{{ __('general.errorname') }}');
+        }
+      })
 
+      @if(Session::has('msg'))
+        toastr.success("{{ __('general.contact-successful-sent') }}");
+      @endif
+      @if (count($errors) > 0)
+        toastr.warning("{{ __('general.sorry') }}");
+      @endif
+
+    });
+    function isEmail(email) {
+      var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      return regex.test(email);
+    }
+    function error(event, obj, msg){
+      event.preventDefault();
+      toastr.error(msg);
+      $("#"+obj).focus();
+    }
+   
+  </script>
 @endsection
 
 @section ('content')
@@ -23,9 +83,9 @@
                         <div class="col-lg-3 col-xs-6 r-full-width">
                             <div class="address-column">
                                 <span class="address-icon"><i class="fa fa-map-marker"></i></span>
-                                <h6>Address</h6>
-                                <strong>6507 Elmwood Avenue Rocky  Mountt</strong>
-                                <p>Habitasse venenatis dictum sed habitant taciti fermentum cras himenaeos nunc et erat blandit at,</p>
+                                <h6>{{__('general.address')}}</h6>
+                                <strong> {{__('general.locations')}}</strong>
+                                
                             </div>
                         </div>
                         <!-- Column -->
@@ -34,9 +94,9 @@
                         <div class="col-lg-3 col-xs-6 r-full-width">
                             <div class="address-column">
                                 <span class="address-icon"><i class="fa fa-volume-control-phone"></i></span>
-                                <h6>Phone No.</h6>
-                                <strong>00+123-456-789</strong>
-                                <p>Habitasse venenatis dictum sed habitant taciti fermentum cras himenaeos nunc et erat blandit at,</p>
+                                <h6>{{__('general.phone')}}</h6>
+                                <strong>012 891 522</strong>
+                                <strong>012 702 122</strong>
                             </div>
                         </div>
                         <!-- Column -->
@@ -45,9 +105,9 @@
                         <div class="col-lg-3 col-xs-6 r-full-width">
                             <div class="address-column">
                                 <span class="address-icon"><i class="fa fa-envelope"></i></span>
-                                <h6>Email</h6>
-                                <strong>contact@onlinbookshops.com</strong>
-                                <p>Habitasse venenatis dictum sed habitant taciti fermentum cras himenaeos nunc et erat blandit at,</p>
+                                <h6>{{__('general.email')}}</h6>
+                                <strong>contact@khmemaraksmey.com</strong>
+                                
                             </div>
                         </div>
                         <!-- Column -->
@@ -56,14 +116,12 @@
                         <div class="col-lg-3 col-xs-6 r-full-width">
                             <div class="address-column">
                                 <span class="address-icon"><i class="fa fa-share-alt"></i></span>
-                                <h6>Fallow us</h6>
+                                <h6>{{__('general.follow-us')}}</h6>
                                 <ul class="social-icons">
                                     <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
                                     <li><a class="youtube" href="#"><i class="fa fa-youtube-play"></i></a></li>
-                                    <li><a class="pinterest" href="#"><i class="fa fa-pinterest-p"></i></a></li>
                                 </ul>
-                                <p>Habitasse venenatis dictum sed habitant taciti fermentum cras himenaeos nunc et erat blandit at,</p>
+                               
                             </div>
                         </div>
                         <!-- Column -->
@@ -74,7 +132,13 @@
 
                 <!-- Contact Map -->
                 <div class="tc-padding-bottom">
-                    <div id="contant-map" class="contant-map"></div>
+                    <iframe
+                              width="100%"
+                              height="500"
+                              frameborder="0" style="border:0"
+                              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCOVmFlwfcjVJE1mgzI69HIOnIwLYEW1OM
+                                &q=Khemara+Raksmey+Book+Center" allowfullscreen>
+                            </iframe>
                 </div>
                 <!-- Contact Map -->
 
@@ -83,39 +147,59 @@
 
                     <!-- Secondary heading -->
                     <div class="sec-heading">
-                        <h3>Contact Form</h3>
+                        <h3>{{__('general.contact-form')}}</h3>
                     </div>
                     <!-- Secondary heading -->
 
+                    <br />
+                    @if (count($errors) > 0)
+                        <div class="form-error-text-block" style="background: #f5cdd9;padding: 21px;">
+                            <h2 style="color:red"> Error Occurs</h2>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li style="color: red;">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <br />
                     <!-- Sending Form -->
-                    <form class="sending-form">
+                    <form id="contact-form" name="contact-form" class="sending-form" action="{{ route('submit-contact', ['locale'=>$locale]) }}" method="post">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <textarea class="form-control" required="required" rows="5" placeholder="Text here..."></textarea>
-                                    <i class="fa fa-pencil-square-o"></i>
-                                </div>
-                            </div>
+                            
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <input class="form-control" required="required" placeholder="Full name">
+                                    <input name="name" id="name" class="form-control" required="required" placeholder="{{__('general.full-name')}}">
                                     <i class="fa fa-user"></i>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <input class="form-control" required="required" placeholder="Phone no.">
+                                    <input name="phone" id="phone" class="form-control" required="required" placeholder="{{__('general.phone')}}">
                                     <i class="fa fa-phone"></i>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <input class="form-control" required="required" placeholder="Email">
+                                    <input id="email" name="email" class="form-control" required="required" placeholder="{{__('general.email')}}">
                                     <i class="fa fa-envelope"></i>
                                 </div>
                             </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <textarea name="message" id="message" class="form-control" required="required" rows="5" placeholder="{{__('general.text-here')}}"></textarea>
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-3">
+                               <div class="form-group">
+                                    <div class="g-recaptcha" data-sitekey="6LezjGAUAAAAAO9c9Z9vR9UFtreVxfIT9urAgTM9"></div>
+                               </div>
+                            </div> -->
                             <div class="col-xs-12">
-                                <button class="btn-1 shadow-0 sm">send message</button>
+                                <button class="btn-1 shadow-0 sm">{{__('general.send-message')}}</button>
                             </div>
                         </div>
                     </form>

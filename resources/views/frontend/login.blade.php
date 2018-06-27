@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-sm-6">
                             <div class="modal-content">
-                                <strong style="padding-left: 40%;padding-top: 10px;">Login</strong>
+                                <strong style="padding-left: 40%;padding-top: 10px;">{{__('general.login')}}</strong>
                                @if ($errors->has('email'))
                                     <div style="max-width: 322px; margin: 0 auto">
                                         <div class="alert alert-danger alert-no-border alert-close alert-dismissible fade in" role="alert">
@@ -32,15 +32,15 @@
                                 <form style="padding: 20px;" action="{{ route('submit-login', $locale) }}" method="POST" class="sending-form">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
-                                        <input class="form-control" required="required" name="email" placeholder="Email Address">
+                                        <input class="form-control" required="required" name="email" placeholder="{{__('general.email-address')}}">
                                         <i class="fa fa-user"></i>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" type="password" name="password" required="required" placeholder="Password">
+                                        <input class="form-control" type="password" name="password" required="required" placeholder="{{__('general.password')}}">
                                         <i class="fa fa-user"></i>
                                     </div>
-                                    <p class="terms">Not yet have account <a href="{{ route('sign-up', $locale) }}">Sign Up</a> | <a href="{{ route('forgot-password', $locale) }}">Forgot Password</a></p>
-                                    <button type="submit" class="btn-1 shadow-0 full-width">Login account</button>
+                                    <p class="terms">{{__('general.not-yet-have-account')}} <a href="{{ route('sign-up', $locale) }}">{{__('general.sign-up')}}</a> | <a href="{{ route('forgot-password', $locale) }}">{{__('general.forgot-password')}}</a></p>
+                                    <button type="submit" class="btn-1 shadow-0 full-width">{{__('general.login-account')}}</button>
                                 </form>
                             </div>
                     </div>

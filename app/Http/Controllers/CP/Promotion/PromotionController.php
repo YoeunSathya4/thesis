@@ -93,7 +93,7 @@ class PromotionController extends Controller
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
-            Image::make($image->getRealPath())->resize(420, 420)->save(public_path('uploads/promotion/image/'.$imagename));
+            Image::make($image->getRealPath())->resize(360, 300)->save(public_path('uploads/promotion/image/'.$imagename));
             $data['image']=$imagename;
         }
 
@@ -142,7 +142,7 @@ class PromotionController extends Controller
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
-            Image::make($image->getRealPath())->resize(420, 420)->save(public_path('uploads/promotion/image/'.$imagename));
+            Image::make($image->getRealPath())->resize(360, 300)->save(public_path('uploads/promotion/image/'.$imagename));
             $data['image']=$imagename;
         }
         Model::where('id', $id)->update($data);

@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-sm-6">
                             <div class="modal-content">
-                                <strong style="padding-left: 40%;padding-top: 10px;">Verify Code</strong>
+                                <strong style="padding-left: 40%;padding-top: 10px;">{{__('general.verify-code')}}</strong>
                                @if ($errors->any())
                                     <div class="alert alert-danger">
                                         <ul>
@@ -31,12 +31,12 @@
                                 <form style="padding: 20px;" action="{{ route('submit-code', $locale) }}" method="POST" class="sending-form">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" required="required" name="code" placeholder="Code">
+                                        <input class="form-control" type="text" required="required" name="code" placeholder="{{__('general.code')}}">
                                         <i class="fa fa-key"></i>
                                     </div>
                                     
-                                    <p class="terms">Back To <a href="{{ route('login', $locale) }}"> Login</a></p>
-                                    <button type="submit" class="btn-1 shadow-0 full-width">Verify Now</button>
+                                    <p class="terms">{{__('general.back-to')}} <a href="{{ route('login', $locale) }}"> {{__('general.login')}}</a></p>
+                                    <button type="submit" class="btn-1 shadow-0 full-width">{{__('general.verify-now')}}</button>
                                 </form>
                             </div>
                     </div>

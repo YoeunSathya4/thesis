@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-sm-6">
                             <div class="modal-content">
-                                <strong style="padding-left: 30%;padding-top: 10px;">Forgot Password</strong>
+                                <strong style="padding-left: 30%;padding-top: 10px;">{{__('general.forgot-password')}}</strong>
                                @if ($errors->has('email'))
                                     <div style="max-width: 322px; margin: 0 auto">
                                         <div class="alert alert-danger alert-no-border alert-close alert-dismissible fade in" role="alert">
@@ -32,12 +32,12 @@
                                 <form style="padding: 20px;" action="{{route('make-forgot-password-code', $locale)}}" method="POST" class="sending-form">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
-                                        <input class="form-control" type="email" required="required" name="email" placeholder="Please Enter Your Email Address">
+                                        <input class="form-control" type="email" required="required" name="email" placeholder="{{__('general.please-enter-your-email-address')}}">
                                         <i class="fa fa-user"></i>
                                     </div>
                                     
-                                    <p class="terms">Back To <a href="{{ route('login', $locale) }}"> Login</a></p>
-                                    <button type="submit" class="btn-1 shadow-0 full-width">Get Reset Link</button>
+                                    <p class="terms">{{__('general.back-to')}} <a href="{{ route('login', $locale) }}"> {{__('general.login')}}</a></p>
+                                    <button type="submit" class="btn-1 shadow-0 full-width">{{__('general.get-resset-link')}}</button>
                                 </form>
                             </div>
                     </div>

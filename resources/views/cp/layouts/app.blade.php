@@ -101,8 +101,14 @@
                 </span>
                 </a>
             </li>
-            
-            
+            <li class="red @yield('active-main-menu-home')">
+                <a href="{{ route('cp.content.content.edit', ['slug' => 'about-us']) }}?menu=AboutUs">
+                <span>
+                    <i class="fa fa-user"></i>
+                    <span class="lbl">Company Profile</span>
+                </span>
+                </a>
+            </li>
            
             <li class="red @yield('active-main-menu-customer')">
                 <a href="{{ route('cp.customer.customer.index') }}">
@@ -112,19 +118,21 @@
                 </span>
                 </a>
             </li>
+
             <li class="@yield('active-main-menu-medai') red with-sub">
                 <span>
                     <i class=" font-icon fa fa-globe"></i>
                     <span class="lbl"> Medai</span>
                 </span>
                 <ul>
-                    <li class=""><a href="{{ route('cp.announcement.index') }}"><span class="lbl">Announment</span></a></li>
+                    <!-- <li class=""><a href="{{ route('cp.announcement.index') }}"><span class="lbl">Announment</span></a></li> -->
                     <li class=""><a href="{{ route('cp.promotion.index') }}"><span class="lbl">Promotion</span></a></li>
                 </ul>
             </li>
-             <li class="@yield('active-main-menu-product') red with-sub">
+
+            <li class="@yield('active-main-menu-product') red with-sub">
                 <span>
-                    <i class=" font-icon fa fa-cutlery"></i>
+                    <i class=" font-icon fa fa-book"></i>
                     <span class="lbl"> Product</span>
                 </span>
                 <ul>
@@ -170,16 +178,6 @@
             </li> -->
         
             @if(Auth::user()->position_id == 1)
-            <!-- <li class=" @yield('active-main-menu-user') red with-sub">
-                <span>
-                    <i class=" font-icon fa fa-users"></i>
-                    <span class="lbl"> Users</span>
-                </span>
-                <ul>
-                    <li class=""><a href="{{ route('cp.user.user.index') }}"><span class="lbl">User</span></a></li>
-                    <li class=""><a href="{{ route('cp.user.permision.index') }}"><span class="lbl">Permision</span></a></li>
-                </ul>
-            </li> -->
             <li class="red @yield('active-main-menu-user')">
                 <a href="{{ route('cp.user.user.index') }}">
                 <span>

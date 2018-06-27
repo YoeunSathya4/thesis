@@ -77,20 +77,15 @@ class CategoryController extends Controller
                             'en_name' => 'required',
                             'kh_name' => 'required'
                         ])->validate();
-        // if($request->input('active')=="")
-        // {
-        //     $data['is_published']=0;
-        // }else{
-        //     $data['is_published']=1;
-        // }
         
-        // if($request->hasFile('image')) {
-        //     $image = $request->file('image');
-        //     $imagename = time().'.'.$image->getClientOriginalExtension(); 
-        //     Image::make($image->getRealPath())->resize(300, 300)->save(public_path('uploads/restaurant/logo/'.$imagename));
-        //     //Image::make($photo->getRealPath())->resize(416, 270)->save(public_path('uploads/property/photo/416x270/'.$photoname));
-        //     $data['logo']=$imagename;
-        // }
+        
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagename = time().'.'.$image->getClientOriginalExtension(); 
+            Image::make($image->getRealPath())->resize(263, 115)->save(public_path('uploads/category/image/'.$imagename));
+            $data['image']=$imagename;
+        }
+        
 
 		$id=Model::insertGetId($data);
         Session::flash('msg', 'Data has been Created!');
@@ -124,12 +119,12 @@ class CategoryController extends Controller
                     'updater_id' =>   $user_id,
                     'updated_at' => $now
                 );
-        // if($request->input('active')=="")
-        // {
-        //     $data['is_published']=0;
-        // }else{
-        //     $data['is_published']=1;
-        // }
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagename = time().'.'.$image->getClientOriginalExtension(); 
+            Image::make($image->getRealPath())->resize(263, 115)->save(public_path('uploads/category/image/'.$imagename));
+            $data['image']=$imagename;
+        }
         
         Model::where('id', $id)->update($data);
         Session::flash('msg', 'Data has been updated!' );

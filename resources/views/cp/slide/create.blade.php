@@ -69,7 +69,7 @@
 		    removeTitle: 'Cancel or reset changes',
 		    elErrorContainer: '#kv-avatar-errors-2',
 		    msgErrorClass: 'alert alert-block alert-danger',
-		    defaultPreviewContent: '<img src="http://via.placeholder.com/1349x516" alt="Missing Image" class="img img-responsive"><span class="text-muted">Click to select <br /><i style="font-size:12px">Image dimesion must be 1920x670 px with .jpg or .png type</i></span>',
+		    defaultPreviewContent: '<img src="http://via.placeholder.com/1903x700" alt="Missing Image" class="img img-responsive"><span class="text-muted">Click to select <br /><i style="font-size:12px">Image dimesion must be 1903x700 px with .jpg or .png type</i></span>',
 		    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
 		    allowedFileExtensions: ["jpg", "png", "gif"]
 		});

@@ -111,9 +111,11 @@
 @section ('section-content')
 	<div class="container-fluid">
 		@include('cp.layouts.error')
-
+		@php ($code = "")
 		@php ($en_name = "")
 		@php ($kh_name = "")
+		@php ($unit_price = 0)
+		@php ($product_qty = 0)
 		@php ($en_description = "")
 		@php ($kh_description = "")
 		@php ($en_content = "")
@@ -121,8 +123,11 @@
        
        	@if (Session::has('invalidData'))
             @php ($invalidData = Session::get('invalidData'))
+            @php ($code = $invalidData['code'])
             @php ($en_name = $invalidData['en_name'])
             @php ($kh_name = $invalidData['kh_name'])
+            @php ($unit_price = $invalidData['unit_price'])
+            @php ($product_qty = $invalidData['product_qty'])
             @php ($en_description = $invalidData['en_description'])
             @php ($kh_description = $invalidData['kh_description'])
             @php ($en_content = $invalidData['en_content'])
@@ -141,7 +146,7 @@
 							
 						@foreach( $categories as $row )
 							
-								<option value="{{ $row->id }}" >{{ $row->en_name }}</option>
+								<option value="{{ $row->id }}" >{{ $row->en_name }} ({{$row->kh_name}})</option>
 							
 						@endforeach
 					</select>
@@ -165,6 +170,20 @@
 						<option value="0" >Please Select Sub Category First</option>
 						
 					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="kh_name">Code</label>
+				<div class="col-sm-10">
+					<input 	id="code"
+							name="code"
+						   	value = "{{$code}}"
+						   	type="text"
+						   	placeholder = "Enter Product Code"
+						   	class="form-control"
+						   	data-validation="[L>=1, L<=200]"
+							data-validation-message="$ must be between 1 and 18 characters. No special characters allowed." />
+							
 				</div>
 			</div>
 			<div class="form-group row">
@@ -192,6 +211,34 @@
 						   	class="form-control"
 						   	data-validation="[L>=1, L<=200]"
 							data-validation-message="$ must be between 6 and 18 characters. No special characters allowed." />
+							
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="unit_price">Unit Price</label>
+				<div class="col-sm-10">
+					<input 	id="unit_price"
+							name="unit_price"
+						   	value = "{{$unit_price}}"
+						   	type="number"
+						   	placeholder = "Enter Product Unit Price"
+						   	class="form-control"
+						   	data-validation="[L>=1, L<=200]"
+							data-validation-message="$ must be between 1 and 18 characters. No special characters allowed." />
+							
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="product_qty">Quatity</label>
+				<div class="col-sm-10">
+					<input 	id="product_qty"
+							name="product_qty"
+						   	value = "{{$product_qty}}"
+						   	type="number"
+						   	placeholder = "Enter Product Quatity"
+						   	class="form-control"
+						   	data-validation="[L>=1, L<=200]"
+							data-validation-message="$ must be between 1 and 18 characters. No special characters allowed." />
 							
 				</div>
 			</div>
@@ -237,13 +284,23 @@
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 form-control-label" for="kh_content">Status</label>
+				<label class="col-sm-2 form-control-label" for="kh_content">Published</label>
 				<div class="col-sm-10">
 					<div class="checkbox-toggle">
-						<input id="status-status" type="checkbox"  >
+						<input id="status-status" type="checkbox" >
 						<label onclick="booleanForm('status')" for="status-status"></label>
 					</div>
 					<input type="hidden" name="status" id="status" value="">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 form-control-label" for="kh_content">Featured</label>
+				<div class="col-sm-10">
+					<div class="checkbox-toggle">
+						<input id="featured-featured" type="checkbox"  >
+						<label onclick="booleanForm('featured')" for="featured-featured"></label>
+					</div>
+					<input type="hidden" name="featured" id="featured" value="">
 				</div>
 			</div>
 			<div class="form-group row">

@@ -1,6 +1,6 @@
 @extends('frontend/layouts.master')
 
-@section('title', 'KHEMARAKSMEY | Login')
+@section('title', 'KHEMARAKSMEY | Porfile')
 @section('my-profile', 'profile-active')
 
 
@@ -59,7 +59,7 @@
 					
 					<!-- Content -->
 					<div class="col-lg-9 col-md-8 col-xs-12 pull-right pull-none">
-						<h1 style="padding-left: 50%;"> My Profile </h1><br/>
+						<h1 style="padding-left: 50%;"> {{__('general.my-profile')}}</h1><br/>
 
 						<form style="padding-left: 40px;" id="form" action="{{ route('update-profile') }}" name="form" method="POST"  enctype="multipart/form-data">
 					        {{ csrf_field() }}
@@ -67,38 +67,38 @@
 					        <input type="hidden" name="id" value="{{ $data->id }}">
 
 					        <div class="form-group row">
-					            <label class="col-sm-2 form-control-label" for="en_name">Name</label>
+					            <label class="col-sm-2 form-control-label" for="en_name">{{__('general.name')}}</label>
 					            <div class="col-sm-10">
 					                <input  id="name"
 					                        name="name"
 					                        value = "{{ $data->name }}"
 					                        type="text"
-					                        placeholder = "Eg. Savan"
+					                        placeholder = "{{__('general.ex')}}. {{__('general.sovan')}}"
 					                        class="form-control">
 					            </div>
 					        </div>
 					        
 					        <div class="form-group row">
-					            <label class="col-sm-2 form-control-label" for="email">Email</label>
+					            <label class="col-sm-2 form-control-label" for="email">{{__('general.email')}}</label>
 					            <div class="col-sm-10">
 					                <input  id="email"
 					                        name="email"
 					                        value = "{{ $data->email }}"
 					                        type="text"
-					                        placeholder = "Eg. you@example.com"
+					                        placeholder = "{{__('general.ex')}}. you@example.com"
 					                        class="form-control"
 					                        data-validation="[EMAIL]">
 					            </div>
 					        </div>
 					        
 					        <div class="form-group row">
-					            <label class="col-sm-2 form-control-label" for="phone">Phone</label>
+					            <label class="col-sm-2 form-control-label" for="phone">{{__('general.phone')}}</label>
 					            <div class="col-sm-10">
 					                <input  id="phone"
 					                        name="phone"
 					                        value = "{{ $data->phone }}"
 					                        type="text" 
-					                        placeholder = "Eg. 093123457"
+					                        placeholder = "{{__('general.ex')}}. 093123457"
 					                        class="form-control"
 					                        data-validation="[L>=9, L<=10, numeric]"
 					                        data-validation-message="$ is not correct." 
@@ -108,29 +108,29 @@
 					            </div>
 					        </div>
 					        <div class="form-group row">
-					            <label class="col-sm-2 form-control-label" for="location">Location</label>
+					            <label class="col-sm-2 form-control-label" for="location">{{__('general.location')}}</label>
 					            <div class="col-sm-10">
 					                <input  id="location"
 					                        name="location"
 					                        value = "{{ $data->location }}"
 					                        type="text"
-					                        placeholder = "Eg. Chom Chav"
+					                        placeholder = "{{__('general.ex')}}. {{__('general.chom-chav')}}"
 					                        class="form-control">
 					            </div>
 					        </div>
 					        <div class="form-group row">
-					            <label class="col-sm-2 form-control-label" for="address">Address</label>
+					            <label class="col-sm-2 form-control-label" for="address">{{__('general.address')}}</label>
 					            <div class="col-sm-10">
 					                <input  id="address"
 					                        name="address"
 					                        value = "{{ $data->address }}"
 					                        type="text"
-					                        placeholder = "Eg. #7A,street 428 Sangkat Boeng Trabeak, Khan Chamkamorn, Phnom Penh"
+					                        placeholder = "{{__('general.ex')}}. #7A,street 428 Sangkat Boeng Trabeak, Khan Chamkamorn, Phnom Penh"
 					                        class="form-control">
 					            </div>
 					        </div>
 					        <div class="form-group row">
-					            <label class="col-sm-2 form-control-label" for="email">Image</label>
+					            <label class="col-sm-2 form-control-label" for="email">{{__('general.image')}}</label>
 					            <div class="col-sm-10">
 					                <div class="kv-avatar center-block">
 					                    <input id="image" name="image" type="file" class="file-loading">
@@ -142,7 +142,7 @@
 					        <div class="form-group row">
 					            <label class="col-sm-2 form-control-label"></label>
 					            <div class="col-sm-10">
-					                <button type="submit" class="btn btn-success"> <fa class="fa fa-cog"></i> Update</button>
+					                <button type="submit" class="btn btn-success"> <fa class="fa fa-cog"></i> {{__('general.update')}}</button>
 					                
 					            </div>
 					        </div>
@@ -156,27 +156,27 @@
 
 						<!-- Aside Widget -->
 						<div class="aside-widget">
-							<h6 style="padding-top: 20px; font-size: 20px; color: #ffffff;"> <b> Profile Menu </b></h6>
+							<h6 style="padding-top: 20px; font-size: 20px; color: #ffffff;"> <b> {{__('general.profile-menu')}} </b></h6>
 							<ul class="s-arthor-list">
 								
 								<li class="@yield('my-profile')">
 									<a id="hover-id" href="{{route('profile',$locale)}}">
-									<h6 id="profileMenu">My Profile</h6>
+									<h6 id="profileMenu">{{__('general.my-profile')}}</h6>
 									</a>
 								</li>
 								<li>
 									<a  href="#">
-										<h6 id="profileMenu">Favorite Product</h6>
+										<h6 id="profileMenu">{{__('general.favorite-product')}}</h6>
 									</a>
 								</li>
 								<li>
 									<a  href="#">
-										<h6 id="profileMenu">Panding Order</h6>
+										<h6 id="profileMenu">{{__('general.panding-order')}}</h6>
 									</a>
 								</li>
 								<li>
 									<a  href="#">
-										<h6 id="profileMenu">Order History</h6>
+										<h6 id="profileMenu">{{__('general.order-history')}}</h6>
 									</a>
 								</li>
 								

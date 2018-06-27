@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use Session;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-use App\Model\Newsletter as Newsletter;
+use App\Model\Promotion\Promotion;
 
 class FrontendController extends Controller
 {
@@ -19,7 +21,9 @@ class FrontendController extends Controller
         
     }
 
-    public function defaultData(){
+    public function defaultData($locale = "en"){
+        App::setLocale($locale);
+
         //Current Language
         $parameters = Route::getCurrentRoute()->parameters();
         $enRouteParamenters = $parameters;
@@ -29,6 +33,8 @@ class FrontendController extends Controller
         $khRouteParamenters['locale'] = 'kh';
         $this->defaultData['khRouteParamenters'] = $khRouteParamenters;
         $this->defaultData['routeName'] = Route::currentRouteName();
+
+        $this->defaultData['promotions']            = Promotion::select('id',$locale.'_title as title','image')->limit(3)->get();
 
         return $this->defaultData;
     }
