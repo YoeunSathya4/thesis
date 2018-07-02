@@ -12,6 +12,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 use App\Model\Promotion\Promotion;
+use App\Model\Category\Category;
+use App\Model\Category\SubCategory;
+use App\Model\Category\SubSubCategory;
 
 class FrontendController extends Controller
 {
@@ -35,7 +38,22 @@ class FrontendController extends Controller
         $this->defaultData['routeName'] = Route::currentRouteName();
 
         $this->defaultData['promotions']            = Promotion::select('id',$locale.'_title as title','image')->limit(3)->get();
+        $navbar_menu = array();
+        $navbar_tab_menu = array();
+        $categories           = Category::select('id',$locale.'_name as name','image')->get();
 
+        foreach($categories as $row){
+
+            $subCategories = SubCategory::select('id', $locale.'_name as name')->where('category_id', $row->id)->get();
+            $navbar_menu[] = array('name'=>$row->name, 'subCategories'=>$subCategories);
+            foreach($subCategories as $subCategory){
+                $subSubCategories = SubSubCategory::select('id', $locale.'_name as name')->where('sub_category_id', $subCategory->id)->get();
+                $navbar_tab_menu[] = array('name'=>$subCategory->name, 'subSubCategories'=>$subSubCategories);
+            }
+        }
+
+        $this->defaultData['navbar_menu'] = $navbar_menu;
+        $this->defaultData['navbar_tab_menu'] = $navbar_tab_menu;
         return $this->defaultData;
     }
     

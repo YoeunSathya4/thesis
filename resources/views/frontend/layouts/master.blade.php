@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/style.css')}}">
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/responsive.css')}}">
         <link rel="stylesheet" href="{{ asset ('public/frontend/css/transition.css')}}">
+        <link rel="stylesheet" href="{{ asset ('public/frontend/css/navbar.css')}}">
         @yield('css')
         @if($locale=="kh")
             <link href="https://fonts.googleapis.com/css?family=Hanuman" rel="stylesheet">
@@ -40,6 +41,7 @@
 
         <!-- JavaScripts -->
         <script src="{{ asset ('public/frontend/js/vendor/modernizr.js')}}"></script>
+        
     </head>
 <body>
     <!-- Wrapper -->
