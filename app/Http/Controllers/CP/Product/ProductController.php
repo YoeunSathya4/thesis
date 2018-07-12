@@ -73,7 +73,11 @@ class ProductController extends Controller
                 $data = $data->whereBetween('created_at', [$from, $till]);
             }
         }
-        $data= $data->orderBy('id', 'DESC')->paginate($limit);
+        if(Auth::user()->position_id == 1){
+            $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+        }else{
+            $data= $data->orderBy('created_at', 'DESC')->where('is_deleted',0)->paginate($limit);
+        }
         $categories = Category::get();
         return view($this->route.'.index', ['route'=>$this->route, 'categories'=>$categories, 'data'=>$data,'appends'=>$appends]);
     }
@@ -103,6 +107,7 @@ class ProductController extends Controller
                     'creator_id' => $user_id,
                     'is_published' =>  $request->input('status'),
                     'is_featured' =>  $request->input('featured'),
+                    'is_deleted' =>  0,
                     'created_at' => $now
                 );
         
@@ -175,6 +180,7 @@ class ProductController extends Controller
                     'en_content' =>  $request->input('en_content'),
                     'is_published' =>  $request->input('status'),
                     'is_featured' =>  $request->input('featured'),
+                    'is_deleted' =>  0,
                     'updater_id' => $user_id,
                     'updated_at' => $now
                 );
@@ -216,13 +222,14 @@ class ProductController extends Controller
         return redirect()->back();
 	}
 
-     public function trash($id){
-        Model::where('id', $id)->update(['deleter_id' => Auth::id()]);
-        Model::find($id)->delete();
+    public function trash($id){
+        $now      = date('Y-m-d H:i:s');
+        Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        //Model::find($id)->delete();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
-            'msg' => 'Data has been deleted'
+            'msg' => 'Restaurant has been deleted'
         ]);
     }
     function updateStatus(Request $request){
@@ -241,6 +248,15 @@ class ProductController extends Controller
       return response()->json([
           'status' => 'success',
           'msg' => 'Featured status has been updated.'
+      ]);
+    }
+    function updateDeletedStatus(Request $request){
+      $id   = $request->input('id');
+      $data = array('is_deleted' => $request->input('active'));
+      Model::where('id', $id)->update($data);
+      return response()->json([
+          'status' => 'success',
+          'msg' => 'Status has been updated.'
       ]);
     }
     function getSubCategory($category_id = 0){

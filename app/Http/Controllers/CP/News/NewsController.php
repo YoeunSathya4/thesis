@@ -51,7 +51,11 @@ class NewsController extends Controller
                 $data = $data->whereBetween('created_at', [$from, $till]);
             }
         }
-        $data= $data->orderBy('id', 'DESC')->paginate($limit);
+        if(Auth::user()->position_id == 1){
+            $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+        }else{
+            $data= $data->orderBy('created_at', 'DESC')->where('is_deleted',0)->paginate($limit);
+        }
         
         return view($this->route.'.index', ['route'=>$this->route, 'data'=>$data,'appends'=>$appends]);
     }
@@ -71,6 +75,7 @@ class NewsController extends Controller
                     'en_description' =>  $request->input('en_description'),
                     'kh_content' =>   $request->input('kh_content'), 
                     'en_content' =>  $request->input('en_content'),
+                    'is_deleted' =>  0,
                     'creator_id' => $user_id,
                     'created_at' => $now
                 );
@@ -131,6 +136,7 @@ class NewsController extends Controller
                     'en_description' =>  $request->input('en_description'),
                     'kh_content' =>   $request->input('kh_content'), 
                     'en_content' =>  $request->input('en_content'),
+                    'is_deleted' =>  0,
                     'updater_id' => $user_id,
                     'updated_at' => $now
                 );
@@ -171,12 +177,13 @@ class NewsController extends Controller
 	}
 
      public function trash($id){
-        Model::where('id', $id)->update(['deleter_id' => Auth::id()]);
-        Model::find($id)->delete();
+        $now      = date('Y-m-d H:i:s');
+        Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        //Model::find($id)->delete();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
-            'msg' => 'Data has been deleted'
+            'msg' => 'Restaurant has been deleted'
         ]);
     }
     function updateStatus(Request $request){
@@ -186,6 +193,16 @@ class NewsController extends Controller
       return response()->json([
           'status' => 'success',
           'msg' => 'Published status has been updated.'
+      ]);
+    }
+
+    function updateDeletedStatus(Request $request){
+      $id   = $request->input('id');
+      $data = array('is_deleted' => $request->input('active'));
+      Model::where('id', $id)->update($data);
+      return response()->json([
+          'status' => 'success',
+          'msg' => 'Status has been updated.'
       ]);
     }
 

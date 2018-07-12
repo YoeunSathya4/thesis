@@ -69,6 +69,7 @@ class AnnouncementController extends Controller
                     'slug'      =>   GenerateSlug::generateSlug('promotions', $request->input('en_title')),
                     'kh_description' =>   $request->input('kh_description'), 
                     'en_description' =>  $request->input('en_description'),
+                    'is_deleted' =>  0,
                     'creator_id' => $user_id,
                     'created_at' => $now
                 );
@@ -119,6 +120,7 @@ class AnnouncementController extends Controller
                     'slug'      =>   GenerateSlug::generateSlug('promotions', $request->input('en_title')),
                     'kh_description' =>   $request->input('kh_description'), 
                     'en_description' =>  $request->input('en_description'),
+                    'is_deleted' =>  0,
                     'updater_id' => $user_id,
                     'updated_at' => $now
                 );

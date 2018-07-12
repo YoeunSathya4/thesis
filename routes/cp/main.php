@@ -10,16 +10,15 @@
 		Route::group(['as' => 'user.',  'prefix' => 'user', 'namespace' => 'User'], function () {
 			require(__DIR__.'/user.php');
 		});
-
+		Route::group(['as' => 'profile.',  'prefix' => 'profile', 'namespace' => 'Profile'], function () {
+			require(__DIR__.'/profile.php');
+		});
 		
 		//:::::::::::::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Setup
 		Route::group(['as' => 'setup.', 'prefix' => 'setup', 'namespace' => 'Setup'], function () {
 			require(__DIR__.'/setup.php');
 		});
-		//:::::::::::::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Restaurant
-		Route::group(['as' => 'restaurant.', 'prefix' => 'restaurant', 'namespace' => 'Restaurant'], function () {
-			require(__DIR__.'/restaurant.php');
-		});
+		
 		Route::group(['as' => 'menu.',  'prefix' => 'menu', 'namespace' => 'Menu'], function () {
 			require(__DIR__.'/menu.php');
 		});

@@ -34,10 +34,10 @@
                     
                     <div class="dropdown user-menu">
                         <button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="{{ asset (Auth::user()->picture) }}" alt="">
+                            <img src="{{ asset ('public/uploads/user/image/'.Auth::user()->avatar) }}" alt="">
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
-                            <a class="dropdown-item" href="{{ route('cp.user.profile.edit') }}"><span class="fa fa-user"></span> Profile</a>
+                            <a class="dropdown-item" href="{{ route('cp.profile.profile.edit') }}"><span class="fa fa-user"></span> Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('cp.auth.logout') }}"><span class="fa fa-sign-out"></span> Logout</a>
                         </div>
@@ -65,7 +65,8 @@
 
     <div class="mobile-menu-left-overlay"></div>
     <nav class="side-menu">
-        <ul class="side-menu-list">    
+        <ul class="side-menu-list"> 
+           @if(Auth::user()->position_id == 1)
             <li class="red @yield('active-main-menu-dashboard')">
                 <a href="#">
                 <span>
@@ -85,6 +86,15 @@
                     <li class=""><a href="{{ route('cp.order.all-order') }}"><span class="lbl">All Orders</span></a></li>
                 </ul>
             </li>
+            <li class="red @yield('active-main-menu-customer')">
+                <a href="{{ route('cp.customer.customer.index') }}">
+                <span>
+                    <i class="fa fa-address-book"></i>
+                    <span class="lbl">Customers</span>
+                </span>
+                </a>
+            </li>
+            @endif
             <li class="red @yield('active-main-menu-slide')">
                 <a href="{{ route('cp.slide.index') }}">
                 <span>
@@ -110,14 +120,6 @@
                 </a>
             </li>
            
-            <li class="red @yield('active-main-menu-customer')">
-                <a href="{{ route('cp.customer.customer.index') }}">
-                <span>
-                    <i class="fa fa-address-book"></i>
-                    <span class="lbl">Customers</span>
-                </span>
-                </a>
-            </li>
 
             <li class="@yield('active-main-menu-medai') red with-sub">
                 <span>
@@ -140,42 +142,7 @@
                     <li class=""><a href="{{ route('cp.category.index') }}"><span class="lbl">Category</span></a></li>
                 </ul>
             </li>
-            <!-- <li class="red @yield('active-main-menu-restaurant')">
-                <a href="{{ route('cp.restaurant.index') }}">
-                <span>
-                    <i class="fa fa-cutlery"></i>
-                    <span class="lbl">Restaurants</span>
-                </span>
-                </a>
-            </li> -->
-            <!-- <li class="red @yield('active-main-menu-menus')">
-                <a href="{{ route('cp.menu.index') }}">
-                <span>
-                    <i class="fa fa-book"></i>
-                    <span class="lbl">Menus</span>
-                </span>
-                </a>
-            </li> -->
-            <!-- <li class="red @yield('active-main-menu-report')">
-                <a href="#">
-                <span>
-                    <i class="fa fa-bar-chart"></i>
-                    <span class="lbl">Reports</span>
-                </span>
-                </a>
-            </li> -->
-            <!-- <li class="@yield('active-main-menu-setup') red with-sub">
-                <span>
-                    <i class=" font-icon fa fa-cog"></i>
-                    <span class="lbl"> Set Up</span>
-                </span>
-                <ul>
-                    <li class=""><a href="{{ route('cp.setup.r_type.index') }}"><span class="lbl">Restaurant Type</span></a></li>
-                    <li class=""><a href="{{ route('cp.setup.category.index') }}"><span class="lbl">Categories</span></a></li>
-                    <li class=""><a href="{{ route('cp.setup.type.index') }}"><span class="lbl">Types</span></a></li>
-                    <li class=""><a href="{{ route('cp.setup.location.index') }}"><span class="lbl">Locations</span></a></li>
-                </ul>
-            </li> -->
+            
         
             @if(Auth::user()->position_id == 1)
             <li class="red @yield('active-main-menu-user')">

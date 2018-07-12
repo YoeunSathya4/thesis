@@ -45,10 +45,10 @@ class FrontendController extends Controller
         foreach($categories as $row){
 
             $subCategories = SubCategory::select('id', $locale.'_name as name')->where('category_id', $row->id)->get();
-            $navbar_menu[] = array('name'=>$row->name, 'subCategories'=>$subCategories);
+            $navbar_menu[] = array('id'=>$row->id,'name'=>$row->name, 'subCategories'=>$subCategories);
             foreach($subCategories as $subCategory){
                 $subSubCategories = SubSubCategory::select('id', $locale.'_name as name')->where('sub_category_id', $subCategory->id)->get();
-                $navbar_tab_menu[] = array('name'=>$subCategory->name, 'subSubCategories'=>$subSubCategories);
+                $navbar_tab_menu[] = array('id'=>$subCategory->id,'name'=>$subCategory->name, 'subSubCategories'=>$subSubCategories);
             }
         }
 

@@ -32,12 +32,12 @@
                                 <form style="padding: 20px;" action="{{route('make-forgot-password-code', $locale)}}" method="POST" class="sending-form">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
-                                        <input class="form-control" type="email" required="required" name="email" placeholder="{{__('general.please-enter-your-email-address')}}">
+                                        <input class="form-control" type="text" required="required" name="phone" placeholder="Enter your phone number">
                                         <i class="fa fa-user"></i>
                                     </div>
                                     
                                     <p class="terms">{{__('general.back-to')}} <a href="{{ route('login', $locale) }}"> {{__('general.login')}}</a></p>
-                                    <button type="submit" class="btn-1 shadow-0 full-width">{{__('general.get-resset-link')}}</button>
+                                    <button type="submit" class="btn-1 shadow-0 full-width">{{__('general.submit')}}</button>
                                 </form>
                             </div>
                     </div>

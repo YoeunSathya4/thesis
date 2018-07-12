@@ -57,7 +57,7 @@
                 <!-- Online Option -->
                 <div class="online-option">
                     <ul>
-                        <li><a href="#" ><i class="fa fa-shopping-cart" style="font-size: 20px;"></i> Cart</a> </li>
+                        <li><a href="{{route('shopping-cart',$locale)}}" ><i class="fa fa-shopping-cart" style="font-size: 20px;"></i>  {{__('general.shopping-cart')}} <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span></a> </li>
                     </ul>
                 </div>
                 <!-- Online Option -->
@@ -216,50 +216,12 @@
 <nav id="menu" class="responive-nav">
     <a class="r-nav-logo" href="index-2.html"><img src="{{ asset ('public/frontend/images/logo-1.png')}}" alt=""></a>
     <ul class="respoinve-nav-list">
-        <li>
-            <a class="triple-eff" data-toggle="collapse" href="#list-1"><i class="pull-right fa fa-angle-down"></i>Home</a>
-            <ul class="collapse" id="list-1">
-                <li><a href="index-2.html">home 1</a></li>
-                <li><a href="index-3.html">home 2</a></li>
-            </ul>
-        </li>
-        <li>
-            <a class="triple-eff" data-toggle="collapse" href="#list-2"><i class="pull-right fa fa-angle-down"></i>Shop</a>
-            <ul class="collapse" id="list-2">
-                <li><a href="shop.html">shop</a></li>
-                <li><a href="shop-detail.html">shop Detail</a></li>
-            </ul>
-        </li>
-        <li>
-            <a class="triple-eff" data-toggle="collapse" href="#list-3"><i class="pull-right fa fa-angle-down"></i>Blog</a>
-            <ul class="collapse" id="list-3">
-                <li><a href="blog-all-views.html">blog all views</a></li>
-                <li><a href="blog-larg.html">blog Larg</a></li>
-                <li><a href="blog-list.html">blog List</a></li>
-                <li><a href="blog-grid.html">blog Grid</a></li>
-                <li><a href="blog-detail.html">blog detail</a></li>
-            </ul>
-        </li>
-        <li>
-            <a class="triple-eff" data-toggle="collapse" href="#list-4"><i class="pull-right fa fa-angle-down"></i>Pages</a>
-            <ul class="collapse" id="list-4">
-                <li><a href="about.html">about</a></li>
-                <li><a href="gallery.html">gallery</a></li>
-                <li><a href="event-list.html">event list</a></li>
-                <li><a href="event-detail.html">event detail</a></li>
-                <li><a href="book-list.html">blog list</a></li>
-                <li><a href="book-detail.html">book detail</a></li>
-                <li><a href="404.html">404</a></li>
-            </ul>
-        </li>
-        <li>
-            <a class="triple-eff" data-toggle="collapse" href="#list-5"><i class="pull-right fa fa-angle-down"></i>author</a>
-            <ul class="collapse" id="list-5">
-                <li><a href="author.html">author</a></li>
-                <li><a href="author-detail.html">author detail</a></li>
-            </ul>
-        </li>
-        <li><a href="contact.html">Contact</a></li>                       
+       <li class="@yield('home')"><a href="{{ route('home', $locale) }}"><i class="fa fa-home" style="padding-right: 5px;"></i>{{__('general.home')}}</a></li>
+                            <li class="@yield('about-us')"> <a href="{{ route('about-us', $locale) }}"><i class="fa fa-user" style="padding-right: 5px;"></i> {{__('general.about-us')}}</a></li>
+                            <li class="@yield('product')"> <a href="{{ route('product', $locale) }}"><i class="fa fa-briefcase" style="padding-right: 5px;"></i> {{__('general.product')}}</a></li>
+                            <li class="@yield('promotion')"><a href="{{ route('promotion', $locale) }}"><i class="fa fa-bullhorn" style="padding-right: 5px;"></i> {{__('general.promotion')}}</a></li>
+                            <li class="@yield('news')"><a href="{{ route('news', $locale) }}"><i class="fa fa-pencil" style="padding-right: 5px;"></i> {{__('general.news')}}</a></li>
+                            <li class="@yield('contact-us')"><a href="{{ route('contact-us', $locale) }}"><i class="fa fa-fax" style="padding-right: 5px;"></i> {{__('general.contact-us')}}</a></li>                    
     </ul>
 </nav>
 <!-- Slide Menu -->

@@ -19,6 +19,26 @@
 		}
 		$(location).attr('href', '{{ route('cp.category.sub-category.index', $id) }}'+url);
 	}
+
+	function showIsDelete(id){
+			active = 0;
+			$.ajax({
+			        url: "{{ route('cp.category.sub-category.update-sub-category-delete-status') }}",
+			        method: 'POST',
+			        data: {id:id, active:active },
+			        success: function( response ) {
+			            if ( response.status === 'success' ) {
+			            	swal("Nice!", response.msg ,"success");
+			            	location.reload();
+			            }else{
+			            	swal("Error!", "Sorry there is an error happens. " ,"error");
+			            }
+			        },
+			        error: function( response ) {
+			           swal("Error!", "Sorry there is an error happens. " ,"error");
+			        }
+				});
+		}
 	
 </script>
 
@@ -48,7 +68,16 @@
 					<th>Name in Khmer</th>
 					<th>Name in English</th>
 					<th>Image</th>
+					@if(Auth::user()->position_id == 1)
+						<th>Created By</th>
+						<th>Created By</th>
+						<th>Updated By</th>
+						@endif
 					<th>Updated Date</th>
+					@if(Auth::user()->position_id == 1)
+					<th>Delete By</th>
+					<th>Delete Date</th>
+					@endif
 					<th></th>
 				</tr>
 			</thead>
@@ -69,13 +98,30 @@
 								No Image Avaiable
 							@endif
 						</td>
+						@if(Auth::user()->position_id == 1)
+							<td>{{ $row->creator->name }}</td>
+							<td>{{ $row->created_at }}</td>
+							<td>@if($row->updater != '') {{ $row->updater->name }} @else no updater @endif</td>
+							@endif
 						<td>{{ $row->updated_at }}</td>
+						@if(Auth::user()->position_id == 1)
+							<td>@if($row->deleter != '') {{ $row->deleter->name }} @else no deleter @endif</td>
+							<td>{{ $row->deleted_at }}</td>
+						@endif
 						<td style="white-space: nowrap; width: 1%;">
 							<div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
 	                           	<div class="btn-group btn-group-sm" style="float: none;">
 	                           		
 	                           		<a href="{{ route('cp.category.sub-category.edit', ['id'=>$id, 'menu_id'=>$row->id]) }}" class="tabledit-edit-button btn btn-sm btn-success" style="float: none;"><span class="fa fa-eye"></span></a>
-	                           		<a href="#" onclick="deleteConfirm('{{ route('cp.category.sub-category.trash', ['id'=>$id, 'subcategory_id'=>$row->id]) }}', '{{ route('cp.category.sub-category.index', ['id'=>$id]) }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
+	                           		
+	                           		@if($row->is_deleted == 0)
+		                           		<a href="#" onclick="deleteConfirm('{{ route('cp.category.sub-category.trash', ['id'=>$id, 'subcategory_id'=>$row->id]) }}', '{{ route('cp.category.sub-category.index', ['id'=>$id]) }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
+		                           		@endif
+		                           		@if(Auth::user()->position_id == 1)
+		                           			@if($row->is_deleted == 1)
+ 											<button onclick="showIsDelete({{$row->id}})" class="tabledit-edit-button btn btn-sm btn-warning" style="float: none;"> <span class="fa fa-check"></span> Restore</button>
+ 											@endif
+		                           		@endif
 	                           		
 	                           	</div>
 	                       </div>

@@ -16,6 +16,8 @@ use App\Http\Controllers\CamCyber\IpAddressController as IpAddress;
 use Image;
 
 use App\Model\Customer\Customer as Model;
+use App\Model\Order\Order as Order;
+use App\Model\Order\OrderDetails as OrderDetails;
 class ProfileController extends FrontendController
 {
     
@@ -75,7 +77,78 @@ class ProfileController extends FrontendController
         return redirect()->back();
     }
 
-   
+    public function newPassword($locale ){
+
+        $defaultData = $this->defaultData($locale);
+        return view('frontend.new-password', ['defaultData'=>$defaultData ,'locale'=>$locale]);
+    }
+
+     public function submitNewPassword(Request $request,$locale){
+        $id = Auth::guard('customer')->user()->id;
+        
+        $data = array(
+                    'password' =>   bcrypt($request->input('password')),
+                );
+
+        //echo $picture; die;
+        Model::where('id', $id)->update($data);
+        Session::flash('msg', 'Password has been changed!' );
+        return redirect($locale.'/profile');
+    }
+
+
+    public function changePassword (Request $request){
+        $id = Auth::guard('customer')->user()->id;
+        $old_password = $request->input('old_password');
+        $current_password = Model::find($id)->password;
+        // echo $old_password. '<br />';
+        // echo $current_password. '<br />';die; 
+
+        if (password_verify($old_password, $current_password)){ 
+
+            Validator::make(
+                        $request->all(), 
+                        [
+                            'new_password'         => 'required|min:6|max:18',
+                            'confirm_password' => 'required|same:new_password',
+                        ], 
+                        [
+                            'new_password.same' => 'Please confirm your password.',
+                        ])->validate();
+            Model::where('id', $id)->update(['password' => bcrypt($request->input('new_password'))]);
+            Session::flash('msg', 'Password has been Reset!' );
+            return redirect()->back();
+        }else{
+            Session::flash('error', 'Password dose not match!');
+            return redirect()->back();
+        }
+       
+        
+    }
+
+
+    public function pandingOrder($locale){
+        $defaultData = $this->defaultData($locale);
+        if(!Session::has('cart')){
+            return view('frontend.panding-order',['defaultData'=>$defaultData,'locale'=>$locale,'product'=>null]);
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view('frontend.panding-order',['defaultData'=>$defaultData, 'locale'=>$locale,'products'=> $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+   public function orderHistory($locale){
+        $customer_id = Auth::guard('customer')->user()->id;
+        //dd($customer_id);
+        $defaultData = $this->defaultData($locale);
+        if($customer_id != ''){
+            $orders = Order::select('*')->where('customer_id',$customer_id)->get();
+
+            return view('frontend.order-history',['defaultData'=>$defaultData, 'locale'=>$locale,'orders'=>$orders]);
+        }else{
+            return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
+        }
+   }
    	
    	
 }

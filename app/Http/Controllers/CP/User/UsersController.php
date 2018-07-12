@@ -15,6 +15,7 @@ use App\Model\User\User as Model;
 use App\Model\User\Position;
 use App\Model\User\PermisionCategory as Category;
 use App\Model\User\Role as Role;
+use Image;
 
 class UsersController extends Controller
 {
@@ -76,7 +77,7 @@ class UsersController extends Controller
                             'password'         => 'required|min:6|max:18',
                             'confirm_password' => 'required|same:password',
                             'avatar' => [
-                                            'required',
+                                            
                                             'mimes:jpeg,png',
                             ],
 						], 
@@ -93,9 +94,15 @@ class UsersController extends Controller
         }else{
             $data['status']=1;
         }
-        $avatar = FileUpload::uploadFile($request, 'avatar', 'uploads/user');
-        if($avatar != ""){
-            $data['avatar'] = $avatar; 
+        // $avatar = FileUpload::uploadFile($request, 'avatar', 'uploads/user');
+        // if($avatar != ""){
+        //     $data['avatar'] = $avatar; 
+        // }
+        if($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $imagename = time().'.'.$avatar->getClientOriginalExtension(); 
+            Image::make($avatar->getRealPath())->resize(200, 165)->save(public_path('uploads/user/image/'.$imagename));
+            $data['avatar']=$imagename;
         }
 		$id=Model::insertGetId($data);
         Session::flash('msg', 'Data has been Created!');
@@ -127,14 +134,12 @@ class UsersController extends Controller
                                         ],
                             'avatar' => [
                                             'sometimes',
-                                            'required',
+                                            
                                             'mimes:jpeg,png',
-                                            Rule::dimensions()->width(200)->height(165),
                             ],
 						],
                         [
                             'email.unique' => 'New new email address :'.$request->input('email').' can not be used. It has already been taken.',
-                            'avatar.dimensions' => 'Please provide valide image dimensions 200x165.',
                         ])->validate();
 
 		
@@ -142,7 +147,6 @@ class UsersController extends Controller
                     'name' =>   $request->input('name'),
                     'phone' =>  $request->input('phone'), 
                     'email' =>  $request->input('email'),
-                    'password' => bcrypt($request->input('password')),
                     'position_id' =>  $request->input('position_id')
                 );
         
@@ -152,11 +156,13 @@ class UsersController extends Controller
         }else{
             $data['status']=1;
         }
-        $avatar = FileUpload::uploadFile($request, 'avatar', 'uploads/user');
-        if($avatar != ""){
-            $data['avatar'] = $avatar; 
+        
+        if($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $imagename = time().'.'.$avatar->getClientOriginalExtension(); 
+            Image::make($avatar->getRealPath())->resize(200, 165)->save(public_path('uploads/user/image/'.$imagename));
+            $data['avatar']=$imagename;
         }
-		//echo $picture; die;
         Model::where('id', $id)->update($data);
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();

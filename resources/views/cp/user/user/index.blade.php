@@ -120,8 +120,6 @@
 				<th>Name</th>
 				<th>Position</th>
 				<th>Status</th>
-				
-				<th>Validate IP</th>
 				<th>Last Updated</th>
 				<th>Avatar</th>
 				<th></th>
@@ -142,15 +140,9 @@
 				        </div>
 					</td>
 					
-					<td>
-						<div class="checkbox-toggle">
-					        <input onclick="updateValidateIP({{ $row->id }})" type="checkbox" id="validate-ip-{{ $row->id }}" @if ($row->is_ip_validated == 1) checked data-value="1" @else data-value="0" @endif >
-					        <label @if($row->position_id == 2)  for="validate-ip-{{ $row->id }}" @endif></label>
-				        </div>
-					</td>
 					<td>{{ $row->updated_at }}</td>
 					<td class="table-photo">
-						<img src="{{ asset ($row->avatar) }}" alt="" data-toggle="tooltip" data-placement="bottom" title="{{ $row->name }}">
+						<img src="{{ asset ('public/uploads/user/image/'.$row->avatar) }}" alt="" data-toggle="tooltip" data-placement="bottom" title="{{ $row->name }}">
 					</td>
 					<td style="white-space: nowrap; width: 1%;">
 						<div class="tabledit-toolbar btn-toolbar" style="text-align: left;">

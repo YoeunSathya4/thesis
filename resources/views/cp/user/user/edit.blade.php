@@ -61,7 +61,7 @@
 		    removeTitle: 'Cancel or reset changes',
 		    elErrorContainer: '#kv-avatar-errors-2',
 		    msgErrorClass: 'alert alert-block alert-danger',
-		    defaultPreviewContent: '<img src="@if($data->avatar != '') {{ asset($data->avatar) }} @else http://via.placeholder.com/200x165 @endif" alt="Missing Image" class="img img-responsive"><span class="text-muted">Click to select <br /><i style="font-size:12px">Image dimesion must be 200x165 with .jpg or .png type</i></span>',
+		    defaultPreviewContent: '<img src="@if($data->avatar != '') {{ asset('public/uploads/user/image/'.$data->avatar) }} @else http://via.placeholder.com/200x165 @endif" alt="Missing Image" class="img img-responsive"><span class="text-muted">Click to select <br /><i style="font-size:12px">Image dimesion must be 200x165 with .jpg or .png type</i></span>',
 		    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
 		    allowedFileExtensions: ["jpg", "png", "gif"]
 		});

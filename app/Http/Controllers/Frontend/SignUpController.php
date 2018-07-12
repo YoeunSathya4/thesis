@@ -150,6 +150,13 @@ class SignUpController extends FrontendController
                     $customer->save();
 
                     Auth::guard('customer')->loginUsingId($customer->id, true);
+                    
+                    if(Session::has('oldUrl')){
+                        $oldUrl = Session::get('oldUrl');
+                        Session::forget('oldUrl');
+                        return redirect()->to($oldUrl);
+                    }
+
                     return redirect('en/profile');
                     
                 }else{

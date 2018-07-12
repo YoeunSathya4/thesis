@@ -15,7 +15,7 @@ class LoginController extends FrontendController
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = 'en/profile';
+    //protected $redirectTo = 'en/profile';
 
     public function showFormLogin($locale) {
 
@@ -23,7 +23,11 @@ class LoginController extends FrontendController
             $defaultData = $this->defaultData($locale);
     		return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
     	}else{
-            
+            if(Session::has('oldUrl')){
+                $oldUrl = Session::get('oldUrl');
+                Session::forget('oldUrl');
+                return redirect()->to($oldUrl);
+            }
     		return redirect('en/profile');
     	}
         
@@ -33,8 +37,20 @@ class LoginController extends FrontendController
     {
         $credentials = $request->only($this->username(), 'password'); 
         //$credentials['status'] = 1; 
-
+            
             return $credentials;
+    }
+
+
+    protected function authenticated(Request $request, $user)
+    {
+        if(Session::has('oldUrl')){
+                $oldUrl = Session::get('oldUrl');
+                Session::forget('oldUrl');
+                return redirect()->to($oldUrl);
+        }
+        return redirect()->to('en/profile');
+
     }
 
     protected function sendLoginResponse(Request $request)
@@ -83,8 +99,8 @@ class LoginController extends FrontendController
 
     public function logout(Request $request,$locale){
         $this->guard('customer')->logout();
-        $request->session()->flush();
-        $request->session()->regenerate();
+        //$request->session()->flush();
+        //$request->session()->regenerate();
         return redirect()->route('login',['locale'=>$locale]);
     }
    	

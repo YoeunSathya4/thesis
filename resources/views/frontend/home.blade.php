@@ -33,7 +33,7 @@
                                 <div class="row">
                                 @foreach($categories as $category)  
                                   <div class="col-lg-3">
-                                    <a href="#" class="thumbnail">
+                                    <a href="{{ route('product', $locale) }}?category={{ $category->id }}" class="thumbnail">
                                         <img class="rounded-circle" style="width: 100%;" src="{{asset('public/uploads/category/image/'.$category->image)}}" alt="Generic placeholder image" width="140" height="140">
                                     </a>
                                     <a href="#">
@@ -74,12 +74,13 @@
                                                     <img class="product-css" src="{{ asset ('public/uploads/product/image/'.$product->image) }}" alt="">
                                                     <div class="s-product-hover">
                                                         <div class="position-center-x">
-                                                            
-                                                            <a class="btn-1 sm shadow-0" data-toggle="modal" href="#">{{__('general.quick-view')}}</a>
+                                                            <a class="btn-1 sm shadow-0" data-toggle="modal" href="{{route('add-to-cart',['locale'=>$locale, 'id'=>$product->id])}}"><span class="fa fa-shopping-cart"></span> {{__('general.add-to-cart')}}</a>
+                                                            <br>
+                                                            <a class="btn-1 sm shadow-0" data-toggle="modal" href="{{route('product-detail',['locale'=>$locale, 'slug'=>$product->slug])}}">{{__('general.quick-view')}}</a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <h6><a href="#">{{$product->name}}</a></h6>
+                                                <h6><a href="{{route('product-detail',['locale'=>$locale, 'slug'=>$product->slug])}}">{{$product->name}}</a></h6>
                                                 <span><b>Price:</b> ${{$product->unit_price}}</span>
                                             </div>
                                         </div>

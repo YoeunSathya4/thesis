@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Mail\Message;
 use Session;
+use Illuminate\Support\Facades\Auth;
+
+use App\Model\Customer\Customer as Customer;
+use App\Model\Customer\Code as Code;
+use Nexmo\Laravel\Facade\Nexmo;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMailable;
@@ -46,6 +51,73 @@ class ForgotPasswordController extends FrontendController
         $defaultData = $this->defaultData($locale);;
         return view('frontend.forgot-password', ['defaultData'=>$defaultData, 'locale'=>$locale]);
     }
+
+    public function sendResetCode(Request $request,$locale){
+            $input = $request->all();
+            $phone = $request->input('phone');
+            $customer = Customer::select('*')->where('phone',$phone)->first();
+            
+            if($customer != ''){
+               $code = new Code;
+                $code->code           = rand();
+                $code->customer_id    = $customer->id;
+                $code->save();
+                $numberPhone = '855'.substr( $customer->phone, 1 );
+                //echo $numberPhone;die;
+                Nexmo::message()->send([
+                    'to'   => $numberPhone,
+                    'from' => $numberPhone,
+                    'text' => 'Your verify code is:'.$code->code
+                ]); 
+                $defaultData = $this->defaultData($locale);
+                return view('frontend.verify-forgot-password-code', ['defaultData'=>$defaultData, 'locale'=>$locale]); 
+            }else{
+                Session::flash('error', 'Phone Not Valid!');
+                return redirect('en/verify-code');
+            }
+            
+    }
+
+    public function verifyCodeForm($locale ){
+
+        $defaultData = $this->defaultData($locale);
+        return view('frontend.verify-forget-password-code', ['defaultData'=>$defaultData ,'locale'=>$locale]);
+    }
+
+    public function submitCodeForgotPassword(Request $request) {
+        
+        $this->validate($request, [
+            'code' => 'required|min:6',
+        ]);
+        
+        $code = $request->input('code'); 
+        
+
+        $data = Code::where(['code'=>$code])->orderBy('id', 'DESC')->first(); 
+      
+        if($data){
+            
+                $customer = Customer::findOrFail($data->customer_id);
+                if($customer){
+                    Auth::guard('customer')->loginUsingId($customer->id, true);
+                    //return redirect('en/profile');
+                    return redirect('en/new-password');
+                    
+                }else{
+                    
+                     Session::flash('error', 'User Not Found!');
+                     return redirect('en/verify-forgot-password-code');
+                }
+                
+        }else{
+           
+            Session::flash('error', 'Code Not Valid!');
+            return redirect('en/verify-forgot-password-code');
+        }
+       
+    }
+
+
     public function sendResetLinkEmail(Request $request)
     {
         $this->validateEmail($request);

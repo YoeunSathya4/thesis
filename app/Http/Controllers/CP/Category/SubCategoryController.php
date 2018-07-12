@@ -36,7 +36,11 @@ class SubCategoryController extends Controller
             });
             $appends['key'] = $key;
         }
-        $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+        if(Auth::user()->position_id == 1){
+            $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+        }else{
+            $data= $data->orderBy('created_at', 'DESC')->where('is_deleted',0)->paginate($limit);
+        }
         return view($this->route.'.index', ['route'=>$this->route, 'id'=>$id, 'data'=>$data,'appends'=>$appends]);
     }
 
@@ -54,9 +58,8 @@ class SubCategoryController extends Controller
                     'en_name' =>   $request->input('en_name'), 
                     'kh_name' =>   $request->input('kh_name'), 
                     'creator_id' =>  $user_id,
-                    'updater_id' =>  $user_id,
+                    'is_deleted' =>  0,
                     'created_at' =>  $now, 
-                    'updated_at' =>  $now
                 );
         //print_r($data); die;
         Session::flash('invalidData', $data );
@@ -101,6 +104,8 @@ class SubCategoryController extends Controller
                     'en_name' =>   $request->input('en_name'), 
                     'kh_name' =>   $request->input('kh_name'), 
                     'updater_id' =>  $user_id,
+                    'is_deleted' =>  0,
+                    'updated_at' =>  $now
                 );
         //print_r($data); die;
         Session::flash('invalidData', $data );
@@ -127,21 +132,35 @@ class SubCategoryController extends Controller
         return redirect(route($this->route.'.edit', ['id'=>$category_id, 'subcategory_id'=>$subcategory_id]));
     }
     
-    function trash($subcategory_id){
-        $id = $_GET['id'];
-        $user_id    = Auth::id();
-        Model::find($id)->subCategories()->where('id', $subcategory_id)->update(['deleter_id' => $user_id]);
-        Model::find($id)->subCategories()->where('id', $subcategory_id)->delete();
-        Session::flash('msg', 'Menu has been delete!' );
+    public function trash($id){
+        $now      = date('Y-m-d H:i:s');
+        SubCategory::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        //Model::find($id)->delete();
+        Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
-            'msg' => 'Menu has been deleted'
+            'msg' => 'Restaurant has been deleted'
         ]);
+    }
+
+    function updateDeletedStatus(Request $request){
+      $id   = $request->input('id');
+      $data = array('is_deleted' => $request->input('active'));
+      SubCategory::where('id', $id)->update($data);
+      return response()->json([
+          'status' => 'success',
+          'msg' => 'Status has been updated.'
+      ]);
     }
 
     public function mainCategories($category_id=0, $subcategory_id=0){
         //$this->validObj($menu_id);
-        $data = SubCategory::find($subcategory_id)->subSubCategories()->get();
+       
+        if(Auth::user()->position_id == 1){
+             $data = SubCategory::find($subcategory_id)->subSubCategories()->get();
+        }else{
+             $data = SubCategory::find($subcategory_id)->subSubCategories()->where('is_deleted',1)->get();
+        }
         return view($this->route.'.mainCategory', ['route'=>$this->route,'id'=>$category_id, 'subcategory_id'=>$subcategory_id, 'data'=>$data]);
 
     }
@@ -151,11 +170,16 @@ class SubCategoryController extends Controller
 
     }
     public function storeMainCategory(Request $request) {
+        $user_id    = Auth::id();
+        $now        = date('Y-m-d H:i:s');
         $data = array(
                     
                     'sub_category_id' =>   $request->input('subcategory_id'), 
                     'en_name' =>  $request->input('en_name'),
-                    'kh_name' =>  $request->input('kh_name')
+                    'kh_name' =>  $request->input('kh_name'),
+                    'is_deleted' =>  0,
+                    'creator_id' =>  $user_id,
+                    'created_at' =>  $now, 
                 );
         Session::flash('invalidData', $data );
         Validator::make(
@@ -189,7 +213,8 @@ class SubCategoryController extends Controller
 
     public function updateMainCategory(Request $request){
         $maincategory_id = $request->input('maincategory_id');
-
+        $user_id    = Auth::id();
+        $now        = date('Y-m-d H:i:s');
         Validator::make(
                         $request->all(), 
                         [
@@ -207,7 +232,10 @@ class SubCategoryController extends Controller
                     
                     'sub_category_id' =>   $request->input('subcategory_id'), 
                     'en_name' =>  $request->input('en_name'),
-                    'kh_name' =>  $request->input('kh_name')
+                    'kh_name' =>  $request->input('kh_name'),
+                    'is_deleted' =>  0,
+                    'updater_id' =>  $user_id,
+                    'updated_at' =>  $now
                 );
         
         SubSubCategory::where('id', $maincategory_id)->update($data);
@@ -217,12 +245,24 @@ class SubCategoryController extends Controller
 
     public function trashMainCategory($id){
         //Model::where('id', $id)->update(['deleter_id' => Auth::id()]);
-        SubSubCategory::find($id)->delete();
+        //SubSubCategory::find($id)->delete();
+        $now      = date('Y-m-d H:i:s');
+        SubSubCategory::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
             'msg' => 'Main Category has been deleted'
         ]);
+    }
+
+    function updateMainDeletedStatus(Request $request){
+      $id   = $request->input('id');
+      $data = array('is_deleted' => $request->input('active'));
+      SubSubCategory::where('id', $id)->update($data);
+      return response()->json([
+          'status' => 'success',
+          'msg' => 'Status has been updated.'
+      ]);
     }
 
 }

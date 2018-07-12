@@ -51,7 +51,11 @@ class CategoryController extends Controller
                 $data = $data->whereBetween('created_at', [$from, $till]);
             }
         }
-        $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+        if(Auth::user()->position_id == 1){
+            $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+        }else{
+            $data= $data->orderBy('created_at', 'DESC')->where('is_deleted',0)->paginate($limit);
+        }
         
         return view($this->route.'.index', ['route'=>$this->route, 'data'=>$data, 'appends'=>$appends]);
     }
@@ -67,6 +71,7 @@ class CategoryController extends Controller
                     'kh_name' =>   $request->input('kh_name'),
                     'creator_id' =>   $user_id,
                     'updater_id' =>   $user_id,
+                    'is_deleted' =>  0,
                     'created_at' => $now, 
                     'updated_at' => $now
                 );
@@ -116,6 +121,7 @@ class CategoryController extends Controller
 		$data = array(
                     'en_name' =>   $request->input('en_name'),
                     'kh_name' =>   $request->input('kh_name'),
+                    'is_deleted' =>  0,
                     'updater_id' =>   $user_id,
                     'updated_at' => $now
                 );
@@ -131,9 +137,10 @@ class CategoryController extends Controller
         return redirect()->back();
 	}
 
-    public function trash($id){
-        Model::where('id', $id)->update(['deleter_id' => Auth::id()]);
-        Model::find($id)->delete();
+   public function trash($id){
+        $now      = date('Y-m-d H:i:s');
+        Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        //Model::find($id)->delete();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
@@ -143,6 +150,15 @@ class CategoryController extends Controller
     function updateStatus(Request $request){
       $id   = $request->input('id');
       $data = array('is_published' => $request->input('active'));
+      Model::where('id', $id)->update($data);
+      return response()->json([
+          'status' => 'success',
+          'msg' => 'Status has been updated.'
+      ]);
+    }
+    function updateDeletedStatus(Request $request){
+      $id   = $request->input('id');
+      $data = array('is_deleted' => $request->input('active'));
       Model::where('id', $id)->update($data);
       return response()->json([
           'status' => 'success',

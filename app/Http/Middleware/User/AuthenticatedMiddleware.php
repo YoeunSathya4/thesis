@@ -15,7 +15,7 @@ class AuthenticatedMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next,$guard = null)
+    public function handle($request, Closure $next)
     {
         if (Auth::guest()) {
             if ($request->ajax() || $request->wantsJson()) {
@@ -25,82 +25,18 @@ class AuthenticatedMiddleware
             }
         }
 
-        // if(Auth::check()){//Check if has logged in.
-        //     $position_id = Auth::user()->position_id;
-        //     if( $position_id == 2){ // This user is not an admin.
-        //         $is_ip_validated = Auth::user()->is_ip_validated;
-        //         if($is_ip_validated == 1){
-        //             $ip         = IpAddress::getIP(); 
-        //             if($ip == env('IP_ADDRESS', '203.189.141.165')){ //Check if ip address is valid;
-        //                 return $next($request);
-        //             }else{
-        //                return redirect()->route('user.auth.not-allow');
-        //             }
-        //         }else{
-        //            return $next($request);
-        //         }
-            
-        //     }else{
-        //         return $next($request);
-        //     }
-        // }
-
-        //$guard = 'customer';
-        switch ($guard) {
-            case 'customer':
-
-                if (Auth::guest('')) {
-                    if ($request->ajax() || $request->wantsJson()) {
-                        return response('Unauthorized.', 401);
-                    } else {
-                        return redirect()->route('customer.login');
-                    }
+        if(Auth::check()){//Check if has logged in.
+            $validate_ip = Auth::user()->validate_ip;
+            if($validate_ip == 1){
+                $ip         = IpAddress::getIP(); 
+                if($ip == env('IP_ADDRESS', '255.255.255.255')){ //Check if ip address is valid;
+                    return $next($request);
+                }else{
+                    return redirect()->route('cp.auth.not-allow');
                 }
-                if(Auth::check()){//Check if has logged in.
-                        $is_ip_validated = Auth::user()->is_ip_validated;
-                        if($is_ip_validated == 1){
-                            $ip         = IpAddress::getIP(); 
-                            if($ip == env('IP_ADDRESS', '203.189.141.165')){ //Check if ip address is valid;
-                                return $next($request);
-                            }else{
-                               return redirect()->route('customer.not-allow');
-                            }
-                        }else{
-                           return $next($request);
-                        }
-                    
-                }
-                break;
-            
-            default:
-
-                if (Auth::guest()) {
-                    if ($request->ajax() || $request->wantsJson()) {
-                        return response('Unauthorized.', 401);
-                    } else {
-                        return redirect()->route('user.auth.login');
-                    }
-                }
-                if(Auth::check()){//Check if has logged in.
-                    $position_id = Auth::user()->position_id;
-                    if( $position_id == 2){ // This user is not an admin.
-                        $is_ip_validated = Auth::user()->is_ip_validated;
-                        if($is_ip_validated == 1){
-                            $ip         = IpAddress::getIP(); 
-                            if($ip == env('IP_ADDRESS', '203.189.141.165')){ //Check if ip address is valid;
-                                return $next($request);
-                            }else{
-                               return redirect()->route('user.auth.not-allow');
-                            }
-                        }else{
-                           return $next($request);
-                        }
-                    
-                    }else{
-                        return $next($request);
-                    }
-                }
-                break;
+            }else{
+               return $next($request);
+            }
         }
     }
 }

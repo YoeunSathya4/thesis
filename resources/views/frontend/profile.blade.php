@@ -1,4 +1,4 @@
-@extends('frontend/layouts.master')
+@extends('frontend.profile-tab')
 
 @section('title', 'KHEMARAKSMEY | Porfile')
 @section('my-profile', 'profile-active')
@@ -51,16 +51,25 @@
     </script>
 @endsection
 
-@section ('content')
-    <!-- Event List -->
-		<div class="tc-padding">
-			<div class="container">
-				<div class="row">
-					
-					<!-- Content -->
+@section ('profile')
+     <!-- Content -->
 					<div class="col-lg-9 col-md-8 col-xs-12 pull-right pull-none">
 						<h1 style="padding-left: 50%;"> {{__('general.my-profile')}}</h1><br/>
-
+						@if (count($errors) > 0)
+						    
+						    <div style="max-width: 322px; margin: 0 auto">
+                                        <div class="alert alert-danger alert-no-border alert-close alert-dismissible fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <ul>
+									            @foreach ($errors->all() as $error)
+									                <li>{{ $error }}</li>
+									            @endforeach
+									        </ul>
+                                        </div>  
+                                    </div>
+						@endif
 						<form style="padding-left: 40px;" id="form" action="{{ route('update-profile') }}" name="form" method="POST"  enctype="multipart/form-data">
 					        {{ csrf_field() }}
 					        {{ method_field('POST') }}
@@ -147,61 +156,69 @@
 					            </div>
 					        </div>
 					    </form>
+					    <h1 style="padding-left: 50%;"> {{__('general.change-password')}}</h1><br/>
+					    @if (count($errors) > 0)
+						    
+						    <div style="max-width: 322px; margin: 0 auto">
+                                        <div class="alert alert-danger alert-no-border alert-close alert-dismissible fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <ul>
+									            @foreach ($errors->all() as $error)
+									                <li>{{ $error }}</li>
+									            @endforeach
+									        </ul>
+                                        </div>  
+                                    </div>
+						@endif
+					    <form style="padding-left: 40px;" id="form" action="{{ route('change-password') }}" name="form" method="POST"  enctype="multipart/form-data">
+					        {{ csrf_field() }}
+					        {{ method_field('POST') }}
+					        <input type="hidden" name="id" value="{{ $data->id }}">
 
+					        <div class="form-group row">
+					            <label class="col-sm-2 form-control-label" for="en_name">{{__('general.current-password')}}</label>
+					            <div class="col-sm-10">
+					                <input  id="old_password"
+					                        name="old_password"
+					                        value = ""
+					                        type="password"
+					                        placeholder = ""
+					                        class="form-control">
+					            </div>
+					        </div>
+					    	<div class="form-group row">
+					            <label class="col-sm-2 form-control-label" for="en_name">{{__('general.new-password')}}</label>
+					            <div class="col-sm-10">
+					                <input  id="new_password"
+					                        name="new_password"
+					                        value = ""
+					                        type="password"
+					                        placeholder = ""
+					                        class="form-control">
+					            </div>
+					        </div>
+					        <div class="form-group row">
+					            <label class="col-sm-2 form-control-label" for="en_name">{{__('general.confirm-password')}}</label>
+					            <div class="col-sm-10">
+					                <input  id="confirm_password"
+					                        name="confirm_password"
+					                        value = ""
+					                        type="password"
+					                        placeholder = ""
+					                        class="form-control">
+					            </div>
+					        </div>
+					        <div class="form-group row">
+					            <label class="col-sm-2 form-control-label"></label>
+					            <div class="col-sm-10">
+					                <button type="submit" class="btn btn-primary"> <fa class="fa fa-cog"></i> {{__('general.change')}} </button>
+					                
+					            </div>
+					        </div>
+					    </form>
 					</div>
 					<!-- Content -->
-
-					<!-- Aside -->
-					<aside style="background: #f16162;" class="col-lg-3 col-md-4 col-xs-12 pull-left pull-none">
-
-						<!-- Aside Widget -->
-						<div class="aside-widget">
-							<h6 style="padding-top: 20px; font-size: 20px; color: #ffffff;"> <b> {{__('general.profile-menu')}} </b></h6>
-							<ul class="s-arthor-list">
-								
-								<li class="@yield('my-profile')">
-									<a id="hover-id" href="{{route('profile',$locale)}}">
-									<h6 id="profileMenu">{{__('general.my-profile')}}</h6>
-									</a>
-								</li>
-								<li>
-									<a  href="#">
-										<h6 id="profileMenu">{{__('general.favorite-product')}}</h6>
-									</a>
-								</li>
-								<li>
-									<a  href="#">
-										<h6 id="profileMenu">{{__('general.panding-order')}}</h6>
-									</a>
-								</li>
-								<li>
-									<a  href="#">
-										<h6 id="profileMenu">{{__('general.order-history')}}</h6>
-									</a>
-								</li>
-								
-							</ul>
-						</div>
-						<!-- Aside Widget -->
-
-					</aside>
-					<!-- Aside -->
-					
-				</div>
-			</div>
-		</div>
-		<!-- Event List -->
-    
-      		<style type="text/css">
-      			.profile-active{
-      				background: #2e3192;
-    				padding: 5px;
-      			}
-      			a:hover{
-      				    color: #0082c6;
-    					text-decoration: none;
-      			}
-      		</style>
-      		<!-- Contant Holder -->  
         
 @endsection

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-   	use SoftDeletes;
+   	//use SoftDeletes;
     protected $table = 'categories';
 
     public function subCategories(){
@@ -15,5 +15,14 @@ class Category extends Model
 
     public function products(){
         return $this->hasMany('App\Model\Product\Product');
+    }
+    public function creator(){
+        return $this->belongsTo('App\Model\User\User','creator_id');
+    }
+    public function updater(){
+        return $this->belongsTo('App\Model\User\User','updater_id');
+    }
+    public function deleter(){
+        return $this->belongsTo('App\Model\User\User','deleter_id');
     }
 }

@@ -29,6 +29,6 @@ Route::group(['as' => 'cp.', 'prefix' => 'cp', 'namespace' => 'CP'], function() 
 });
 
 //:::::::::::::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Control Panel
-Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function() {
-	require(__DIR__.'/customer/main.php');
-});
+// Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function() {
+// 	require(__DIR__.'/customer/main.php');
+// });
