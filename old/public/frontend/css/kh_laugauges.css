@@ -1,0 +1,28 @@
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Hanuman', serif;
+  line-height: 1.25em;
+  font-weight: normal;
+  color:#003399;
+}
+a,p,body{
+  font-family: 'Hanuman', serif;
+}
+.text{
+  font-family: 'Hanuman', serif !important;
+}
+.main-menu .navigation > li > a{
+	font-size:17px;
+}
+.list-blog .blog-detail h3{
+	font-family: 'Hanuman', serif !important;
+}
+body h1, body h2, body h3, body h4, body h5, body h6{
+	font-family: 'Hanuman', serif !important;
+}
+.mission-disc strong{
+	font-family: 'Hanuman', serif !important;
+}
+.btn-success {
+  font-family: 'Hanuman', serif !important;
+}
