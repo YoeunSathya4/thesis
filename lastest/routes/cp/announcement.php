@@ -9,6 +9,8 @@ Route::group([], function () {
 	Route::put('/', 							['as' => 'store', 			'uses' => 'AnnouncementController@store']);
 	Route::delete('/{id}', 						['as' => 'trash', 			'uses' => 'AnnouncementController@trash']);
 	Route::post('update-status', 				['as' => 'update-status', 	'uses' => 'AnnouncementController@updateStatus']);
+
+	
 });
 
 

@@ -17,6 +17,7 @@ use App\Model\Order\OrderDetails as OrderDetails;
 use App\Model\Customer\Customer as Customer;
 use App\Model\User\User as User;
 use App\Model\Product\Product as Product;
+use App\Model\User\Tracking;
 //use App\Model\Menu\MenuSize as MenuSize;
 
 
@@ -79,6 +80,7 @@ class OrderController extends Controller
             $data = $data->where('address', 'like', '%'.$key.'%')->orWhere('delivery_time', 'like', '%'.$key.'%');
             $appends['key'] = $key;
         }
+
         if(FunctionController::isValidDate($from)){
             if(FunctionController::isValidDate($till)){
                 $appends['from'] = $from;
@@ -93,6 +95,24 @@ class OrderController extends Controller
         $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
         
         return view($this->route.'.all_order', ['route'=>$this->route, 'data'=>$data, 'appends'=>$appends]);
+    }
+
+    public function allOderDetail($id = 0){
+        //$id = $request->input('id');
+        $user_id  = Auth::id();
+        $now      = date('Y-m-d H:i:s');
+        $data = Model::findOrFail($id);
+        $data->is_new = 1;
+        $data->save();
+        
+        $details = Model::find($id)->details;
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Recieve new order id: '.$id.' from customer';
+        $tracking->save();
+        //dd($details);
+        return view($this->route.'.order-detail', ['route'=>$this->route, 'data'=>$data,'details'=>$details]);
     }
 
      public function orderForm(Request $request){

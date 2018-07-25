@@ -11,10 +11,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Controllers\CamCyber\AgentController as Agent;
 use App\Http\Controllers\CamCyber\IpAddressController as IpAddress;
-
+use App\Model\Product\Favorite;
 
 use Image;
-
+use App\Model\Product\Cart;
 use App\Model\Customer\Customer as Model;
 use App\Model\Order\Order as Order;
 use App\Model\Order\OrderDetails as OrderDetails;
@@ -142,13 +142,39 @@ class ProfileController extends FrontendController
         //dd($customer_id);
         $defaultData = $this->defaultData($locale);
         if($customer_id != ''){
-            $orders = Order::select('*')->where('customer_id',$customer_id)->get();
+            $orders = Order::select('*')->where('customer_id',$customer_id)->orderBy('id','DESC')->get();
 
             return view('frontend.order-history',['defaultData'=>$defaultData, 'locale'=>$locale,'orders'=>$orders]);
         }else{
             return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
         }
    }
+
+   public function orderHistoryDetail($locale='', $id = 0){
+
+        $customer_id = Auth::guard('customer')->user()->id;
+        //dd($customer_id);
+        $defaultData = $this->defaultData($locale);
+        if($customer_id != ''){
+                $details = OrderDetails::select('*')->with(['product:id,'.$locale.'_name as productName'])->where('order_id',$id)->get();
+                //dd($details);
+                return view('frontend.order-history-detail',['defaultData'=>$defaultData, 'locale'=>$locale,'details'=>$details]);
+        }else{
+            return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
+        }
+   }
    	
+    public function favoriteProduct($locale){
+        $customer_id = Auth::guard('customer')->user()->id;
+        //dd($customer_id);
+        $defaultData = $this->defaultData($locale);
+        if($customer_id != ''){
+            $favorites = Favorite::select('*')->where('customer_id',$customer_id)->with(['product:id,'.$locale.'_name as productName'])->get();
+            //dd($favorites);
+            return view('frontend.favorite-product',['defaultData'=>$defaultData, 'locale'=>$locale,'favorites'=>$favorites]);
+        }else{
+            return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
+        }
+   }
    	
 }

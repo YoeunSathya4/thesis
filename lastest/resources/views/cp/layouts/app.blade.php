@@ -68,7 +68,7 @@
         <ul class="side-menu-list"> 
            @if(Auth::user()->position_id == 1)
             <li class="red @yield('active-main-menu-dashboard')">
-                <a href="#">
+                <a href="{{ route('cp.dashboard.index') }}">
                 <span>
                     <i class="fa fa-desktop"></i>
                     <span class="lbl">Dashboard</span>
@@ -81,8 +81,8 @@
                     <span class="lbl"> Orders</span>
                 </span>
                 <ul>
-                    <li class=""><a href="{{ route('cp.order.new-order') }}"><span class="lbl">New Orders</span></a></li>
-                    <li class=""><a href="{{ route('cp.order.order-form') }}"><span class="lbl">Order Form</span></a></li>
+                    <!-- <li class=""><a href="{{ route('cp.order.new-order') }}"><span class="lbl">New Orders</span></a></li>
+                    <li class=""><a href="{{ route('cp.order.order-form') }}"><span class="lbl">Order Form</span></a></li> -->
                     <li class=""><a href="{{ route('cp.order.all-order') }}"><span class="lbl">All Orders</span></a></li>
                 </ul>
             </li>
@@ -150,6 +150,14 @@
                 <span>
                     <i class="fa fa-users"></i>
                     <span class="lbl">User</span>
+                </span>
+                </a>
+            </li>
+            <li class="red @yield('active-main-menu-tracking')">
+                <a href="{{ route('cp.tracking.index') }}">
+                <span>
+                    <i class="fa fa-child"></i>
+                    <span class="lbl">Tracking User</span>
                 </span>
                 </a>
             </li>

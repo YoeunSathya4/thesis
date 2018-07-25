@@ -13,7 +13,7 @@ class OrderDetails extends Model
     	return $this->belongsTo('App\Model\Order\Order');
     }
     public function product(){
-        return $this->belongsTo('App\Model\Product\Product');
+        return $this->belongsTo('App\Model\Product\Product','product_id');
     }
     
 }

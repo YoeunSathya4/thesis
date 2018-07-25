@@ -13,6 +13,7 @@ use App\Http\Controllers\CamCyber\FunctionController;
 use Image;
 
 use App\Model\User\User as Model;
+use App\Model\User\Tracking;
 use App\Model\User\Position;
 
 
@@ -29,6 +30,8 @@ class ProfileController extends Controller
         
     }
     public function update(Request $request) {
+        $user_id  = Auth::id();
+        $now      = date('Y-m-d H:i:s');
        $id = $request->input('id');
         Validator::make(
                         $request->all(), 
@@ -68,6 +71,11 @@ class ProfileController extends Controller
             $data['avatar']=$imagename;
         }
         Model::where('id', $id)->update($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update his profile.';
+        $tracking->save();
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
     }
@@ -79,6 +87,8 @@ class ProfileController extends Controller
     }
     public function changePassword (Request $request){
         $id =  Auth::user()->id;
+        $user_id  = Auth::id();
+        $now      = date('Y-m-d H:i:s');
         $old_password = $request->input('old_password');
         $current_password = Model::find($id)->password;
         // echo $old_password. '<br />';
@@ -96,6 +106,11 @@ class ProfileController extends Controller
                             'new_password.same' => 'Please confirm your password.',
                         ])->validate();
             Model::where('id', $id)->update(['password' => bcrypt($request->input('new_password'))]);
+            $tracking = new Tracking();
+            $tracking->user_id = $user_id;
+            $tracking->created_at = $now;
+            $tracking->description = 'Change password.';
+            $tracking->save();
             Session::flash('msg', 'Password has been Reset!' );
             return redirect()->back();
         }else{

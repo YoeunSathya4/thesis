@@ -19,7 +19,7 @@
 
     <!-- Book Detail -->
         <div style="padding-top: 20px;" class="book-detail">
-            <div class="container">
+            <div id="border-text" class="container">
                 
                 <!-- Alert -->
                 <!-- <div class="add-cart-alert">
@@ -44,11 +44,11 @@
                         <!-- book Detail -->
                         <div class="col-lg-8 col-md-7">
                             <div class="single-product-detail">
-                                <h3>{{$data->name}}</h3>
+                                <h3>{{$data->name}}</h3><hr>
                                 <span style="color: black;" class="availability">{{__('general.availability')}} :<strong>{{$data->product_qty}} {{__('general.stock')}}<i class="fa fa-check-circle"></i></strong></span>
-
+                                <hr>
                                 <span style="color: black;" class="availability">{{__('general.price')}} :<strong>{{$data->unit_price}}<i class="fa fa-dollar"></i></strong></span>
-
+                                <hr>
                                 
                                 
                                 <h4>{{__('general.description')}}</h4>
@@ -61,11 +61,24 @@
                                         <input type='button' value='+' class='qtyplus'/>
                                     </form>
                                 </div> -->
+                                <hr>
                                 <ul class="btn-list">
-                                    <li><a class="btn-1 sm shadow-0 " href="{{route('add-to-cart',['locale'=>$locale, 'id'=>$data->id])}}">{{__('general.add-to-cart')}}</a></li>
-                                    <li><button onclick="add_to_favorite({{$data->id}})" class="btn-1 sm shadow-0 blank"><i class="fa fa-heart"></i> </button></li>
-                                    <!-- <li><a class="btn-1 sm shadow-0 blank" href="#"><i class="fa fa-repeat"></i></a></li>
-                                    <li><a class="btn-1 sm shadow-0 blank" href="#"><i class="fa fa-share-alt"></i></a></li> -->
+                                    <li style="margin-right: 10px;"><a class="btn-1 sm shadow-0 " href="{{route('add-to-cart',['locale'=>$locale, 'id'=>$data->id])}}">{{__('general.add-to-cart')}}</a></li>
+                                    @if($data->favorites()->first() == null)
+                                       @php($favorite = 0) 
+                                    @else
+                                        @php($favorite = 1)
+                                    @endif
+                                    @if(Auth::guard('customer')->user())
+                                    @if($favorite == 1)
+                                    <li><a href="{{route('remove-from-favorite',['locale'=>$locale, 'id'=>$data->id])}}" class="btn-1 sm shadow-0 blank"><i class="fa fa-heart"></i> </a></li>
+                                    @else
+                                        <a style="background: #b09b9b;" href="{{route('add-to-favorite',['locale'=>$locale, 'id'=>$data->id])}}" class="btn-1 sm shadow-0"><i class="fa fa-heart"></i>  </a>
+                                    @endif
+                                    @else
+                                        <a style="background: #b09b9b;" href="{{route('add-to-favorite',['locale'=>$locale, 'id'=>$data->id])}}" class="btn-1 sm shadow-0"><i class="fa fa-heart"></i>  </a>
+                                    @endif
+
                                 </ul>
                             </div>
                         </div>
@@ -75,6 +88,7 @@
                     </div>
 
                 </div>
+                <hr>
                 <!-- Single Book Detail -->
                 <!-- Related Products -->
                 <div class="related-products">

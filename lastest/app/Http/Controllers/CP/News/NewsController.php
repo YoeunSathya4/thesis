@@ -13,6 +13,7 @@ use App\Http\Controllers\CamCyber\FunctionController;
 use App\Http\Controllers\CamCyber\GenerateSlugController as GenerateSlug;
 
 use App\Model\News\News as Model;
+use App\Model\User\Tracking;
 use Image;
 
 
@@ -113,6 +114,11 @@ class NewsController extends Controller
         }
 
 		$id=Model::insertGetId($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Create new news id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been Created!');
 		return redirect(route($this->route.'.edit', $id));
     }
@@ -172,24 +178,62 @@ class NewsController extends Controller
         }
 
         Model::where('id', $id)->update($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update news id:'.$id.'and name:'.$data->en_title;
+        $tracking->save();
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
 	}
 
      public function trash($id){
+        $user_id  = Auth::id();
         $now      = date('Y-m-d H:i:s');
         Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         //Model::find($id)->delete();
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Delete news id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
-            'msg' => 'Restaurant has been deleted'
+            'msg' => 'News has been deleted'
         ]);
     }
+
+    public function delete($id){
+        $now      = date('Y-m-d H:i:s');
+        //Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        Model::find($id)->delete();
+        Session::flash('msg', 'Data has been delete!' );
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'News has been deleted'
+        ]);
+    }
+
     function updateStatus(Request $request){
+      $user_id  = Auth::id();
+      $now      = date('Y-m-d H:i:s');
       $id   = $request->input('id');
       $data = array('is_published' => $request->input('active'));
       Model::where('id', $id)->update($data);
+      if($request->input('active') == 1){
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update news publish id:'.$id;
+        $tracking->save();
+    }else{
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update news unpublish id:'.$id;
+        $tracking->save();
+    }
       return response()->json([
           'status' => 'success',
           'msg' => 'Published status has been updated.'

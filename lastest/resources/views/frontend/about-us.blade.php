@@ -19,7 +19,7 @@
 
         <!-- Service And Mission -->
         <section class="service-nd-mission tc-padding-top white-bg">
-            <div class="container">
+            <div  class="container">
                 
 
                 <!-- Mission & values -->
@@ -29,7 +29,7 @@
                         <!-- Mission Disc -->
                         <div class="col-lg-12 col-xs-12">
                             <div class="mission-disc">
-                                <h4>{{__('general.company-profile')}}</h4>
+                                <h4>{{__('general.company-profile')}}</h4><hr>
                                 <strong>@if($aboutUsContent != '') {!!$aboutUsContent->content!!} @else No Data Here!  @endif</strong>
                                 
                             </div>

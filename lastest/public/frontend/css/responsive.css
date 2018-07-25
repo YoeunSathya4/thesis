@@ -296,3 +296,9 @@ h2{ font-size: 18px;}
 .main-heading h2::before, .main-heading h2::after{ width: 60px;}
 .main-heading h2{ font-size: 13px; padding: 0 10px;}
 }
+
+@media only screen and (max-width: 991px){
+	.online-option {
+    display: inline;
+}
+}

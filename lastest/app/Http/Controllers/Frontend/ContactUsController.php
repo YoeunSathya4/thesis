@@ -24,7 +24,7 @@ class ContactUsController extends FrontendController
         $data = array(
                     'name' =>   $request->input('name'),
                     'phone' =>  $request->input('phone'),
-                    'email' =>  $request->input('email'),
+                    
                     'message' =>  $request->input('message') 
                 );
         //dd($data);
@@ -33,7 +33,7 @@ class ContactUsController extends FrontendController
                         $request->all(), 
                         [
                             'name' => 'required|min:3|max:30',
-                            'email' => 'email',
+                            //'email' => 'email',
                             'message' => 'required|max:255',
                             // 'g-recaptcha-response' => 'required',
                         ], 

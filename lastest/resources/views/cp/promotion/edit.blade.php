@@ -123,7 +123,12 @@
 			<label class="col-sm-2 form-control-label"></label>
 			<div class="col-sm-10">
 				<button type="submit" class="btn btn-success"> <fa class="fa fa-cog"></i> Update</button>
+				@if(Auth::user()->position_id == 1)
+				<button type="button" onclick="deleteConfirm('{{ route($route.'.delete', $data->id) }}', '{{ route($route.'.index') }}')" class="btn btn-danger"> <fa class="fa fa-trash"></i> Delete</button>
+				@else
 				<button type="button" onclick="deleteConfirm('{{ route($route.'.trash', $data->id) }}', '{{ route($route.'.index') }}')" class="btn btn-danger"> <fa class="fa fa-trash"></i> Delete</button>
+				@endif
+				
 			</div>
 		</div>
 	</form>

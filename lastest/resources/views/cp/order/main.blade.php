@@ -1,7 +1,7 @@
 @extends('cp.layouts.app')
 @section('active-main-menu-order', 'opened')
 @section('title')
-	New Order: @yield('section-title')
+	Order: @yield('section-title')
 @endsection
 
 @section ('appheadercss')
@@ -20,11 +20,10 @@
 			<div class="tbl">
 				<div class="tbl-row">
 					<div class="tbl-cell">
-						<h3>New Order<span> <i class="fa fa-long-arrow-right"></i> @yield('section-title')</span></h3> 
+						<h3>Order<span> <i class="fa fa-long-arrow-right"></i> @yield('section-title')</span></h3> 
 					</div>
 					<div class="tbl-cell tbl-cell-action">
-						<!-- <a href="{{ route('cp.menu.index') }}"  class="tabledit-delete-button btn btn-sm btn-primary" style="float: none;   @yield("display-btn-add-new") "><span class="fa fa-arrow-left"></span></a>
-						@if(checkPermision('cp.menu.create'))<a href="{{ route('cp.menu.create') }}"  class="tabledit-delete-button btn btn-sm btn-primary" style="float: none;"><span class="fa fa-plus"></span></a>@endif -->
+						<a href="{{ route('cp.order.all-order') }}"  class="tabledit-delete-button btn btn-sm btn-primary" style="float: none;   @yield("display-btn-add-new") "><span class="fa fa-arrow-left"></span></a>
 					</div>
 				</div>
 			</div>

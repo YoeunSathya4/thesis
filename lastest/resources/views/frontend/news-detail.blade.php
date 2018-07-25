@@ -26,13 +26,15 @@
                         @if($data != '')
                         <!-- blog Detail -->
                         <div class="single-blog-detail">
-                            <h2>{{$data->title}}</h2>
-                            <div class="large-blog-img">
-                                <img src="{{ asset ('public/uploads/news/image-detail/'.$data->image_detail)}}" alt="">
-                            </div>
-                            <div class="social-text">
-                                
-                                <p><?=$data->content?></p>
+                            <h2 id="news-title">{{$data->title}}</h2>
+                            <div id="border-text">
+                                <div class="large-blog-img">
+                                    <img src="{{ asset ('public/uploads/news/image-detail/'.$data->image_detail)}}" alt="">
+                                </div>
+                                <div class="social-text">
+                                    
+                                    <p><?=$data->content?></p>
+                                </div>
                             </div>
                         </div>
                         <!-- blog Detail -->
@@ -42,44 +44,25 @@
                     </div>
                     <!-- Content -->
 
-                    <!-- Aside -->
-                    <aside class="col-lg-3 col-md-4 col-xs-12">
+                   <aside class="col-lg-3 col-md-4 col-xs-12">
 
                         <!-- Aside Widget -->
                         <div class="aside-widget">
-                            <h6>Books of the Year</h6>
+                            <h6>{{__('general.promotion')}}</h6>
                             <ul class="books-year-list">
-                                <li>
-                                    <div class="books-post-widget">
-                                        <img src="{{ asset ('public/frontend/images/books-year-list/img-01.jpg')}}" alt="">
-                                        <h6><a href="#">My Brilliant Friend The Neapolitan Novels, Book One</a></h6>
-                                        <span>By Elena Ferrante</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="books-post-widget">
-                                        <img src="{{ asset ('public/frontend/images/books-year-list/img-02.jpg')}}" alt="">
-                                        <h6><a href="#">As night fell, something stirred the darkness.</a></h6>
-                                        <span>By Meg Caddy</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="books-post-widget">
-                                        <img src="{{ asset ('public/frontend/images/books-year-list/img-03.jpg')}}" alt="">
-                                        <h6><a href="#">The Rosie Project: Don Tillman 1</a></h6>
-                                        <span>By Graeme Simsion</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="books-post-widget">
-                                        <img src="{{ asset ('public/frontend/images/books-year-list/img-04.jpg')}}" alt="">
-                                        <h6><a href="#">Heartbreaking, joyous, traumatic, intimate and</a></h6>
-                                        <span>By Magda Szubanski</span>
-                                    </div>
-                                </li>
+                                @php($promotions = $defaultData['promotions'])
+                                @foreach($promotions as $promotion)
+                                    <li id="list-promotion">
+                                        <div class="books-post-widget">
+                                            <img src="{{ asset ('public/uploads/promotion/image/'.$promotion->image)}}" id="image-show" alt="">
+                                            <h6><a href="#">{{$promotion->title}}</a></h6>
+                                            
+                                        </div>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
-                        <!-- Aside Widget -->
+                    </aside>
 
 
                 </div>

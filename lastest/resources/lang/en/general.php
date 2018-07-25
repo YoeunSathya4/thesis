@@ -16,6 +16,23 @@ return [
     'product-category' => 'Product Categories',
     'feature-product' => 'Feature Product',
     'quick-view'    => 'Quick view',
+    'favorite'    => 'Favorite',
+    'view-more'    => 'View More',
+    'no-favorite-product'    => 'No Favorite Product',
+    'no-history-order'    => 'No History Order',
+    'your-total' => 'Your Total',
+
+    //=================================//Thank
+    'thank' => 'Thank your for your order',
+    'well-done' => 'Well done! You have successfully ordered product form our website. Our staff will response to you soon. Best regrade!',
+    'click-to-see-invoice' => 'click to see invoice.',
+
+    'no' => 'No',
+    'payment-id' => 'Payment ID',
+    'view-invoice' => 'View Invoice',
+    'invoice' => 'Invoice',
+    'grand-total' => 'Grand Total',
+    'back' => 'Back',
     //=============================// Property Search
     
     'search'  =>'Search',   

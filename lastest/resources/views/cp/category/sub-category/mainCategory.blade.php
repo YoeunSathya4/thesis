@@ -84,7 +84,9 @@
 	                           		<a href="{{ route('cp.category.sub-category.edit-mainCategory', ['category_id'=>$id,'subcategory_id'=>$subcategory_id,'maincategory_id'=>$row->id]) }}" class="tabledit-edit-button btn btn-sm btn-success" style="float: none;"><span class="fa fa-eye"></span></a>
 	                           		
 
-	                           		@if($row->is_deleted == 0)
+	                           		@if(Auth::user()->position_id == 1)
+	                           			<a href="#" onclick="deleteConfirm('{{ route('cp.category.sub-category.delete-mainCategory', $row->id) }}', '{{ route('cp.category.sub-category.mainCategory',['category_id'=>$id,'subcategory_id'=>$subcategory_id]) }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
+	                           		@else
 		                           		<a href="#" onclick="deleteConfirm('{{ route('cp.category.sub-category.trash-mainCategory', $row->id) }}', '{{ route('cp.category.sub-category.mainCategory',['category_id'=>$id,'subcategory_id'=>$subcategory_id]) }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
 		                           		@endif
 		                           		@if(Auth::user()->position_id == 1)

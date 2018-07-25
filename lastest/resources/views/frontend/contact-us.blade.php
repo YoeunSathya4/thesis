@@ -19,8 +19,7 @@
         g =$('#g-recaptcha-response').val();
         
         if(name != ""){
-            if(email != ""){
-              if(isEmail(email)){
+            
                 if(phone != ""){
                 if(message != ""){
                   // if(g != ""){
@@ -35,12 +34,7 @@
                 }else{
                   error(event, "phone", '{{ __('general.errorphone') }}');
                 }
-              }else{
-                error(event, "email", '{{ __('general.incorrectemail') }}');
-              }
-            }else{
-              error(event, "email", '{{ __('general.erroremail') }}.');
-            }
+              
         }else{
           error(event, "name", '{{ __('general.errorname') }}');
         }
@@ -169,24 +163,24 @@
                         {{ method_field('PUT') }}
                         <div class="row">
                             
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <input name="name" id="name" class="form-control" required="required" placeholder="{{__('general.full-name')}}">
                                     <i class="fa fa-user"></i>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <input name="phone" id="phone" class="form-control" required="required" placeholder="{{__('general.phone')}}">
                                     <i class="fa fa-phone"></i>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <!-- <div class="col-sm-4">
                                 <div class="form-group">
                                     <input id="email" name="email" class="form-control" required="required" placeholder="{{__('general.email')}}">
                                     <i class="fa fa-envelope"></i>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <textarea name="message" id="message" class="form-control" required="required" rows="5" placeholder="{{__('general.text-here')}}"></textarea>

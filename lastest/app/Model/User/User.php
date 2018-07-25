@@ -36,7 +36,9 @@ class User extends Authenticatable
     public function logs() {
         return $this->hasMany('App\Model\User\Log', 'user_id');
     }
-
+    public function tracking() {
+        return $this->hasMany('App\Model\User\Tracking', 'user_id');
+    }
     public function records() {
         return $this->hasMany('App\Model\Mailing\Record', 'creator_id');
     }

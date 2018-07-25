@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Favorite extends Model
 {
-    use SoftDeletes;
+    //use SoftDeletes;
     protected $table = 'customer_product_favorites';
     //protected $dates = ['deleted_at'];
 
-   	public function Product(){
+   	public function product(){
         return $this->belongsTo('App\Model\Product\Product');
     }
-    public function Customer(){
+    public function customer(){
         return $this->belongsTo('App\Model\Customer\Customer');
     }
     

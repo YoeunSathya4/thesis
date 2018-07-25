@@ -9,7 +9,7 @@ use App\Http\Controllers\CamCyber\AgentController as Agent;
 use App\Http\Controllers\CamCyber\IpAddressController as IpAddress;
 
 use App\Model\User\Log;
-
+use App\Model\User\Tracking;
 
 use Hash;
 use Auth;
@@ -45,7 +45,7 @@ class AuthController extends Controller {
             Session::flash ('flashmessage', trans('Invalide Username')) ;
             return redirect()->route('user.auth.login');
         }
-
+            $now      = date('Y-m-d H:i:s');
         if (Auth::guard('user')->attempt($credentials, $remember)) {
             $agent      = new Agent;
             $info       = $agent::showInfo();
@@ -59,6 +59,12 @@ class AuthController extends Controller {
             $log->broswer   = $info['browser'];
             $log->version   = $info['version'];
             $log->save();
+
+            $tracking = new Tracking();
+            $tracking->user_id = Auth::user('user')->id;
+            $tracking->created_at = $now;
+            $tracking->description = 'User login to the system with ip:'.$ip.' os:'.$info['os'].' browser:'.$info['browser'];
+            $tracking->save();
             return redirect()->route('user.profile');
         } else {
             Session::flash ('flashmessage', trans('Username Password Not Correct')) ;

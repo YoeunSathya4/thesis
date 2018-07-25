@@ -31,7 +31,7 @@ class UsersController extends Controller
     }
 
     public function index(){
-        $this->checkPermision($this->route.'.index');
+        
         $data = Model::where('visible', 1)->get();
         if(!empty($data)){
             return view($this->route.'.index', ['route'=>$this->route, 'data'=>$data]);

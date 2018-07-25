@@ -3,6 +3,7 @@
 Route::group([], function () {
 	Route::get('/new-order', 							['as' => 'new-order', 			'uses' => 'OrderController@newOder']);
 	Route::get('/all-order', 							['as' => 'all-order', 			'uses' => 'OrderController@allOder']);
+	Route::get('/all-order-detail/{id}', 							['as' => 'all-order-detail', 			'uses' => 'OrderController@allOderDetail']);
 	
 	Route::get('/order-form', 							['as' => 'order-form', 			'uses' => 'OrderController@orderForm']);
 	Route::get('/search-product', 							['as' => 'search-product', 		'uses' => 'OrderController@searchProduct']);

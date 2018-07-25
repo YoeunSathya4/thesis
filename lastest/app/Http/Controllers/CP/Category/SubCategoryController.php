@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Model\Category\Category as Model;
 use App\Model\Category\SubCategory as SubCategory;
 use App\Model\Category\SubSubCategory as SubSubCategory;
+use App\Model\User\Tracking;
 use Image;
 
 class SubCategoryController extends Controller
@@ -80,7 +81,11 @@ class SubCategoryController extends Controller
             $data['image']=$imagename;
         }
         $id=SubCategory::insertGetId($data);
-       
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Create new subcategory id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'A Sub Category has been uploaded!');
         return redirect(route($this->route.'.edit', ['id'=>$category_id, 'subcategory_id'=>$id]));
     }
@@ -128,25 +133,62 @@ class SubCategoryController extends Controller
         }
 
         Model::find($category_id)->subCategories()->where('id', $subcategory_id)->update($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update subcategory id:'.$subcategory_id;
+        $tracking->save();
         Session::flash('msg', 'Sub Category has been Created!');
         return redirect(route($this->route.'.edit', ['id'=>$category_id, 'subcategory_id'=>$subcategory_id]));
     }
     
-    public function trash($id){
+    public function trash($subcategory_id){
+         $user_id    = Auth::id();
         $now      = date('Y-m-d H:i:s');
-        SubCategory::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        SubCategory::where('id', $subcategory_id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         //Model::find($id)->delete();
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Delete subcategory id:'.$subcategory_id;
+        $tracking->save();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
             'msg' => 'Restaurant has been deleted'
         ]);
     }
+    public function delete($subcategory_id){
+        $user_id    = Auth::id();
+        $now      = date('Y-m-d H:i:s');
+        //SubCategory::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        SubCategory::find($subcategory_id)->delete();
+        Session::flash('msg', 'Data has been delete!' );
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Sub Category has been deleted'
+        ]);
+    }
 
     function updateDeletedStatus(Request $request){
+        $user_id    = Auth::id();
+        $now      = date('Y-m-d H:i:s');
       $id   = $request->input('id');
       $data = array('is_deleted' => $request->input('active'));
       SubCategory::where('id', $id)->update($data);
+      if($request->input('active') == 1){
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update subcategory publish id:'.$id;
+        $tracking->save();
+    }else{
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update subcategory unpublish id:'.$id;
+        $tracking->save();
+    }
       return response()->json([
           'status' => 'success',
           'msg' => 'Status has been updated.'
@@ -200,12 +242,17 @@ class SubCategoryController extends Controller
         $subcategory_id = $request->input('subcategory_id');
 
         $id=SubSubCategory::insertGetId($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Create new main category id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been Created!');
         return redirect(route('cp.category.sub-category.edit-mainCategory', ['category_id'=>$category_id,'subcategory_id'=>$subcategory_id,'maincategory_id'=>$id]));
        
     }
 
-     public function editMainCategory($category_id = 0,$subcategory_id = 0, $maincategory_id=0){
+    public function editMainCategory($category_id = 0,$subcategory_id = 0, $maincategory_id=0){
         //$this->validObj($id);
         $data = SubCategory::find($subcategory_id)->subSubCategories()->find($maincategory_id);
         return view($this->route.'.editMainCategory', ['route'=>$this->route, 'id'=>$category_id,'subcategory_id'=>$subcategory_id ,'maincategory_id'=>$maincategory_id, 'data'=>$data]);
@@ -239,6 +286,11 @@ class SubCategoryController extends Controller
                 );
         
         SubSubCategory::where('id', $maincategory_id)->update($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update main category id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
     }
@@ -246,8 +298,27 @@ class SubCategoryController extends Controller
     public function trashMainCategory($id){
         //Model::where('id', $id)->update(['deleter_id' => Auth::id()]);
         //SubSubCategory::find($id)->delete();
-        $now      = date('Y-m-d H:i:s');
+        $user_id    = Auth::id();
+        $now        = date('Y-m-d H:i:s');
         SubSubCategory::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Delete main category id:'.$id;
+        $tracking->save();
+        Session::flash('msg', 'Data has been delete!' );
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Main Category has been deleted'
+        ]);
+    }
+
+    public function deleteMainCategory($id){
+        //Model::where('id', $id)->update(['deleter_id' => Auth::id()]);
+        SubSubCategory::find($id)->delete();
+        $user_id    = Auth::id();
+        $now        = date('Y-m-d H:i:s');
+        // SubSubCategory::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',

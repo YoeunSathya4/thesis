@@ -13,6 +13,7 @@ use App\Http\Controllers\CamCyber\FunctionController;
 use App\Http\Controllers\CamCyber\GenerateSlugController as GenerateSlug;
 
 use App\Model\Promotion\Promotion as Model;
+use App\Model\User\Tracking;
 use Image;
 
 
@@ -103,6 +104,11 @@ class PromotionController extends Controller
         }
 
 		$id=Model::insertGetId($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Create new Promotion id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been Created!');
 		return redirect(route($this->route.'.edit', $id));
     }
@@ -152,24 +158,61 @@ class PromotionController extends Controller
             $data['image']=$imagename;
         }
         Model::where('id', $id)->update($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update promotion id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
 	}
 
     public function trash($id){
+        $user_id  = Auth::id();
         $now      = date('Y-m-d H:i:s');
         Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         //Model::find($id)->delete();
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Delete promotion id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
-            'msg' => 'Restaurant has been deleted'
+            'msg' => 'promotion has been deleted'
+        ]);
+    }
+
+    public function delete($id){
+        $now      = date('Y-m-d H:i:s');
+        //Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        Model::find($id)->delete();
+        Session::flash('msg', 'Data has been delete!' );
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'promotion has been deleted'
         ]);
     }
     function updateStatus(Request $request){
+        $user_id  = Auth::id();
+        $now      = date('Y-m-d H:i:s');
       $id   = $request->input('id');
       $data = array('is_published' => $request->input('active'));
       Model::where('id', $id)->update($data);
+      if($request->input('active') == 1){
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update promotion publish id:'.$id;
+        $tracking->save();
+    }else{
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update promotion unpublish id:'.$id;
+        $tracking->save();
+    }
       return response()->json([
           'status' => 'success',
           'msg' => 'Published status has been updated.'

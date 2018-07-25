@@ -28,8 +28,8 @@
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         @endif
         <!-- Online Lib -->
-        <link rel="stylesheet" href="{{ asset ('public/frontend/../../../../www.atlasestateagents.co.uk/css/tether.min.css')}}">
-        <script src="{{ asset ('public/frontend/../../../../www.atlasestateagents.co.uk/javascript/tether.min.js')}}"></script>
+        
+        
 
         <!-- Switcher CSS -->
         <link href="{{ asset ('public/frontend/switcher/switcher.css')}}" rel="stylesheet" type="text/css"/> 
@@ -43,48 +43,9 @@
 
         <!-- JavaScripts -->
         <script src="{{ asset ('public/frontend/js/vendor/modernizr.js')}}"></script>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
-    <script type="text/javascript">
-        function add_to_favorite(id) {
-            var cutomer_id = '<?php if(Auth::guard('customer')->user()){ echo Auth::guard('customer')->user()->id; }else{ echo ''; } ?>';
-            if(cutomer_id == ''){
-                toastr.warning("Please login or Signup your account first!")
-            }else{
-
-                $.ajax({
-                    url: "{{ route('add-to-favorite',$locale) }}",
-                    method: 'POST',
-                    
-                    data: {id:id},
-                    success: function( response ) {
-                        if ( response.status === 'success' ) {
-                            toastr.success("You have add product to your favorite.");
-                            
-                        }else{
-                            toastr.warning("{{ __('general.sorry') }}");
-                        }
-                    },
-                    error: function( response ) {
-                       toastr.warning("{{ __('general.sorry') }}");
-                    }
-                });
-            }
-        }
-
-    function error(event, obj, msg){
-      event.preventDefault();
-      toastr.error(msg);
-      $("#"+obj).focus();
-    }
-    </script>
+   
 <body>
     <!-- Wrapper -->
 <div class="wrapper push-wrapper">
@@ -408,8 +369,58 @@
 <script src="{{ asset ('public/frontend/js/isotope.pkgd.js')}}"></script>                   
 <script src="{{ asset ('public/frontend/js/wow-min.js')}}"></script>           
 <script src="{{ asset ('public/frontend/js/classie.js')}}"></script>                   
-<script src="{{ asset ('public/frontend/js/main.js')}}"></script>      
+<script src="{{ asset ('public/frontend/js/main.js')}}"></script>   
+<script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>   
+<script type="text/javascript">
 
+    function addfavorite(id){
+           
+                    alert(id);
+                    $.ajax({
+                        url: "",
+                        type: 'POST',
+                        data: {id:id},
+                        success: function( response ) {
+                           toastr.success("Product has been added to favorite.");
+                           $('#add-favorite').css({'background' : '#b09b9b','color':'#e71e1e'});
+                        },
+                        error: function( response ) {
+                           toastr.warning("Please sign in your account before add to favorite list.");
+                        }
+                            
+                    });
+                 
+        }
+
+        function removefavorite(id){
+           
+                    alert(id);
+                    $.ajax({
+                        url: "",
+                        type: 'POST',
+                        data: {id:id},
+                        success: function( response ) {
+                           toastr.success("Product has been unfavorite.");
+
+                        },
+                        error: function( response ) {
+                           toastr.warning("Please sign in your account before add to favorite list.");
+                        }
+                            
+                    });
+                 
+        }
+
+        $.fn.andSelf = function() {
+          return this.addBack.apply(this, arguments);
+        }
+</script>
 <!-- Switcher JS -->
 <script type="text/javascript" src="{{ asset ('public/frontend/switcher/cookie.js')}}"></script>
 <script type="text/javascript" src="{{ asset ('public/frontend/switcher/colorswitcher.js')}}"></script>

@@ -114,8 +114,10 @@
 	                           		
 	                           		<a href="{{ route('cp.category.sub-category.edit', ['id'=>$id, 'menu_id'=>$row->id]) }}" class="tabledit-edit-button btn btn-sm btn-success" style="float: none;"><span class="fa fa-eye"></span></a>
 	                           		
-	                           		@if($row->is_deleted == 0)
-		                           		<a href="#" onclick="deleteConfirm('{{ route('cp.category.sub-category.trash', ['id'=>$id, 'subcategory_id'=>$row->id]) }}', '{{ route('cp.category.sub-category.index', ['id'=>$id]) }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
+	                           		@if(Auth::user()->position_id == 1)
+	                           			<a href="#" onclick="deleteConfirm('{{ route('cp.category.sub-category.delete', ['subcategory_id'=>$row->id]) }}', '{{ route('cp.category.sub-category.index', ['id'=>$id]) }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
+	                           		@else
+		                           		<a href="#" onclick="deleteConfirm('{{ route('cp.category.sub-category.trash', ['subcategory_id'=>$row->id]) }}', '{{ route('cp.category.sub-category.index', ['id'=>$id]) }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
 		                           		@endif
 		                           		@if(Auth::user()->position_id == 1)
 		                           			@if($row->is_deleted == 1)

@@ -11,7 +11,11 @@ Route::get('{locale}/contact-us', 			[ 'as' => 'contact-us',			'uses' => 'Contac
 Route::put('{locale}/submit-contact', 	[ 'as' => 'submit-contact',			'uses' => 'ContactUsController@submitContact']);
 
 //======================================================> add To Favorite
-Route::post('{locale}/add-to-favorite', 				[ 'as' => 'add-to-favorite',			'uses' => 'FrontendController@addToFavorite']);
+// Route::post('{locale}/add-to-favorite', 				[ 'as' => 'add-to-favorite',			'uses' => 'FrontendController@addToFavorite']);
+// Route::get('{locale}/remove-from-favorite', 				[ 'as' => 'remove-from-favorite',			'uses' => 'FrontendController@removeFromFavorite']);
+//======================================================> add To Favorite
+Route::get('{locale}/add-to-favorite/{id}', 				[ 'as' => 'add-to-favorite',			'uses' => 'FrontendController@addToFavorite']);
+Route::get('{locale}/remove-from-favorite/{id}', 				[ 'as' => 'remove-from-favorite',			'uses' => 'FrontendController@removeFromFavorite']);
 
 //========================================================> Add To Cart
 Route::get('{locale}/add-to-cart/{id}', 			[ 'as' => 'add-to-cart',			'uses' => 'ProductController@AddToCart']);
@@ -21,7 +25,7 @@ Route::post('{locale}/checkouts', 				[ 'as' => 'checkouts',			'uses' => 'Produc
 Route::get('{locale}/reduce/{id}', 			[ 'as' => 'reduce',			'uses' => 'ProductController@getReduceByOne']);
 
 Route::get('{locale}/remove/{id}', 			[ 'as' => 'remove',			'uses' => 'ProductController@RemoveItem']);
-
+Route::get('{locale}/thanks', 			[ 'as' => 'thanks',			'uses' => 'ProductController@thanks']);
 //============================================ Login SignUp Process
 Route::get('{locale}/login', 					[ 'as' => 'login',			'uses' => 'LoginController@showFormLogin']);
 Route::post('{locale}/submit-login', 			['as' => 'submit-login', 				'uses' => 'LoginController@login']);
@@ -32,8 +36,11 @@ Route::get('{locale}/sign-up', 					[ 'as' => 'sign-up',			'uses' => 'SignUpCont
 Route::post('{locale}/register', 				[ 'as' => 'register',					'uses' => 'SignUpController@register']);
 Route::get('{locale}/forgot-password', 			['as' => 'forgot-password', 			'uses' => 'ForgotPasswordController@showLinkRequestForm']);//display forgot password form
 //=================================== Order 
+Route::get('{locale}/favorite-product', 					[ 'as' => 'favorite-product',			'uses' => 'ProfileController@favoriteProduct']);
+
 Route::get('{locale}/panding-order', 					[ 'as' => 'panding-order',			'uses' => 'ProfileController@pandingOrder']);
 Route::get('{locale}/order-history', 					[ 'as' => 'order-history',			'uses' => 'ProfileController@orderHistory']);
+Route::get('{locale}/order-history-detail/{id}', 					[ 'as' => 'order-history-detail',			'uses' => 'ProfileController@orderHistoryDetail']);
 
 Route::post('{locale}/forgot-password', 		['as' => 'make-forgot-password-code', 	'uses' => 'ForgotPasswordController@sendResetCode']); 
 Route::get('{locale}/reset-password/{token}', 	['as' => 'reset-password', 				'uses' => 'ResetPasswordController@showResetForm']); //After verify the code, a form of reseting new password is here

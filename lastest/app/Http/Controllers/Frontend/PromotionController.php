@@ -15,7 +15,7 @@ class PromotionController extends FrontendController
     
     public function index($locale) {
     	$defaultData = $this->defaultData($locale);
-    	$promotions = Promotion::select('id', $locale.'_title as title', $locale.'_description as description', 'image', 'created_at')->where('is_published',1)->paginate(3);
+    	$promotions = Promotion::select('id', $locale.'_title as title', $locale.'_description as description', 'image', 'created_at')->where(['is_published'=>1,'is_deleted'=>0])->paginate(3);
         return view('frontend.promotion',['defaultData'=>$defaultData ,'locale'=>$locale,'promotions'=>$promotions]);
     }
    

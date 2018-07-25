@@ -19,12 +19,12 @@ class Product extends Model
     public function MainCategory(){
         return $this->belongsTo('App\Model\Category\SubSubCategory');
     }
-    public function orderDetails(){
-        return $this->hasMany('App\Model\Order\orderDetails');
+    public function details(){
+        return $this->hasMany('App\Model\Order\OrderDetails','product_id');
     }
 
-    public function Favorites(){
-        return $this->hasMany('App\Model\Product\Product');
+    public function favorites(){
+        return $this->hasMany('App\Model\Product\Favorite');
     }
 
     public function creator(){

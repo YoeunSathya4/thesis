@@ -52,7 +52,7 @@ class ProductController extends FrontendController
             }
         }
 
-        $data= $data->orderBy('id', 'DESC')->paginate(12);
+        $data= $data->where(['is_published'=>1,'is_deleted'=>0])->orderBy('id', 'DESC')->paginate(9);
 
     	$defaultData = $this->defaultData($locale);
         return view('frontend.product',['defaultData'=>$defaultData, 'locale'=>$locale, 'data'=>$data,'appends'=>$appends]);
@@ -72,7 +72,6 @@ class ProductController extends FrontendController
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart ($oldCart);
         $cart->add($productSession, $productSession->id);
-
         $request->session()->put('cart', $cart);
         //dd($request->session()->get('cart'));
         //return view('frontend.product-detail',['defaultData'=>$defaultData, 'locale'=>$locale, 'data'=>$data,'relatedProducts'=>$relatedProducts]);
@@ -164,8 +163,9 @@ class ProductController extends FrontendController
             $customer_id = Auth::guard('customer')->user()->id;
             $order = new Order();
             $order->customer_id = $customer_id;
-            $order->name = $request->input('name');
-            $order->address = $request->input('address');
+            $order->is_new = 0;
+            //$order->name = $request->input('name');
+            //$order->address = $request->input('address');
             $order->payment_id = $charge->id;
             $order->save();
             
@@ -181,7 +181,20 @@ class ProductController extends FrontendController
 
 
         Session::forget('cart');
-        return redirect()->route('product',$locale)->with('success', 'Successfully purchased products!');
+        return redirect()->route('thanks',$locale)->with('success', 'Successfully purchased products!');
+    }
+
+     public function thanks($locale){
+        $defaultData = $this->defaultData($locale);
+        
+
+        
+        $customer = Auth::guard('customer')->user();
+        if($customer != ''){
+            return view('frontend.thanks', ['defaultData'=>$defaultData,'locale'=>$locale]);
+        }else{
+            return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
+        }
     }
 
 }

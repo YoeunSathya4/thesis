@@ -38,7 +38,7 @@
 			<div class="container">
 				<div class="row">
 					<!-- Aside -->
-					<aside style="background: #f16162;" class="col-lg-3 col-md-4 col-xs-12 pull-left pull-none">
+					<aside style="background: #f16162; border-radius: 25px;" class="col-lg-3 col-md-4 col-xs-12 pull-left pull-none">
 
 						<!-- Aside Widget -->
 						<div class="aside-widget">
@@ -50,8 +50,8 @@
 									<h6 id="profileMenu">{{__('general.my-profile')}}</h6>
 									</a>
 								</li>
-								<li>
-									<a  href="#">
+								<li class="@yield('favorite-product')">
+									<a  href="{{route('favorite-product',$locale)}}">
 										<h6 id="profileMenu">{{__('general.favorite-product')}}</h6>
 									</a>
 								</li>
@@ -88,6 +88,8 @@
       			.profile-active{
       				background: #2e3192;
     				padding: 5px;
+    				border-radius: 25px;
+    				padding-top: 19px;
       			}
       			a:hover{
       				    color: #0082c6;

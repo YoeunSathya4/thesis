@@ -13,6 +13,10 @@
 		Route::group(['as' => 'profile.',  'prefix' => 'profile', 'namespace' => 'Profile'], function () {
 			require(__DIR__.'/profile.php');
 		});
+
+		Route::group(['as' => 'dashboard.',  'prefix' => 'dashboard', 'namespace' => 'Dashboard'], function () {
+			require(__DIR__.'/dashboard.php');
+		});
 		
 		//:::::::::::::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Setup
 		Route::group(['as' => 'setup.', 'prefix' => 'setup', 'namespace' => 'Setup'], function () {
@@ -58,5 +62,10 @@
 
 		Route::group(['as' => 'content.',  'prefix' => 'content', 'namespace' => 'Content'], function () {
 			require(__DIR__.'/content.php');
+		});
+
+		//:::::::::::::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Tracking
+		Route::group(['as' => 'tracking.', 'prefix' => 'tracking', 'namespace' => 'Tracking'], function () {
+			require(__DIR__.'/tracking.php');
 		});
 	});

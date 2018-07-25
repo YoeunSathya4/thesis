@@ -10,6 +10,7 @@ Route::group([], function () {
 	Route::delete('/{id}', 						['as' => 'trash', 			'uses' => 'SlideController@trash']);
 	Route::post('update-status', 				['as' => 'update-status', 	'uses' => 'SlideController@updateStatus']);
 	Route::post('update-delete-status', 				['as' => 'update-delete-status', 	'uses' => 'SlideController@updateDeletedStatus']);
+	Route::delete('/delete/{id}', 						['as' => 'delete', 			'uses' => 'SlideController@delete']);
 });
 
 

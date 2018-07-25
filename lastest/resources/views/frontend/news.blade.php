@@ -69,6 +69,7 @@
                                 @endforeach
                             </ul>
                         </div>
+                    </aside>
                         <!-- Aside Widget -->
 
 

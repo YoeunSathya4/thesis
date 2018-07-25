@@ -1,5 +1,5 @@
 @extends($route.'.main')
-@section ('section-title', 'All Customers')
+@section ('section-title', 'All Orders')
 @section ('display-btn-add-new', 'display:none')
 @section ('section-css')
 
@@ -116,7 +116,7 @@
 						<td>{{ $row->address }}</td>
 						<td>{{ $row->delivery_time }}</td>
 						<td>{{ $row->discount }} %</td>
-					<td><a href="#" onclick="orderData({{$row->id}})" class="tabledit-edit-button btn btn-sm btn-success" data-toggle="modal" data-target="#orderDetail" style="float: none;"><span class="fa fa-eye"></span></a></td>
+					<td><a href="{{route('cp.order.all-order-detail',$row->id)}}" class="tabledit-edit-button btn btn-sm btn-success" style="float: none;"><span class="fa fa-eye"></span></a></td>
 				</tr>
 			@endforeach
 		</tbody>

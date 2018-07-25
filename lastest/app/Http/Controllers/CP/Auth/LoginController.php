@@ -11,6 +11,7 @@ use App\Http\Controllers\CamCyber\AgentController as Agent;
 use App\Http\Controllers\CamCyber\IpAddressController as IpAddress;
 
 use App\Model\User\Log;
+use App\Model\User\Tracking;
 
 class LoginController extends Controller
 {
@@ -58,6 +59,7 @@ class LoginController extends Controller
    
     //Create Logs
     protected function authenticated(Request $request, $user){
+        $now      = date('Y-m-d H:i:s');
         //Log Information
         $agent      = new Agent;
         $info       = $agent::showInfo();
@@ -71,7 +73,11 @@ class LoginController extends Controller
         $log->broswer   = $info['browser'];
         $log->version   = $info['version'];
         $log->save();
-        
+        $tracking = new Tracking();
+            $tracking->user_id = Auth::user('user')->id;
+            $tracking->created_at = $now;
+            $tracking->description = 'User login to the system with ip:'.$ip.' os:'.$info['os'].' browser:'.$info['browser'];
+        $tracking->save();
     }
    
     public function logout(Request $request){

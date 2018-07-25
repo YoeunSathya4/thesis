@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 use App\Model\Product\Favorite;
+use App\Model\Product\Product;
 use App\Model\Promotion\Promotion;
 use App\Model\Category\Category;
 use App\Model\Category\SubCategory;
@@ -39,17 +40,17 @@ class FrontendController extends Controller
         $this->defaultData['khRouteParamenters'] = $khRouteParamenters;
         $this->defaultData['routeName'] = Route::currentRouteName();
 
-        $this->defaultData['promotions']            = Promotion::select('id',$locale.'_title as title','image')->limit(3)->get();
+        $this->defaultData['promotions']            = Promotion::select('id',$locale.'_title as title','image')->limit(3)->where('is_deleted',0)->get();
         $navbar_menu = array();
         $navbar_tab_menu = array();
-        $categories           = Category::select('id',$locale.'_name as name','image')->get();
+        $categories           = Category::select('id',$locale.'_name as name','image')->where('is_deleted',0)->get();
 
         foreach($categories as $row){
 
             $subCategories = SubCategory::select('id', $locale.'_name as name')->where('category_id', $row->id)->get();
             $navbar_menu[] = array('id'=>$row->id,'name'=>$row->name, 'subCategories'=>$subCategories);
             foreach($subCategories as $subCategory){
-                $subSubCategories = SubSubCategory::select('id', $locale.'_name as name')->where('sub_category_id', $subCategory->id)->get();
+                $subSubCategories = SubSubCategory::select('id', $locale.'_name as name')->where(['sub_category_id'=> $subCategory->id,'is_deleted'=>0])->get();
                 $navbar_tab_menu[] = array('id'=>$subCategory->id,'name'=>$subCategory->name, 'subSubCategories'=>$subSubCategories);
             }
         }
@@ -61,32 +62,131 @@ class FrontendController extends Controller
     
 
 
-    public function addToFavorite(Request $request , $locale = "")
+    // public function addToFavorite(Request $request , $locale = "")
+    // {
+    //     $now        = date('Y-m-d H:i:s');
+    //     $defaultData = $this->defaultData($locale);
+    //     $customer = Auth::guard('customer')->user();
+    //     if($customer != ''){
+    //         //$favorite = Favorite::select('*')->where(array('product_id'=>$id, 'customer_id'=>$customer->id))->first();
+    //         //dd($favorite);
+    //         //if($favorite  == null){
+
+    //             $data = array(
+    //                     'product_id' =>  $request->input('id'),
+    //                     'customer_id' =>  $customer->id,
+    //                     'is_favorited' =>  1,
+    //                     'created_at' => $now
+    //                 );
+    //              Session::flash('invalidData', $data );
+    //              Validator::make(
+    //                             $request->all(), 
+    //                             [
+    //                                 'email' => 'email',
+    //                             ])->validate();
+                
+    //             $id=Favorite::insertGetId($data);
+
+
+    //             return response()->json('success', 200);
+
+    //         // }else{
+    //         //   Session::flash('error', "This product has already added to favorite.");
+    //         //     return redirect()->back();  
+    //         // }
+            
+
+    //     }else{
+    //         return response()->json('error', 400);
+    //     }
+
+        
+    // }
+
+    // public function removeFromFavorite(Request $request , $locale = "")
+    // {
+    //     $now        = date('Y-m-d H:i:s');
+    //     $defaultData = $this->defaultData($locale);
+    //     $customer = Auth::guard('customer')->user();
+    //     if($customer != ''){
+    //         $favorite = Favorite::select('*')->where(array('product_id'=>$request->input('id'), 'customer_id'=>$customer->id))->first()->delete();
+    //         // Session::flash('msg', "Product has been unfavorite.");
+    //         // return redirect()->back();
+            
+    //         return response()->json('success', 200);
+
+    //     }else{
+    //         // Session::flash('error', "Please signin or signup before add to favorite.");
+    //         // return redirect()->back();
+    //         return response()->json('error', 400);
+    //     }
+
+        
+    // }
+
+    public function addToFavorite(Request $request , $locale = "", $id=0)
     {
         $now        = date('Y-m-d H:i:s');
         $defaultData = $this->defaultData($locale);
         $customer = Auth::guard('customer')->user();
         if($customer != ''){
-            
-            $data = array(
-                        'product_id' =>  $request->input('id'),
+            //$favorite = Favorite::select('*')->where(array('product_id'=>$id, 'customer_id'=>$customer->id))->first();
+            //dd($favorite);
+            //if($favorite  == null){
+
+                $data = array(
+                        'product_id' =>  $id,
                         'customer_id' =>  $customer->id,
+                        'is_favorited' =>  1,
                         'created_at' => $now
                     );
-             Session::flash('invalidData', $data );
-             Validator::make(
-                            $request->all(), 
-                            [
-                                'email' => 'email',
-                            ])->validate();
+                 Session::flash('invalidData', $data );
+                 Validator::make(
+                                $request->all(), 
+                                [
+                                    'email' => 'email',
+                                ])->validate();
+                
+                $id=Favorite::insertGetId($data);
+
+
+                Session::flash('msg', "Product has been added to favorite.");
+                return redirect()->back();
+
+            // }else{
+            //   Session::flash('error', "This product has already added to favorite.");
+            //     return redirect()->back();  
+            // }
             
-            $id=Favorite::insertGetId($data);
-            Session::flash('msg', __('contact_us.contact-successful-sent') );
-            //return redirect(route('home', ['locale'=>$locale]));
+
         }else{
-            return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
+            Session::flash('error', "Please signin or signup before add to favorite.");
+            return redirect()->back();
         }
 
         
     }
+
+    public function removeFromFavorite(Request $request , $locale = "", $id=0)
+    {
+        $now        = date('Y-m-d H:i:s');
+        $defaultData = $this->defaultData($locale);
+        $customer = Auth::guard('customer')->user();
+        if($customer != ''){
+            $favorite = Favorite::select('*')->where(array('product_id'=>$id, 'customer_id'=>$customer->id))->first()->delete();
+            Session::flash('msg', "Product has been unfavorite.");
+            return redirect()->back();
+            
+            
+
+        }else{
+            Session::flash('error', "Please signin or signup before add to favorite.");
+            return redirect()->back();
+        }
+
+        
+    }
+
+
+
 }

@@ -45,21 +45,24 @@
 			                        <table class="table table-condensed">
 			                            <thead>
 			                                <tr>
-			                                    <td><strong>Name</strong></td>
-			                                    <td class="text-center"><strong>Payment ID</strong></td>
-			                                    <td class="text-center"><strong>Address</strong></td>
+			                                	<td><strong>{{__('general.no')}}</strong></td>
+			                                    <td><strong>{{__('general.name')}}</strong></td>
+			                                    <td class="text-center"><strong>{{__('general.payment-id')}}</strong></td>
+			                                    <td class="text-center"><strong>{{__('general.address')}}</strong></td>
 			                                    <td class="text-right"></td>
 			                                    
 			                                </tr>
 			                            </thead>
 			                            <tbody>
 			                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+			                                @php($i = 1)
 			                                @foreach( $orders as $row)
 			                                <tr>
-			                                    <td>{{$row->name}} </td>
+			                                	<td>{{$i++}} </td>
+			                                    <td>{{$row->customer->name}} </td>
 			                                    <td class="text-center">{{$row->payment_id}}</td>
-			                                    <td class="text-center">{{$row->address}}</td>
-			                                    <td class="text-right"> <button type="button" class="btn btn-primary btn-sm">View Invoice</button> </td>
+			                                    <td class="text-center">{{$row->customer->address}}</td>
+			                                    <td class="text-right"> <a href="{{route('order-history-detail',['locale'=>$locale, 'id'=>$row->id])}}" type="button" class="btn btn-primary btn-sm">{{__('general.view-invoice')}}</a> </td>
 			                                </tr>
 			                                @endforeach
 
@@ -74,7 +77,7 @@
 
 				        <div style="padding-top: 50px;" class="row">
 				            <div style="text-align: center;" class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-				                <h2>{{__('general.no-items-in-cart')}}!</h2>
+				                <h2>{{__('general.no-history-order')}}!</h2>
 				            </div>
 				        </div>
 

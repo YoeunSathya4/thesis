@@ -172,12 +172,14 @@
 						<div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
                            	<div class="btn-group btn-group-sm" style="float: none;">
                            		<a href="{{ route($route.'.edit', $row->id) }}" class="tabledit-edit-button btn btn-sm btn-success" style="float: none;"><span class="fa fa-eye"></span></a>
-                           		@if($row->is_deleted == 0)
+                           		@if(Auth::user()->position_id == 1)
+                           		<a href="#" onclick="deleteConfirm('{{ route($route.'.delete', $row->id) }}', '{{ route($route.'.index') }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
+                           		@else
 		                           		<a href="#" onclick="deleteConfirm('{{ route($route.'.trash', $row->id) }}', '{{ route($route.'.index') }}')" class="tabledit-delete-button btn btn-sm btn-danger" style="float: none;"><span class="glyphicon glyphicon-trash"></span></a>
 		                           		@endif
 		                           		@if(Auth::user()->position_id == 1)
 		                           			@if($row->is_deleted == 1)
- 											<button onclick="showIsDelete({{$row->id}})" class="tabledit-edit-button btn btn-sm btn-warning" style="float: none;"> <span class="fa fa-check"></span> Show</button>
+ 											<button onclick="showIsDelete({{$row->id}})" class="tabledit-edit-button btn btn-sm btn-warning" style="float: none;"> <span class="fa fa-check"></span> Restore</button>
  											@endif
 		                           		@endif
                            	</div>

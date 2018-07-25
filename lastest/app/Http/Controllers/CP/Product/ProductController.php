@@ -17,6 +17,7 @@ use App\Model\Category\Category as Category;
 use App\Model\Category\SubCategory as SubCategory;
 
 use App\Model\Category\SubSubCategory as SubSubCategory;
+use App\Model\User\Tracking;
 use Image;
 
 
@@ -34,9 +35,9 @@ class ProductController extends Controller
     }
 
     public function index(){
-        $data = Model::select('*');
+        $data            = Model::select('*');
         $limit      =   intval(isset($_GET['limit'])?$_GET['limit']:10); 
-        $key       =   isset($_GET['key'])?$_GET['key']:"";
+        $key        =   isset($_GET['key'])?$_GET['key']:"";
         $category   =   intval(isset($_GET['category'])?$_GET['category']:0); 
         $subcategory    =   intval(isset($_GET['subcategory'])?$_GET['subcategory']:0);
         $maincategory    =   intval(isset($_GET['maincategory'])?$_GET['maincategory']:0);
@@ -146,6 +147,11 @@ class ProductController extends Controller
         }
 
 		$id=Model::insertGetId($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Create new product id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been Created!');
 		return redirect(route($this->route.'.edit', $id));
     }
@@ -218,33 +224,86 @@ class ProductController extends Controller
             $data['image']=$imagename;
         }
         Model::where('id', $id)->update($data);
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update product id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
 	}
 
     public function trash($id){
+        $user_id    = Auth::id();
         $now      = date('Y-m-d H:i:s');
         Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         //Model::find($id)->delete();
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Delete product id:'.$id;
+        $tracking->save();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
             'status' => 'success',
-            'msg' => 'Restaurant has been deleted'
+            'msg' => 'Product has been deleted'
+        ]);
+    }
+
+    public function delete($id){
+        $now      = date('Y-m-d H:i:s');
+        //Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
+        Model::find($id)->delete();
+        Session::flash('msg', 'Data has been delete!' );
+        return response()->json([
+            'status' => 'success',
+            'msg' => 'Product has been deleted'
         ]);
     }
     function updateStatus(Request $request){
+      $user_id    = Auth::id();
+      $now      = date('Y-m-d H:i:s');
       $id   = $request->input('id');
       $data = array('is_published' => $request->input('active'));
       Model::where('id', $id)->update($data);
+      if($request->input('active') == 1){
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update product publish id:'.$id;
+        $tracking->save();
+    }else{
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update product unpublish id:'.$id;
+        $tracking->save();
+    }
       return response()->json([
           'status' => 'success',
           'msg' => 'Published status has been updated.'
       ]);
     }
     function updateFeatured(Request $request){
+      $user_id    = Auth::id();
+      $now      = date('Y-m-d H:i:s');
       $id   = $request->input('id');
       $data = array('is_featured' => $request->input('active'));
+      
       Model::where('id', $id)->update($data);
+      if($request->input('active') == 1){
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update product feature id:'.$id;
+        $tracking->save();
+    }else{
+        $tracking = new Tracking();
+        $tracking->user_id = $user_id;
+        $tracking->created_at = $now;
+        $tracking->description = 'Update product unfeature id:'.$id;
+        $tracking->save();
+    }
       return response()->json([
           'status' => 'success',
           'msg' => 'Featured status has been updated.'

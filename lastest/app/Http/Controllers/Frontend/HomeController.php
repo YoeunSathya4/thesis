@@ -16,9 +16,9 @@ class HomeController extends FrontendController
 {
     
     public function index($locale) {
-    	$slides = Slide::select('*')->where('is_published', 1)->get();
-    	$categories = Category::select('id',$locale.'_name as name','image')->limit(4)->get();
-    	$products = Product::select('id',$locale.'_name as name','image','unit_price','slug')->limit(8)->get();
+    	$slides = Slide::select('*')->where(['is_published'=> 1,'is_deleted'=>0])->get();
+    	$categories = Category::select('id',$locale.'_name as name','image')->where('is_deleted',0)->limit(4)->get();
+    	$products = Product::select('id',$locale.'_name as name','image','unit_price','slug')->where(['is_featured'=>1,'is_deleted'=>0])->orderBy('id','DESC')->limit(9)->get();
     	$defaultData = $this->defaultData($locale);
         return view('frontend.home',['defaultData'=>$defaultData, 'locale'=>$locale, 'slides'=>$slides,'categories'=>$categories, 'products'=>$products]);
     }
