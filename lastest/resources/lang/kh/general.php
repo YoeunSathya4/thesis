@@ -112,7 +112,7 @@ return [
     'my-profile' => 'ពត៌មានរបស់ខ្ញុំ',
     'profile-menu' => 'ម៉ឺនុយ',
     'favorite-product' => 'ផលិតផលដែលពេញចិត្ត',
-    'panding-order' => 'ការបញ្ជាទិញមិនសម្រាច',
+    'panding-order' => 'ការបញ្ជាទិញនៅក្នុងកន្រ្តក',
     'order-history' => 'ប្រវិត្តនៃការបញ្ជាទិញ',
     'location' => 'ទីកន្លែង',
     'location-example' => 'ឧ ចោមចៅ',

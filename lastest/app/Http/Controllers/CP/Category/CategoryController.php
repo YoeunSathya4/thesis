@@ -93,10 +93,11 @@ class CategoryController extends Controller
         
 
 		$id=Model::insertGetId($data);
-         $tracking = new Tracking();
+        $tracking_data = Model::find($id);
+        $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Create new category id:'.$id;
+        $tracking->description = 'Create new category name:'.$tracking_data->en_name;
         $tracking->save();
         Session::flash('msg', 'Data has been Created!');
 		return redirect(route($this->route.'.edit', $id));
@@ -138,10 +139,11 @@ class CategoryController extends Controller
         }
         
         Model::where('id', $id)->update($data);
+        $tracking_data = Model::find($id);
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update category id:'.$id;
+        $tracking->description = 'Update category name:'.$tracking_data->en_name;
         $tracking->save();
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
@@ -152,10 +154,11 @@ class CategoryController extends Controller
         $now      = date('Y-m-d H:i:s');
         Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         //Model::find($id)->delete();
-         $tracking = new Tracking();
+        $tracking_data = Model::find($id);
+        $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Delete category id:'.$id;
+        $tracking->description = 'Delete category name:'.$tracking_data->en_name;
         $tracking->save();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
@@ -179,17 +182,18 @@ class CategoryController extends Controller
       $id   = $request->input('id');
       $data = array('is_published' => $request->input('active'));
       Model::where('id', $id)->update($data);
+      $tracking_data = Model::find($id);
       if($request->input('active') == 1){
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update category publish id:'.$id;
+        $tracking->description = 'Update category publish name:'.$tracking_data->en_name;
         $tracking->save();
     }else{
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update category unpublish id:'.$id;
+        $tracking->description = 'Update category unpublish name:'.$tracking_data->en_name;
         $tracking->save();
     }
       return response()->json([

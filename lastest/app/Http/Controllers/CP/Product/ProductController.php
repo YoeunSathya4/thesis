@@ -147,10 +147,11 @@ class ProductController extends Controller
         }
 
 		$id=Model::insertGetId($data);
+        $tracking_data = Model::find($id);
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Create new product id:'.$id;
+        $tracking->description = 'Create new product name:'.$tracking_data->en_name;
         $tracking->save();
         Session::flash('msg', 'Data has been Created!');
 		return redirect(route($this->route.'.edit', $id));
@@ -224,10 +225,11 @@ class ProductController extends Controller
             $data['image']=$imagename;
         }
         Model::where('id', $id)->update($data);
+        $tracking_data = Model::find($id);
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update product id:'.$id;
+        $tracking->description = 'Update product name:'.$tracking_data->en_name;
         $tracking->save();
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
@@ -238,10 +240,11 @@ class ProductController extends Controller
         $now      = date('Y-m-d H:i:s');
         Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         //Model::find($id)->delete();
+        $tracking_data = Model::find($id);
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Delete product id:'.$id;
+        $tracking->description = 'Delete product name:'.$tracking_data->en_name;
         $tracking->save();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
@@ -266,17 +269,18 @@ class ProductController extends Controller
       $id   = $request->input('id');
       $data = array('is_published' => $request->input('active'));
       Model::where('id', $id)->update($data);
+      $tracking_data = Model::find($id);
       if($request->input('active') == 1){
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update product publish id:'.$id;
+        $tracking->description = 'Update product publish name:'.$tracking_data->en_name;
         $tracking->save();
     }else{
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update product unpublish id:'.$id;
+        $tracking->description = 'Update product unpublish name:'.$tracking_data->en_name;
         $tracking->save();
     }
       return response()->json([
@@ -291,17 +295,18 @@ class ProductController extends Controller
       $data = array('is_featured' => $request->input('active'));
       
       Model::where('id', $id)->update($data);
+      $tracking_data = Model::find($id);
       if($request->input('active') == 1){
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update product feature id:'.$id;
+        $tracking->description = 'Update product feature name:'.$tracking_data->en_name;
         $tracking->save();
     }else{
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update product unfeature id:'.$id;
+        $tracking->description = 'Update product unfeature name:'.$tracking_data->en_name;
         $tracking->save();
     }
       return response()->json([

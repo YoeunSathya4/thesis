@@ -143,7 +143,15 @@
                 </ul>
             </li>
             
-        
+            <li class="red @yield('active-main-menu-visitor')">
+                <a href="{{ route('cp.visitor.index') }}">
+                <span>
+                    <i class="fa fa-eye"></i>
+                    <span class="lbl">Visitor</span>
+                </span>
+                </a>
+            </li>
+
             @if(Auth::user()->position_id == 1)
             <li class="red @yield('active-main-menu-user')">
                 <a href="{{ route('cp.user.user.index') }}">

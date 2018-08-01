@@ -117,7 +117,7 @@ return [
     'my-profile' => 'My Profile',
     'profile-menu' => 'Profile Menu',
     'favorite-product' => 'Favorite Product',
-    'panding-order' => 'Panding Order',
+    'panding-order' => 'Pending Cart',
     'order-history' => 'Order History',
     'location' => 'Location',
     'location-example' => 'Eg. Chom Chav',

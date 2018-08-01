@@ -56,7 +56,8 @@
 			                                @foreach( $favorites as $row)
 			                                <tr>
 			                                    <td>{{$row->product->productName}} </td>
-			                                    <td class="text-right"> <a href="{{route('add-to-cart',['locale'=>$locale, 'id'=>$row->product_id])}}" type="button" class="btn btn-primary btn-sm">{{__('general.add-to-cart')}}</a> </td>
+			                                    <td class="text-right"> <a href="{{route('add-to-cart',['locale'=>$locale, 'id'=>$row->product_id])}}" type="button" class="btn btn-primary btn-sm">{{__('general.add-to-cart')}}</a> <a href="{{route('remove-from-favorite',['locale'=>$locale, 'id'=>$row->product_id])}}" type="button" class="btn btn-danger btn-sm">Remove Favorite</a></td>
+			                                   
 			                                </tr>
 			                                @endforeach
 

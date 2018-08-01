@@ -68,4 +68,8 @@
 		Route::group(['as' => 'tracking.', 'prefix' => 'tracking', 'namespace' => 'Tracking'], function () {
 			require(__DIR__.'/tracking.php');
 		});
+		//:::::::::::::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Visitor
+		Route::group(['as' => 'visitor.', 'prefix' => 'visitor', 'namespace' => 'Visitor'], function () {
+			require(__DIR__.'/visitor.php');
+		});
 	});
