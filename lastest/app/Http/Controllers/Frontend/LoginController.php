@@ -38,9 +38,9 @@ class LoginController extends FrontendController
         $credentials = $request->only($this->username(), 'password'); 
         //$credentials['status'] = 1; 
             
-            return $credentials;
+        return $credentials;
     }
-
+   
 
     protected function authenticated(Request $request, $user)
     {
@@ -89,7 +89,7 @@ class LoginController extends FrontendController
     }
     public function username()
     {
-        return 'email';
+        return 'phone';
     }
 
     protected function guard()

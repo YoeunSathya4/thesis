@@ -114,10 +114,11 @@ class NewsController extends Controller
         }
 
 		$id=Model::insertGetId($data);
+        $tracking_data = Model::find($id);
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Create new news id:'.$id;
+        $tracking->description = 'Create new news name:'.$tracking_data->en_title;
         $tracking->save();
         Session::flash('msg', 'Data has been Created!');
 		return redirect(route($this->route.'.edit', $id));
@@ -178,10 +179,11 @@ class NewsController extends Controller
         }
 
         Model::where('id', $id)->update($data);
+        $tracking_data = Model::find($id);
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update news id:'.$id.'and name:'.$data->en_title;
+        $tracking->description = 'Update news id:'.$id.'and name:'.$tracking_data->en_title;
         $tracking->save();
         Session::flash('msg', 'Data has been updated!' );
         return redirect()->back();
@@ -192,10 +194,11 @@ class NewsController extends Controller
         $now      = date('Y-m-d H:i:s');
         Model::where('id', $id)->update(['is_deleted'=>1,'deleter_id' => Auth::id(), 'deleted_at'=>$now]);
         //Model::find($id)->delete();
+        $tracking_data = Model::find($id);
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Delete news id:'.$id;
+        $tracking->description = 'Delete news name:'.$tracking_data->en_title;
         $tracking->save();
         Session::flash('msg', 'Data has been delete!' );
         return response()->json([
@@ -221,17 +224,18 @@ class NewsController extends Controller
       $id   = $request->input('id');
       $data = array('is_published' => $request->input('active'));
       Model::where('id', $id)->update($data);
+      $tracking_data = Model::find($id);
       if($request->input('active') == 1){
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update news publish id:'.$id;
+        $tracking->description = 'Update news publish name:'.$tracking_data->en_title;
         $tracking->save();
     }else{
         $tracking = new Tracking();
         $tracking->user_id = $user_id;
         $tracking->created_at = $now;
-        $tracking->description = 'Update news unpublish id:'.$id;
+        $tracking->description = 'Update news unpublish name:'.$tracking_data->en_title;
         $tracking->save();
     }
       return response()->json([

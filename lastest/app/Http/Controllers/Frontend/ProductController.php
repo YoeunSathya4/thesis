@@ -57,7 +57,33 @@ class ProductController extends FrontendController
     	$defaultData = $this->defaultData($locale);
         return view('frontend.product',['defaultData'=>$defaultData, 'locale'=>$locale, 'data'=>$data,'appends'=>$appends]);
     }
+    public function searchProduct($locale) {
+        $data = Product::select('id',$locale.'_name as name','image','unit_price','slug');
+        $key       =   isset($_GET['key'])?$_GET['key']:"";
+        $min   =   intval(isset($_GET['min'])?$_GET['min']:0); 
+        $max    =   intval(isset($_GET['max'])?$_GET['max']:0);
+        $appends=array();
+        if( $key != "" ){
+            $data = $data->where('en_name', 'like', '%'.$key.'%')->orWhere('kh_name', 'like', '%'.$key.'%');
+            $appends['key'] = $key;
+        }
 
+        if($min){
+            if($max){
+                
+
+                $data = $data->whereBetween('unit_price', [$min, $max]);
+                $appends['min'] = $min;
+                $appends['max'] = $max;
+            }
+        }
+       
+
+        $data= $data->where(['is_published'=>1,'is_deleted'=>0])->orderBy('id', 'DESC')->paginate(9);
+
+        $defaultData = $this->defaultData($locale);
+        return view('frontend.product-search',['defaultData'=>$defaultData, 'locale'=>$locale, 'data'=>$data,'appends'=>$appends]);
+    }
     public function detail($locale = '', $slug = ''){
         $data = Product::select('id', $locale.'_name as name', $locale.'_description as description',$locale.'_content as content', 'image','product_qty','unit_price', 'created_at')->where('slug', $slug)->first();
         $defaultData = $this->defaultData($locale);

@@ -114,9 +114,9 @@
                     <!-- Logo -->
 
                     <!-- Search bar -->
-                    <div class="search-bar">
+                    <!-- <div class="search-bar">
                         <a href="#"><i class="fa fa-search"></i></a>
-                    </div>
+                    </div> -->
                     <!-- Search bar -->
 
                     <!-- Responsive Button -->
@@ -428,6 +428,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 <!-- Switcher JS -->
+@yield('product-search')
 @yield('appbottomjs')
 @yield('property-js')
 
