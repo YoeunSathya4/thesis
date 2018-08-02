@@ -142,7 +142,14 @@
                     <li class=""><a href="{{ route('cp.category.index') }}"><span class="lbl">Category</span></a></li>
                 </ul>
             </li>
-            
+            <li class="red @yield('active-main-menu-product-post')">
+                <a href="{{ route('cp.product-post.index') }}">
+                <span>
+                    <i class="fa fa-product-hunt"></i>
+                    <span class="lbl">User Posted Product</span>
+                </span>
+                </a>
+            </li>
             <li class="red @yield('active-main-menu-visitor')">
                 <a href="{{ route('cp.visitor.index') }}">
                 <span>

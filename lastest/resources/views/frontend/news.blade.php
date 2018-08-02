@@ -56,7 +56,7 @@
                         <!-- Aside Widget -->
                         <div class="aside-widget">
                             <h6>{{__('general.promotion')}}</h6>
-                            <ul class="books-year-list">
+                            <ul style="height: 300px" class="books-year-list">
                                 @php($promotions = $defaultData['promotions'])
                                 @foreach($promotions as $promotion)
                                     <li id="list-promotion">

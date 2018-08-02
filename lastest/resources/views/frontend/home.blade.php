@@ -18,6 +18,7 @@
 
         </div>
         <!--BANNER-->
+        @include('frontend.layouts.sidebar.product_search')
         <section class="book-collection">
             <div class="container">
                 <div class="row">

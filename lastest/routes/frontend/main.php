@@ -2,6 +2,7 @@
 Route::get('{locale}/home', 				[ 'as' => 'home',			'uses' => 'HomeController@index']);
 Route::get('{locale}/about-us', 			[ 'as' => 'about-us',			'uses' => 'AboutUsController@index']);
 Route::get('{locale}/product', 				[ 'as' => 'product',			'uses' => 'ProductController@index']);
+Route::get('{locale}/search-product', 				[ 'as' => 'search-product',			'uses' => 'ProductController@searchProduct']);
 Route::get('{locale}/product-detail/{slug}', 				[ 'as' => 'product-detail',			'uses' => 'ProductController@detail']);
 
 Route::get('{locale}/promotion', 			[ 'as' => 'promotion',			'uses' => 'PromotionController@index']);

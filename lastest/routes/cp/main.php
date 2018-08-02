@@ -72,4 +72,8 @@
 		Route::group(['as' => 'visitor.', 'prefix' => 'visitor', 'namespace' => 'Visitor'], function () {
 			require(__DIR__.'/visitor.php');
 		});
+		//:::::::::::::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Product
+		Route::group(['as' => 'product-post.', 'prefix' => 'product-post', 'namespace' => 'ProductPost'], function () {
+			require(__DIR__.'/product_post.php');
+		});
 	});
