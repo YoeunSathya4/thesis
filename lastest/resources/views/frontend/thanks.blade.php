@@ -18,7 +18,8 @@
         </div>
         <div class="panel-body">
            <div class="alert alert-success" role="alert">
-                {{__('general.well-done')}} <a href="{{route('order-history',$locale)}}"> {{__('general.click-to-see-invoice')}}</a>
+                {{__('general.well-done')}} <a style="font-size: 23px;
+    color: #ee383a;" href="{{route('order-history',$locale)}}"> <b> {{__('general.click-to-see-invoice')}} </b></a>
             </div>
         </div>
     </div>
