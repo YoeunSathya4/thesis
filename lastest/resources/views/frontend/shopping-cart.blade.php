@@ -34,10 +34,18 @@
                                 <tr>
                                     <td>{{$product['item'][$locale.'_name']}}</td>
                                     <td class="text-center">${{$product['price']}}</td>
-                                    <td class="text-center">{{$product['qty']}}</td>
+                                    <td class="text-center">
+                                       
+                                    </td>
+                                    <td class="text-center">
+                                         <a href="{{route('reduce',['locale'=>$locale, 'id'=>$product['item']['id']])}}" type="button" class="btn btn-sm btn-primary"><i class="fa fa-minus"></i></a>
+                                        {{$product['qty']}}
+                                        <a href="{{route('plus',['locale'=>$locale, 'id'=>$product['item']['id']])}}" type="button" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></a>
+                                    </td>
+
                                     <td class="text-right">${{$product['price'] }}</td>
                                     <td class="text-center">
-                                        <a href="{{route('reduce',['locale'=>$locale, 'id'=>$product['item']['id']])}}" type="button" class="btn btn-danger">{{__('general.remove')}}</a>
+                                        <!-- <a href="{{route('reduce',['locale'=>$locale, 'id'=>$product['item']['id']])}}" type="button" class="btn btn-danger">{{__('general.remove')}}</a> -->
                                          <a href="{{route('remove',['locale'=>$locale, 'id'=>$product['item']['id']])}}" type="button" class="btn btn-danger">{{__('general.remove-all')}}</a>
                                     </td>
                                 </tr>

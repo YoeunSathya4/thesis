@@ -41,7 +41,16 @@ class Cart
 		}
 
 	}
+	public function plusByOne($id){
+		$this->items[$id]['qty']++;
+		$this->items[$id]['price']+= $this->items[$id]['item']['unit_price'];
+		$this->totalQty++;
+		$this->totalPrice += $this->items[$id]['item']['unit_price'];
+		if($this->items[$id]['qty'] <= 0){
+			unset($this->items[$id]);
+		}
 
+	}
 	public function removeItem($id){
 		$this->totalQty -= $this->items[$id]['qty'];
 

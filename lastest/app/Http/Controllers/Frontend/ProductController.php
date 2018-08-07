@@ -119,7 +119,20 @@ class ProductController extends FrontendController
         Session::flash('msg', 'Product has been removed!' );
         return redirect()->route('shopping-cart',$locale);
     }
+    public function getPlusByOne($locale = '',$id){
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart ($oldCart);
+        $cart->plusByOne($id);
+        if(count($cart->items) > 0){
+            Session::put('cart',$cart);
+        }else{
+            Session::forget('cart');
+        }
 
+        //Session::put('cart',$cart);
+        Session::flash('msg', 'Product has been removed!' );
+        return redirect()->route('shopping-cart',$locale);
+    }
     public function RemoveItem($locale = '',$id){
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart ($oldCart);
@@ -166,6 +179,33 @@ class ProductController extends FrontendController
         }
     }
 
+    public function Buy(Request $request,$locale = '', $id = 0){
+
+        $productSession = Product::find($id);
+        $defaultData = $this->defaultData($locale);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart ($oldCart);
+        $cart->add($productSession, $productSession->id);
+        $request->session()->put('cart', $cart);
+
+        $defaultData = $this->defaultData($locale);
+        if(!Session::has('cart')){
+            return view('frontend.shopping-cart',['defaultData'=>$defaultData,'locale'=>$locale]); 
+        }
+
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        $total = $cart->totalPrice;
+        $customer = Auth::guard('customer')->user();
+        if($customer != ''){
+            return view('frontend.checkout', ['defaultData'=>$defaultData,'locale'=>$locale,'total'=>$total]);
+        }else{
+            Session::put('oldUrl', route('checkout',$locale));
+            
+            return view('frontend.login',['defaultData'=>$defaultData, 'locale'=>$locale]);
+        }
+    }
+
     public function postCheckout(Request $request,$locale = ''){
         if(!Session::has('cart')){
             return redirect()->route('shopping-cart',$locale);
@@ -189,6 +229,7 @@ class ProductController extends FrontendController
             $customer_id = Auth::guard('customer')->user()->id;
             $order = new Order();
             $order->customer_id = $customer_id;
+            $order->is_success = 1;
             $order->is_new = 0;
             //$order->name = $request->input('name');
             //$order->address = $request->input('address');

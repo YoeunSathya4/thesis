@@ -63,7 +63,7 @@
                                 </div> -->
                                 <hr>
                                 <ul class="btn-list">
-                                    <li style="margin-right: 10px;"><a class="btn-1 sm shadow-0 " href="{{route('add-to-cart',['locale'=>$locale, 'id'=>$data->id])}}">{{__('general.add-to-cart')}}</a></li>
+                                    <li style="margin-right: 10px;"><a style="background:#2e9249;" class="btn-1 sm shadow-0 " href="{{route('buy',['locale'=>$locale, 'id'=>$data->id])}}">{{__('general.buy')}}</a></li>
                                     @if($data->favorites()->first() == null)
                                        @php($favorite = 0) 
                                     @else

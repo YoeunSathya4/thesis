@@ -190,8 +190,6 @@
 				<th>Name</th>
 				<th>Phone</th>
 				<th>Email</th>
-				<th>Email Verified</th>
-				
 				<th>Phone Verified</th>
 				<th>Last Updated</th>
 				<th>Avatar</th>
@@ -207,12 +205,7 @@
 					<td>{{ $row->name }}</td>
 					<td>{{ $row->phone }}</td>
 					<td>{{ $row->email }}</td>
-					<td>
-						<div class="checkbox-toggle">
-					        <input onclick="updateEmail({{ $row->id }})" type="checkbox" id="email-{{ $row->id }}" @if ($row->is_email_verified == 1) checked data-value="1" @else data-value="0" @endif >
-					        <label for="email-{{ $row->id }}"></label>
-				        </div>
-					</td>
+				
 					
 					<td>
 						<div class="checkbox-toggle">
