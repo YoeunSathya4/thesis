@@ -58,7 +58,7 @@
 	<div class="col-xs-12 col-sm-6 col-md-3">
 		<div class="form-group">
 			
-			<input  type="text" class="form-control" id="key" placeholder="Key" value="{{ isset($appends['key'])?$appends['key']:'' }}">
+			<input  type="text" class="form-control" id="key" placeholder="Invoice ID" value="{{ isset($appends['key'])?$appends['key']:'' }}">
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-6 col-md-3">
@@ -93,11 +93,11 @@
 		<thead>
 			<tr>
 				<th>#</th>
+				<th>Invoice ID</th>
 				<th>Customer</th>
-				<th>Success</th>
-				<th>Address</th>
-				<th>Delevery Time</th>
-				<th>Discount</th>
+				<th>Product</th>
+				<th>Quatity</th>
+				<th>Price</th>
 				<th></th>
 				
 			</tr>
@@ -108,14 +108,30 @@
 			@foreach ($data as $row)
 				<tr>
 					<td>{{ $i++ }}</td>
+					<td>00000{{ $row->id }}</td>
 					<td>{{$row->customer->name}}</td>
-					<td ><div class="checkbox-toggle">
-							        <input  onclick="updateStatus({{ $row->id }})" type="checkbox" id="status-{{ $row->id }}" @if ($row->is_success == 1) checked data-value="1" @else data-value="0" @endif >
-							        <label  for="status-{{ $row->id }}"></label>
-						        </div></td>
-						<td>{{ $row->address }}</td>
-						<td>{{ $row->delivery_time }}</td>
-						<td>{{ $row->discount }} %</td>
+					<td >
+						<ul>
+							@php($details = $row->details)
+							@foreach($details as $detail)
+							<li>{{$detail->product->en_name}}</li>
+							@endforeach
+						</ul>
+					</td>
+					<td>
+						<ul>
+							@foreach($details as $detail)
+							<li>{{$detail->qty}}</li>
+							@endforeach
+						</ul>
+					</td>
+					<td>
+						<ul>
+							@foreach($details as $detail)
+							<li>{{$detail->unit_price}} $</li>
+							@endforeach
+						</ul>
+					</td>
 					<td><a href="{{route('cp.order.all-order-detail',$row->id)}}" class="tabledit-edit-button btn btn-sm btn-success" style="float: none;"><span class="fa fa-eye"></span></a></td>
 				</tr>
 			@endforeach

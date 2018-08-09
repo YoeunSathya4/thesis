@@ -23,7 +23,21 @@
 @section ('section-content')
 
 <form id="form" action="#" name="form" method="POST"  enctype="multipart/form-data">
-							
+	<div class="form-group row">
+		<label class="col-sm-2 form-control-label" for="name">Invoice ID</label>
+		<div class="col-sm-10">
+			<input 	id="name"
+					name="name"
+					disabled="" 
+				   	value = "00000{{$data->id}}"
+				   	type="text"
+				   	placeholder = ""
+				   	class="form-control"
+				   	data-validation="[L>=1, L<=200]"
+					 />
+					
+		</div>
+	</div>						
 	<div class="form-group row">
 		<label class="col-sm-2 form-control-label" for="name">Customer</label>
 		<div class="col-sm-10">

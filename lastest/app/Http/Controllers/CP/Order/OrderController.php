@@ -77,7 +77,7 @@ class OrderController extends Controller
         $till=isset($_GET['till'])?$_GET['till']:"";
         $appends=array('limit'=>$limit);
         if( $key != "" ){
-            $data = $data->where('address', 'like', '%'.$key.'%')->orWhere('delivery_time', 'like', '%'.$key.'%');
+            $data = $data->where('id', 'like', '%'.substr($key,5).'%');
             $appends['key'] = $key;
         }
 

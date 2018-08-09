@@ -22,8 +22,10 @@ Route::get('{locale}/remove-from-favorite/{id}', 				[ 'as' => 'remove-from-favo
 Route::get('{locale}/add-to-cart/{id}', 			[ 'as' => 'add-to-cart',			'uses' => 'ProductController@AddToCart']);
 Route::get('{locale}/shopping-cart', 			[ 'as' => 'shopping-cart',			'uses' => 'ProductController@ShoppingCart']);
 Route::get('{locale}/checkout', 			[ 'as' => 'checkout',			'uses' => 'ProductController@Checkout']);
+Route::get('{locale}/buy/{id}', 			[ 'as' => 'buy',			'uses' => 'ProductController@Buy']);
 Route::post('{locale}/checkouts', 				[ 'as' => 'checkouts',			'uses' => 'ProductController@postCheckout']);
 Route::get('{locale}/reduce/{id}', 			[ 'as' => 'reduce',			'uses' => 'ProductController@getReduceByOne']);
+Route::get('{locale}/plus/{id}', 			[ 'as' => 'plus',			'uses' => 'ProductController@getPlusByOne']);
 
 Route::get('{locale}/remove/{id}', 			[ 'as' => 'remove',			'uses' => 'ProductController@RemoveItem']);
 Route::get('{locale}/thanks', 			[ 'as' => 'thanks',			'uses' => 'ProductController@thanks']);

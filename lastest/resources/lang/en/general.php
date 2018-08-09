@@ -24,9 +24,10 @@ return [
     'enter-your-phone-number' => 'Enter Your Phone Number',
     'search-product' => 'Search Product',
     'search-result' => 'Search Result',
-    'key' => 'Key',
+    'key' => 'Product Name',
     'minimun-price' => 'Minimun Price',
     'maximun-price' => 'Maximun Price',
+    'buy' => 'Buy',
     //=================================//Thank
     'thank' => 'Thank your for your order',
     'well-done' => 'Well done! You have successfully ordered product form our website. Our staff will response to you soon. Best regrade!',
