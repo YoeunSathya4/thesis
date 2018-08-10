@@ -7,17 +7,16 @@
 @endsection
 
 @section ('content')
-    <!-- breadcrumb -->
-    <div class="parallax-window inner-banner tc-padding overlay-dark" data-parallax="scroll" data-image-src="{{asset('public/frontend/images/banner.jpg')}}">
-        <div class="container">
+@include('frontend.layouts.sidebar.slides')
+    <div class="container tc-padding-top">
             <div class="inner-page-heading h-white style-2">
-                <h2>{{__('general.news-detail')}}</h2>            
+                <h2 style="color: black;">{{__('general.news-detail')}}</h2>
             </div>
         </div>
-    </div>
-<!-- Breadcrumb -->
+        <!-- breadcrumb -->
+ 
         <!-- Blog List -->
-        <div class="tc-padding">
+        <div class="">
             <div class="container">
                 <div class="row">
                     

@@ -7,14 +7,15 @@
 @endsection
 
 @section ('content')
-        <!-- breadcrumb -->
-    <div class="parallax-window inner-banner tc-padding overlay-dark" data-parallax="scroll" data-image-src="{{asset('public/frontend/images/banner.jpg')}}">
-        <div class="container">
+
+@include('frontend.layouts.sidebar.slides')
+    <div class="container tc-padding-top">
             <div class="inner-page-heading h-white style-2">
-                <h2>{{__('general.promotion')}}</h2>
+                <h2 style="color: black;">{{__('general.promotion')}}</h2>
             </div>
         </div>
-    </div>
+        <!-- breadcrumb -->
+  
 
 
     		<div class="container" style="padding-top: 20px;">

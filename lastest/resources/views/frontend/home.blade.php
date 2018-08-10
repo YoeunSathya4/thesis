@@ -8,7 +8,7 @@
 
 @section ('content')
         <!--BANNER-->
-        <div id="main-slider" class="main-slider">
+       <!--  <div id="main-slider" class="main-slider">
 
             @foreach($slides as $slide)
             <div class="item">
@@ -16,8 +16,14 @@
             </div>
             @endforeach
 
-        </div>
+        </div> -->
         <!--BANNER-->
+
+
+
+
+@include('frontend.layouts.sidebar.slides')
+
         @include('frontend.layouts.sidebar.product_search')
         <section class="book-collection">
             <div class="container">

@@ -7,18 +7,20 @@
 @endsection
 
 @section ('content')
+
+@include('frontend.layouts.sidebar.slides')
 <!-- breadcrumb -->
-    <div class="parallax-window inner-banner tc-padding overlay-dark" data-parallax="scroll" data-image-src="{{asset('public/frontend/images/banner.jpg')}}">
-        <div class="container">
+
+        <div class="container tc-padding-top">
             <div class="inner-page-heading h-white style-2">
-                <h2>{{__('general.about-us')}}</h2>
+                <h2 style="color: black;">{{__('general.about-us')}}</h2>
             </div>
         </div>
-    </div>
-<!-- Breadcrumb -->
 
+<!-- Breadcrumb -->
+    
         <!-- Service And Mission -->
-        <section class="service-nd-mission tc-padding-top white-bg">
+        <section class="service-nd-mission white-bg">
             <div  class="container">
                 
 

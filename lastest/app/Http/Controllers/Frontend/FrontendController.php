@@ -18,6 +18,7 @@ use App\Model\Promotion\Promotion;
 use App\Model\Category\Category;
 use App\Model\Category\SubCategory;
 use App\Model\Category\SubSubCategory;
+use App\Model\Slide\Slide;
 
 class FrontendController extends Controller
 {
@@ -41,6 +42,9 @@ class FrontendController extends Controller
         $this->defaultData['routeName'] = Route::currentRouteName();
 
         $this->defaultData['promotions']            = Promotion::select('id',$locale.'_title as title','image')->limit(3)->where('is_deleted',0)->get();
+
+
+        $this->defaultData['slides'] = Slide::select('*')->where(['is_published'=> 1,'is_deleted'=>0])->get();
         $navbar_menu = array();
         $navbar_tab_menu = array();
         $categories           = Category::select('id',$locale.'_name as name','image')->where('is_deleted',0)->get();
