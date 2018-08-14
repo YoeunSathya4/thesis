@@ -25,8 +25,76 @@
 
 	<div class="container-fluid">
 	        <div class="row">
-	           
-	            <div class="col-xl-6">
+
+	            <div class="col-xl-12">
+	               
+	                   <div class="row">
+
+	                   	<div class="col-sm-3">
+	                        <article class="statistic-box purple">
+	                            <div>
+	                                <div class="number">{{count($today_customer)}}</div>
+	                                <div class="caption"><div>New Customer Today</div></div>
+	                                <div class="percent">
+	                                   
+	                                </div>
+	                            </div>
+	                        </article>
+	                    </div><!--.col-->
+	                    <div class="col-sm-3">
+	                        <article class="statistic-box green">
+	                            <div>
+	                                <div class="number">{{count($today_order)}}</div>
+	                                <div class="caption"><div>New Order Today</div></div>
+	                                <div class="percent">
+	                                   
+	                                </div>
+	                            </div>
+	                        </article>
+	                    </div><!--.col-->
+
+	                    <div class="col-sm-3">
+	                        <article class="statistic-box red">
+	                            <div>
+	                                <div class="number">{{count($customers)}}</div>
+	                                <div class="caption"><div>Total Customer</div></div>
+	                                <div class="percent">
+	                                   
+	                                </div>
+	                            </div>
+	                        </article>
+	                    </div><!--.col-->
+	                   
+	                    <div class="col-sm-3">
+	                        <article class="statistic-box yellow">
+	                            <div>
+	                                <div class="number">{{count($orders)}}</div>
+	                                <div class="caption"><div>Total Order</div></div>
+	                                <div class="percent">
+	                                   
+	                                </div>
+	                            </div>
+	                        </article>
+	                    </div><!--.col-->
+	                    <!-- <div class="col-sm-6">
+	                        <article class="statistic-box green">
+	                            <div>
+	                                <div class="number"> </div>
+	                                <div class="caption"><div>Sell or Rent</div></div>
+	                                <div class="percent">
+	                                   
+	                                </div>
+	                            </div>
+	                        </article>
+	                    </div> -->
+
+	                </div><!--.row-->
+	               
+	            </div><!--.col-->
+	        </div>
+
+	        <div class="row">
+	            <div class="col-xl-12">
 	                <section class="box-typical box-typical-dashboard panel panel-default">
 	                    <header class="box-typical-header panel-heading">
 	                        <h3 class="panel-title">New Order <span class="label label-pill label-danger">{{count($new_orders)}}</span></h3>
@@ -58,47 +126,6 @@
 	                </section><!--.box-typical-dashboard-->
 	            </div><!--.col-->
 
-	            <div class="col-xl-6">
-	               
-	                   <div class="row">
-	                    <div class="col-sm-6">
-	                        <article class="statistic-box red">
-	                            <div>
-	                                <div class="number">{{count($customers)}}</div>
-	                                <div class="caption"><div>Total Customer</div></div>
-	                                <div class="percent">
-	                                   
-	                                </div>
-	                            </div>
-	                        </article>
-	                    </div><!--.col-->
-	                   
-	                    <div class="col-sm-6">
-	                        <article class="statistic-box yellow">
-	                            <div>
-	                                <div class="number">{{count($orders)}}</div>
-	                                <div class="caption"><div>Total Order</div></div>
-	                                <div class="percent">
-	                                   
-	                                </div>
-	                            </div>
-	                        </article>
-	                    </div><!--.col-->
-	                    <!-- <div class="col-sm-6">
-	                        <article class="statistic-box green">
-	                            <div>
-	                                <div class="number"> </div>
-	                                <div class="caption"><div>Sell or Rent</div></div>
-	                                <div class="percent">
-	                                   
-	                                </div>
-	                            </div>
-	                        </article>
-	                    </div> -->
-
-	                </div><!--.row-->
-	               
-	            </div><!--.col-->
 	        </div><!--.row-->
 	
 	        <div class="row">

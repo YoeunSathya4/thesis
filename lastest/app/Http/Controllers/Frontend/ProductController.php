@@ -116,7 +116,7 @@ class ProductController extends FrontendController
         }
 
         //Session::put('cart',$cart);
-        Session::flash('msg', 'Product has been removed!' );
+        Session::flash('msg', 'Product has been increase!' );
         return redirect()->route('shopping-cart',$locale);
     }
     public function getPlusByOne($locale = '',$id){
@@ -212,7 +212,8 @@ class ProductController extends FrontendController
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-
+        $customerName = Auth::guard('customer')->user()->name;
+        $customerPhone = Auth::guard('customer')->user()->phone;
         Stripe::setApiKey('sk_test_fMXB2txgqlGSoCJFaBwKfPVI');
         try {
             $charge = Charge::create(
@@ -220,7 +221,7 @@ class ProductController extends FrontendController
                     "amount"=> $cart->totalPrice * 100,
                     "currency" => 'usd',
                     "source" => 'tok_amex',
-                    "description" => 'Test Charge',
+                    "description" => $customerName.' and tel:'.$customerPhone,
 
                 )
             );

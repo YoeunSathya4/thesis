@@ -33,10 +33,11 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Success</th>
-					<th>Address</th>
-					<th>Delevery Time</th>
-					<th>Discount</th>
+					<th>Invoice ID</th>
+					<th>Customer</th>
+					<th>Product</th>
+					<th>Quatity</th>
+					<th>Price</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -45,14 +46,31 @@
 				@php ($i = 1)
 				@foreach ($data as $row)
 					<tr>
-						<td>{{ $i++ }}</td>
-						<td ><div class="checkbox-toggle">
-							        <input  onclick="updateStatus({{ $row->id }})" type="checkbox" id="status-{{ $row->id }}" @if ($row->is_success == 1) checked data-value="1" @else data-value="0" @endif >
-							        <label  for="status-{{ $row->id }}"></label>
-						        </div></td>
-						<td>{{ $row->address }}</td>
-						<td>{{ $row->delivery_time }}</td>
-						<td>{{ $row->discount }}</td>
+					<td>{{ $i++ }}</td>
+					<td>00000{{ $row->id }}</td>
+					<td>{{$row->customer->name}}</td>
+					<td >
+						<ul>
+							@php($details = $row->details)
+							@foreach($details as $detail)
+							<li>{{$detail->product->en_name}}</li>
+							@endforeach
+						</ul>
+					</td>
+					<td>
+						<ul>
+							@foreach($details as $detail)
+							<li>{{$detail->qty}}</li>
+							@endforeach
+						</ul>
+					</td>
+					<td>
+						<ul>
+							@foreach($details as $detail)
+							<li>{{$detail->unit_price}} $</li>
+							@endforeach
+						</ul>
+					</td>
 						<td><a href="#" onclick="orderDetail({{$row->id}})" class="tabledit-edit-button btn btn-sm btn-success" data-toggle="modal" data-target="#orderDetail" style="float: none;"><span class="fa fa-eye"></span></a></td>
 					</tr>
 				

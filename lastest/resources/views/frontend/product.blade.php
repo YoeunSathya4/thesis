@@ -25,14 +25,16 @@
 
 @section ('content')
        <!-- breadcrumb -->
-    <div class="parallax-window inner-banner tc-padding overlay-dark" data-parallax="scroll" data-image-src="{{asset('public/frontend/images/banner.jpg')}}">
-        <div class="container">
+
+@include('frontend.layouts.sidebar.slides')
+    <div class="container tc-padding-top">
             <div class="inner-page-heading h-white style-2">
-                <h2>{{__('general.product')}}</h2>
-                <h4>{{__('general.page')}}:@if(isset($appends['category_name'])) {{$appends['category_name']}} @endif @if(isset($appends['sub_category_name'])) <i class="fa fa-arrow-right"></i> {{$appends['sub_category_name']}} @endif @if(isset($appends['sub_sub_category_name'])) <i class="fa fa-arrow-right"></i> {{$appends['sub_sub_category_name']}} @endif</h4>
+                <h2 style="color: black;">{{__('general.product')}}</h2>
+                <h4 style="color: black;">{{__('general.page')}}:@if(isset($appends['category_name'])) {{$appends['category_name']}} @endif @if(isset($appends['sub_category_name'])) <i class="fa fa-arrow-right"></i> {{$appends['sub_category_name']}} @endif @if(isset($appends['sub_sub_category_name'])) <i class="fa fa-arrow-right"></i> {{$appends['sub_sub_category_name']}} @endif</h4>
             </div>
         </div>
-    </div>
+
+
 <!-- Breadcrumb -->
 @include('frontend.layouts.sidebar.product_search')
  <!-- Blog List -->

@@ -18,6 +18,8 @@ use App\Model\Promotion\Promotion;
 use App\Model\Category\Category;
 use App\Model\Category\SubCategory;
 use App\Model\Category\SubSubCategory;
+use App\Model\Slide\Slide;
+use App\Model\Content;
 
 class FrontendController extends Controller
 {
@@ -41,6 +43,16 @@ class FrontendController extends Controller
         $this->defaultData['routeName'] = Route::currentRouteName();
 
         $this->defaultData['promotions']            = Promotion::select('id',$locale.'_title as title','image')->limit(3)->where('is_deleted',0)->get();
+
+
+        //=========================================== Slogan
+        $this->defaultData['address'] = Content::select('id', $locale.'_content as content')->where('slug','address')->first();
+        $this->defaultData['phone'] = Content::select('id', $locale.'_content as content')->where('slug','phone')->first();
+        $this->defaultData['email'] = Content::select('id', $locale.'_content as content')->where('slug','email')->first();
+        $this->defaultData['slogan'] = Content::select('id', $locale.'_content as content')->where('slug','slogan')->first();
+
+
+        $this->defaultData['slides'] = Slide::select('*')->where(['is_published'=> 1,'is_deleted'=>0])->get();
         $navbar_menu = array();
         $navbar_tab_menu = array();
         $categories           = Category::select('id',$locale.'_name as name','image')->where('is_deleted',0)->get();

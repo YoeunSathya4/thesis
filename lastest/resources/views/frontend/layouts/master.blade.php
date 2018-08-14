@@ -168,11 +168,11 @@
                     <div class="col-lg-12 col-sm-12" style="text-align: center;">
                         <div class="footer-column logo-column">
                             <a href="index-1.html"><img src="{{ asset ('public/frontend/images/logo-2.png')}}" alt=""></a>
-                            <p>{{__('general.footer-content')}}</p>
+                            <p>@if($defaultData['slogan']) {{$defaultData['slogan']->content}} @endif</p>
                             <ul class="address-list">
-                                <li><i class="fa fa-home"></i>{{__('general.locations')}}</li>
-                                <li><i class="fa fa-phone"></i>012 891 522 , 012 702 122</li>
-                                <li><i class="fa fa-envelope"></i>contact@khmemaraksmey.com</li>
+                                <li><i class="fa fa-home"></i>@if($defaultData['address']) {{$defaultData['address']->content}} @endif</li>
+                                <li><i class="fa fa-phone"></i>@if($defaultData['phone']) {{$defaultData['phone']->content}} @endif</li>
+                                <li><i class="fa fa-envelope"></i>@if($defaultData['email']) {{$defaultData['email']->content}} @endif</li>
                             </ul>
                         </div>
                     </div>
@@ -197,12 +197,7 @@
                     </div>
                     <div class="col-sm-6">
                         <a class="back-top" href="#">{{__('general.back-to-top')}}<i class="fa fa-caret-up"></i></a>
-                        <ul class="cards-list">
-                            <li><img src="{{ asset ('public/frontend/images/cards/img-01.jpg')}}" alt=""></li>
-                            <li><img src="{{ asset ('public/frontend/images/cards/img-02.jpg')}}" alt=""></li>
-                            <li><img src="{{ asset ('public/frontend/images/cards/img-03.jpg')}}" alt=""></li>
-                            <li><img src="{{ asset ('public/frontend/images/cards/img-04.jpg')}}" alt=""></li>
-                        </ul>
+                      
                     </div>
                 </div>
             </div>
@@ -228,121 +223,6 @@
     </ul>
 </nav>
 <!-- Slide Menu -->
-
-<!-- View Pages -->
-<div class="modal fade open-book-view" id="open-book-view" role="dialog">
-    <div class="position-center-center" role="document">
-        <div class="modal-content">
-            <button class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div id="magazine">
-                <div style="background-image:url(images/pages/01.jpg);"></div>
-                <div style="background-image:url(images/pages/02.jpg);"></div>
-                <div style="background-image:url(images/pages/03.jpg);"></div>
-                <div style="background-image:url(images/pages/04.jpg);"></div>
-                <div style="background-image:url(images/pages/04.jpg);"></div>
-                <div style="background-image:url(images/pages/05.jpg);"></div>
-                <div style="background-image:url(images/pages/05.jpg);"></div>
-                <div style="background-image:url(images/pages/06.jpg);"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- View Pages -->
-
-<!-- Login Modal -->
-<div class="modal fade login-modal" id="login-modal" role="dialog">
-    <div class="position-center-center" role="document">
-        <div class="modal-content">
-            <strong>Register</strong>
-            <button class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="social-options">
-                <ul>
-                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i>Register with facebook</a></li>
-                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i>Register with twitter</a></li>
-                    <li><a class="google" href="#"><i class="fa fa-google-plus"></i>Register with gmail+</a></li>
-                </ul>
-            </div>
-            <form class="sending-form">
-                <div class="form-group">
-                    <input class="form-control" required="required" placeholder="Full name">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" required="required" placeholder="Email Address">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="password" required="required" placeholder="Password">
-                    <i class="fa fa-user"></i>
-                </div>
-                <p class="terms">You agree to the hldy.hr <a href="#">Terms &amp; Conditions</a></p>
-                <button class="btn-1 shadow-0 full-width">Register account</button>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- Login Modal -->
-
-<!-- Quick View -->
-<div class="modal fade quick-view" id="quick-view" role="dialog">
-    <div class="position-center-center" role="document">
-        <div class="modal-content">
-            <button class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="single-product-detail">
-                <div class="row">
-
-                    <!-- Product Thumnbnail -->
-                    <div class="col-sm-5">
-                        <div class="product-thumnbnail">
-                            <img src="images/qiuck-view/img-01.jpg" alt="">
-                        </div>
-                    </div>
-                    <!-- Product Thumnbnail -->
-
-                    <!-- Product Detail -->
-                    <div class="col-sm-7">
-                        <div class="single-product-detail">
-                            <span class="availability">Availability :<strong>Stock<i class="fa fa-check-circle"></i></strong></span>
-                            <h3>Land the Earth Beach</h3>
-                            <ul class="rating-stars">
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-half-o"></i></li>
-                                <li>1 customer review</li>
-                            </ul>
-                            <div class="prics"><del class="was">$32.00</del><span class="now">$30.99</span></div>
-                            <h4>Overview</h4>
-                            <p>With this highly anticipated new novel, the author of the bestselling Life of Pi returns to the storytelling power and luminous wisdom of his master novel. The High Mountains of Portugal.</p>
-                            <div class="quantity-box">
-                                <label>Qty :</label>
-                                <div class="sp-quantity">
-                                    <div class="sp-minus fff"><a class="ddd" data-multi="-1">-</a></div>
-                                    <div class="sp-input">
-                                      <input type="text" class="quntity-input" value="1" />
-                                    </div>
-                                    <div class="sp-plus fff"><a class="ddd" data-multi="1">+</a></div>
-                                </div>
-                            </div>
-                            <ul class="btn-list">
-                                <li><a class="btn-1 sm shadow-0 " href="#">add to cart</a></li>
-                                <li><a class="btn-1 sm shadow-0 blank" href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a class="btn-1 sm shadow-0 blank" href="#"><i class="fa fa-repeat"></i></a></li>
-                                <li><a class="btn-1 sm shadow-0 blank" href="#"><i class="fa fa-share-alt"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Product Detail -->
-
-                </div>
-            </div>
-            <!-- Single Product Detail -->
-
-        </div>
-    </div>
-</div>
-<!-- Quick View -->
 
 
 <!-- Java Script -->

@@ -75,6 +75,20 @@
                 </span>
                 </a>
             </li>
+
+             <li class="@yield('active-main-menu-general') red with-sub">
+                <span>
+                    <i class=" font-icon fa fa-file"></i>
+                    <span class="lbl"> General Content</span>
+                </span>
+                <ul>
+                    
+                    <li class=""><a href="{{ route('cp.content.content.edit', ['slug' => 'address']) }}?menu=general"><span class="lbl">Address</span></a></li>
+                    <li class=""><a href="{{ route('cp.content.content.edit', ['slug' => 'phone']) }}?menu=general"><span class="lbl">Phone</span></a></li>
+                    <li class=""><a href="{{ route('cp.content.content.edit', ['slug' => 'email']) }}?menu=general"><span class="lbl">Email</span></a></li>
+                    <li class=""><a href="{{ route('cp.content.content.edit', ['slug' => 'slogan']) }}?menu=general"><span class="lbl">Slogan</span></a></li>
+                </ul>
+            </li>
              <li class="@yield('active-main-menu-order') red with-sub">
                 <span>
                     <i class=" font-icon fa fa-bell"></i>
@@ -111,8 +125,8 @@
                 </span>
                 </a>
             </li>
-            <li class="red @yield('active-main-menu-home')">
-                <a href="{{ route('cp.content.content.edit', ['slug' => 'about-us']) }}?menu=AboutUs">
+            <li class="red @yield('active-main-menu-about-us')">
+                <a href="{{ route('cp.content.content.edit', ['slug' => 'about-us']) }}?menu=about-us">
                 <span>
                     <i class="fa fa-user"></i>
                     <span class="lbl">Company Profile</span>

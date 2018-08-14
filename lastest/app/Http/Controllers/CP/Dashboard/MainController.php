@@ -25,10 +25,14 @@ class MainController extends Controller
 
 
     public function index(){
-        
+        $now      = date('Y:m:d 23:59:59');
+        $yesterday = date('Y:m:d 00:00:00');
+        $today_customer = count(Customer::select('*')->whereBetween('created_at', [$yesterday, $now])->get());
+        $today_order = count(Order::select('*')->whereBetween('created_at', [$yesterday, $now])->get());
 
         $trackings      = Tracking::select('*')->orderBy('created_at','DESC')->limit(10)->get();
         $customers = Customer::select('*')->get();
+
 
         $orders = Order::select('*')->get();
         $products = Product::select('*')->where('is_deleted', 0)->get();
@@ -39,7 +43,7 @@ class MainController extends Controller
 
 
         //if(!empty($provinces && $users)){
-            return view($this->route.'.index', ['route'=>$this->route, 'top_products'=>$top_products,'trackings'=>$trackings,'customers'=>$customers,'orders'=>$orders,'products'=>$products,'new_orders'=>$new_orders]);
+            return view($this->route.'.index', ['route'=>$this->route, 'top_products'=>$top_products,'trackings'=>$trackings,'customers'=>$customers,'orders'=>$orders,'products'=>$products,'new_orders'=>$new_orders,'today_order'=>$today_order,'today_customer'=>$today_customer]);
         // }else{
         //     return view('errors.404');
         // }
