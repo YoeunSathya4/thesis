@@ -77,7 +77,7 @@ class OrderController extends Controller
         $till=isset($_GET['till'])?$_GET['till']:"";
         $appends=array('limit'=>$limit);
         if( $key != "" ){
-            $data = $data->where('id', 'like', '%'.substr($key,5).'%');
+            $data = $data->where('id', 'like', '%'.substr($key,5).'%')->orWhere('payment_id', 'like', '%'.$key.'%');
             $appends['key'] = $key;
         }
 
