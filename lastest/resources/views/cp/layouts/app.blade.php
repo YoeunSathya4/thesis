@@ -75,7 +75,7 @@
                 </span>
                 </a>
             </li>
-
+            @endif
              <li class="@yield('active-main-menu-general') red with-sub">
                 <span>
                     <i class=" font-icon fa fa-file"></i>
@@ -89,7 +89,8 @@
                     <li class=""><a href="{{ route('cp.content.content.edit', ['slug' => 'slogan']) }}?menu=general"><span class="lbl">Slogan</span></a></li>
                 </ul>
             </li>
-             <li class="@yield('active-main-menu-order') red with-sub">
+             @if(Auth::user()->position_id == 1)
+            <li class="@yield('active-main-menu-order') red with-sub">
                 <span>
                     <i class=" font-icon fa fa-bell"></i>
                     <span class="lbl"> Orders</span>
@@ -156,6 +157,7 @@
                     <li class=""><a href="{{ route('cp.category.index') }}"><span class="lbl">Category</span></a></li>
                 </ul>
             </li>
+            @if(Auth::user()->position_id == 1)
             <li class="red @yield('active-main-menu-product-post')">
                 <a href="{{ route('cp.product-post.index') }}">
                 <span>
@@ -164,6 +166,8 @@
                 </span>
                 </a>
             </li>
+            
+
             <li class="red @yield('active-main-menu-visitor')">
                 <a href="{{ route('cp.visitor.index') }}">
                 <span>
@@ -172,7 +176,7 @@
                 </span>
                 </a>
             </li>
-
+            @endif
             @if(Auth::user()->position_id == 1)
             <li class="red @yield('active-main-menu-user')">
                 <a href="{{ route('cp.user.user.index') }}">
