@@ -29,6 +29,7 @@
 							</span>
 						</a>
 					</li>
+					@if(Auth::user()->position_id == 1)
 					<li class="nav-item">
 						<a class="nav-link @yield ('tab-active-logs')" onclick="window.location.href='{{ route($route.'.logs') }}' " href="#" role="tab" data-toggle="tab">
 							<span class="nav-link-in">
@@ -36,7 +37,7 @@
 							</span>
 						</a>
 					</li>
-					
+					@endif
 				</ul>
 			</div>
 		</div><!--.tabs-section-nav-->
