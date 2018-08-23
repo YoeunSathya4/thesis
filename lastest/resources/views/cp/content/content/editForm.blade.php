@@ -1,8 +1,13 @@
 @extends('cp.layouts.app')
-@section('active-main-menu-home', 'opened')
+@php ($menu = "")
+@if(isset($_GET['menu']))
+    @php( $menu = $_GET['menu'])
+@endif
+@section('active-main-menu-'.$menu, 'opened')
 @section('title', 'Edit Content')
 
 @if($data->image_required)
+
 
 @section ('appbottomjs')
 	

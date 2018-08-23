@@ -58,12 +58,12 @@
 											@php($total = 0)
 			                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
 			                                @foreach( $details as $row)
-			                                @php($total_amount += $row->unit_price * $row->qty)
+			                                @php($total_amount += $row->unit_price)
 			                                <tr>
 			                                    <td>{{$row->product->productName}} </td>
-			                                    <td class="text-center">{{$row->unit_price}}</td>
+			                                    <td class="text-center">{{$row->unit_price / $row->qty}}</td>
 			                                    <td class="text-center">{{$row->qty}}</td>
-			                                    <td class="text-right"> {{$row->unit_price * $row->qty}}</td>
+			                                    <td class="text-right"> {{$row->unit_price}}</td>
 			                                    
 			                                </tr>
 			                                @endforeach

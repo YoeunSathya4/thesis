@@ -78,7 +78,7 @@
                             <div class="address-column">
                                 <span class="address-icon"><i class="fa fa-map-marker"></i></span>
                                 <h6>{{__('general.address')}}</h6>
-                                <strong> {{__('general.locations')}}</strong>
+                                <strong>@if($defaultData['address']) {{$defaultData['address']->content}} @endif </strong>
                                 
                             </div>
                         </div>
@@ -89,8 +89,7 @@
                             <div class="address-column">
                                 <span class="address-icon"><i class="fa fa-volume-control-phone"></i></span>
                                 <h6>{{__('general.phone')}}</h6>
-                                <strong>012 891 522</strong>
-                                <strong>012 702 122</strong>
+                                <strong>@if($defaultData['phone']) {{$defaultData['phone']->content}} @endif</strong>
                             </div>
                         </div>
                         <!-- Column -->
@@ -100,7 +99,7 @@
                             <div class="address-column">
                                 <span class="address-icon"><i class="fa fa-envelope"></i></span>
                                 <h6>{{__('general.email')}}</h6>
-                                <strong>contact@khmemaraksmey.com</strong>
+                                <strong>@if($defaultData['email']) {{$defaultData['email']->content}} @endif</strong>
                                 
                             </div>
                         </div>
@@ -112,7 +111,7 @@
                                 <span class="address-icon"><i class="fa fa-share-alt"></i></span>
                                 <h6>{{__('general.follow-us')}}</h6>
                                 <ul class="social-icons">
-                                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a target="_blank" class="facebook" href="https://www.facebook.com/%E1%9E%94%E1%9E%8E%E1%9F%92%E1%9E%8E%E1%9E%B6%E1%9E%82%E1%9E%B6%E1%9E%9A-%E1%9E%81%E1%9F%81%E1%9E%98%E1%9E%9A%E1%9E%B6%E1%9E%9A%E1%9E%9F%E1%9F%92%E1%9E%98%E1%9E%BE-520399685084750/?modal=admin_todo_tour"><i class="fa fa-facebook"></i></a></li>
                                     <li><a class="youtube" href="#"><i class="fa fa-youtube-play"></i></a></li>
                                 </ul>
                                

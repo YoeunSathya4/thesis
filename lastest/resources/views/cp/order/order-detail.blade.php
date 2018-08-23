@@ -83,7 +83,7 @@
 					
 		</div>
 	</div>
-	<div class="form-group row">
+	<!-- <div class="form-group row">
 		<label class="col-sm-2 form-control-label" for="name">Delivery Time</label>
 		<div class="col-sm-10">
 			<input 	id="name"
@@ -97,7 +97,7 @@
 					 />
 					
 		</div>
-	</div>
+	</div> -->
 	<div class="form-group row">
 		<label class="col-sm-2 form-control-label" for="name">Discount</label>
 		<div class="col-sm-10">
@@ -147,17 +147,17 @@
 
 			@endforeach
 			<tr>
-				<td colspan="5" style="text-align: right;"></td>
+				<td class="no-line" colspan="3" style="text-align: right; border:0px solid black;"></td>
 				<td>Total in USD</td>
 				<td>$ {{$total_amount + $sumExtra}}</td>
 			</tr>
 			<tr>
-				<td colspan="5" style="text-align: right;"></td>
+				<td colspan="3" style="text-align: right;border:0px solid black;"></td>
 				<td>Discount</td>
 				<td>% {{$data->discount}}</td>
 			</tr>
-			<tr>
-				<td colspan="5" style="text-align: right;"></td>
+			<tr class="no-line">
+				<td colspan="3" style="text-align: right;border:0px solid black;"></td>
 				<td>You have to Paid</td>
 				<td>$ 
 					@if($data->discount==0) 
@@ -168,7 +168,6 @@
 					@endif
 				</td>
 			</tr>
-
 			
 		</tbody>
 	</table>
