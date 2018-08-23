@@ -61,10 +61,15 @@ class TrackingController extends Controller
         }
         if(Auth::user()->position_id == 1){
             $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+            $users = User::where(['visible'=> 1])->get();
+        }else if(Auth::user()->position_id == 2){
+            $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+            $users = User::where(['visible'=> 1,'position_id'=>2])->get();
         }else{
-            $data= $data->orderBy('created_at', 'DESC')->where('is_deleted',0)->paginate($limit);
+            $data= $data->orderBy('created_at', 'DESC')->paginate($limit);
+            $users = User::where(['visible'=> 1,'position_id'=>2])->get();
         }
-        $users = User::where(['visible'=> 1,'position_id'=>2])->get();
+       
         return view($this->route.'.index', ['route'=>$this->route, 'data'=>$data,'appends'=>$appends,'users'=>$users]);
     }
    
