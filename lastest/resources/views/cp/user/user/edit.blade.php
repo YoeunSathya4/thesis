@@ -122,10 +122,17 @@
 				<select id="position_id" name="position_id" class="form-control">
 					@if($data->position_id == 1)
 					<option value="1" >Admin</option>
+					<option value="3" >Manager</option>
 					<option value="2" >User</option>
-					@else
+					@elseif($data->position_id == 2)
 					<option value="2" >User</option>
 					<option value="1" >Admin</option>
+					<option value="3" >Manager</option>
+					@else
+					<option value="3" >Manager</option>
+					<option value="2" >User</option>
+					<option value="1" >Admin</option>
+					
 					@endif
 					
 				</select>

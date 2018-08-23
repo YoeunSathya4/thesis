@@ -30,6 +30,11 @@
             $(location).attr('href', '{{ route('search-product',$locale) }}'+url);
           }
     </script>
+    <style type="text/css">
+        input[type="text"]#text-color::-webkit-input-placeholder {
+              color: #fff;
+            }
+    </style>
 @endsection
 
     
@@ -47,26 +52,26 @@
 
 
 
-                                <div style="    padding: 21px; background: #283891;border-radius: 11px;" class="row">
+                                <div style=" padding: 21px; background: #283891;border-radius: 11px;" class="row">
                                     <form style="padding-left: 40px;" id="frm-search" name="form">
                                     
 
                                         <div class="col-xs-12 col-sm-12 col-md-3">
                                             <div class="form-group">
                                                 
-                                                <input style="color: white;border: 1px solid #fff;"  type="text" class="form-control" id="key" placeholder="{{__('general.key')}}" value="{{isset($appends['key'])?$appends['key']:''}}">
+                                                <input id="text-color" style="color: white;border: 1px solid #fff;"  type="text" class="form-control" id="key" placeholder="{{__('general.key')}}" value="{{isset($appends['key'])?$appends['key']:''}}">
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3">
                                             <div class="form-group">
                                                 
-                                                <input style="color: white;border: 1px solid #fff;" type="text" class="form-control" id="min" placeholder="{{__('general.minimun-price')}}" value="{{isset($appends['min'])?$appends['min']:''}}">
+                                                <input id="text-color" style="color: white;border: 1px solid #fff;" type="text" class="form-control" id="min" placeholder="{{__('general.minimun-price')}}" value="{{isset($appends['min'])?$appends['min']:''}}">
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3">
                                             <div class="form-group">
                                                 
-                                                <input style="color: white;border: 1px solid #fff;" type="text" class="form-control" id="max" placeholder="{{__('general.maximun-price')}}" value="{{isset($appends['max'])?$appends['max']:''}}">
+                                                <input id="text-color" style="color: white;border: 1px solid #fff;" type="text" class="form-control" id="max" placeholder="{{__('general.maximun-price')}}" value="{{isset($appends['max'])?$appends['max']:''}}">
                                             </div>
                                         </div>
                                         <div class="ccol-xs-12 col-sm-12 col-md-3">

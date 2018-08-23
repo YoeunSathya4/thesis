@@ -129,6 +129,7 @@
 			<div class="col-sm-10">
 				<select id="position_id" name="position_id" class="form-control">
 					<option value="1" >Admin</option>
+					<option value="3" >Manager</option>
 					<option value="2" >User</option>
 				</select>
 			</div>

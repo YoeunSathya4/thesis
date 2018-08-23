@@ -58,7 +58,7 @@
 	<div class="col-xs-12 col-sm-6 col-md-3">
 		<div class="form-group">
 			
-			<input  type="text" class="form-control" id="key" placeholder="Invoice ID" value="{{ isset($appends['key'])?$appends['key']:'' }}">
+			<input  type="text" class="form-control" id="key" placeholder="Invoice ID or Payment ID" value="{{ isset($appends['key'])?$appends['key']:'' }}">
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-6 col-md-3">
@@ -94,6 +94,7 @@
 			<tr>
 				<th>#</th>
 				<th>Invoice ID</th>
+				<th>Payment ID</th>
 				<th>Customer</th>
 				<th>Product</th>
 				<th>Quatity</th>
@@ -109,6 +110,7 @@
 				<tr>
 					<td>{{ $i++ }}</td>
 					<td>00000{{ $row->id }}</td>
+					<td>{{ $row->payment_id }}</td>
 					<td>{{$row->customer->name}}</td>
 					<td >
 						<ul>
