@@ -149,7 +149,7 @@
 							<td>{{ $row->kh_name }}</td>
 							<td>
 								@if($row->image!="")
-									<img src="{{asset('public/uploads/category/image/'.$row->image)}}" class="img img-responsive" />
+									<img src="{{asset('public/uploads/category/image/'.$row->image)}}" width="50px" class="img img-responsive" />
 								@else
 									No Image Avaiable
 								@endif

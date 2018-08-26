@@ -141,7 +141,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-2">
 		<div class="form-group">
 			
-			<input  type="text" class="form-control" id="key" placeholder="Key" value="{{ isset($appends['key'])?$appends['key']:'' }}">
+			<input  type="text" class="form-control" id="key" placeholder="Customer Name" value="{{ isset($appends['key'])?$appends['key']:'' }}">
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-2">

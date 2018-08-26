@@ -79,6 +79,8 @@ class SubCategoryController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(400, 313)->save(public_path('uploads/subcategory/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
         $id=SubCategory::insertGetId($data);
         $tracking_data = SubCategory::find($id);
@@ -93,7 +95,7 @@ class SubCategoryController extends Controller
 
     function edit($id, $subcategory_id){
         $data = Model::find($id)->subCategories()->find($subcategory_id);
-        if( sizeof($data) == 1){
+        if( $data){
             return view($this->route.'.edit', ['route'=>$this->route, 'id'=>$id,'subcategory_id'=>$subcategory_id, 'data'=>$data]);
         }else{
             echo "ivalide data";
@@ -131,6 +133,8 @@ class SubCategoryController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(400, 313)->save(public_path('uploads/subcategory/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
 
         Model::find($category_id)->subCategories()->where('id', $subcategory_id)->update($data);
