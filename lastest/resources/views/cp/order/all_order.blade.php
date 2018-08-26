@@ -99,12 +99,13 @@
 				<th>Product</th>
 				<th>Quatity</th>
 				<th>Price</th>
+				<th>Total Price</th>
 				<th></th>
 				
 			</tr>
 		</thead>
 		<tbody>
-			
+			@php($total_amount = 0)
 			@php ($i = 1)
 			@foreach ($data as $row)
 				<tr>
@@ -134,9 +135,23 @@
 							@endforeach
 						</ul>
 					</td>
+					<td>
+						<ul>
+							@foreach($details as $detail)
+							@php($total_amount += $detail->unit_price * $detail->qty)
+							<li>{{$detail->unit_price * $detail->qty}} $</li>
+							@endforeach
+						</ul>
+					</td>
 					<td><a href="{{route('cp.order.all-order-detail',$row->id)}}" class="tabledit-edit-button btn btn-sm btn-success" style="float: none;"><span class="fa fa-eye"></span></a></td>
 				</tr>
+				
 			@endforeach
+				<tr class="no-line">
+					<td colspan="6" style="text-align: right;border:0px solid black;"></td>
+					<td>You have to Paid</td>
+					<td>$ {{$total_amount}}</td>
+				</tr>
 		</tbody>
 	</table>
 </div >

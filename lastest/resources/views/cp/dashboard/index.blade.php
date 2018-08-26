@@ -33,7 +33,7 @@
 	                   	<div class="col-sm-3">
 	                        <article class="statistic-box purple">
 	                            <div>
-	                                <div class="number">{{count($today_customer)}}</div>
+	                                <div class="number">{{$today_customer}}</div>
 	                                <div class="caption"><div>New Customer Today</div></div>
 	                                <div class="percent">
 	                                   
@@ -44,7 +44,7 @@
 	                    <div class="col-sm-3">
 	                        <article class="statistic-box green">
 	                            <div>
-	                                <div class="number">{{count($today_order)}}</div>
+	                                <div class="number">{{$today_order}}</div>
 	                                <div class="caption"><div>New Order Today</div></div>
 	                                <div class="percent">
 	                                   

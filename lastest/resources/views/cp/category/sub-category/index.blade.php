@@ -48,7 +48,7 @@
 	<div class="row">
 
 		<div class="col-md-3">
-			<input type="text" placeholder="Name" id="key" class="form-control" value="{{isset($_GET['key'])?$_GET['key']:''}}" />
+			<input type="text" placeholder="Sub Category name" id="key" class="form-control" value="{{isset($_GET['key'])?$_GET['key']:''}}" />
 		</div>
 		
 		
