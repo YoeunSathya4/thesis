@@ -32,8 +32,8 @@ class ContactUsController extends FrontendController
          Validator::make(
                         $request->all(), 
                         [
-                            'name' => 'required|min:3|max:30',
-                            //'email' => 'email',
+                            'name' => 'required|min:1|max:30',
+                            'phone' => 'required|numeric',
                             'message' => 'required|max:255',
                             // 'g-recaptcha-response' => 'required',
                         ], 

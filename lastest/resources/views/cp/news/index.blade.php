@@ -153,7 +153,7 @@
 					</td>
 					<td>
 						@if($row->image!="")
-							<img src="{{ asset ('public/uploads/news/image/'.$row->image) }}" style="max-width:250px" alt="" data-toggle="tooltip" data-placement="bottom" title="{{ $row->name }}">
+							<img src="{{ asset ('public/uploads/news/image/'.$row->image) }}" style="max-width:50px" alt="" data-toggle="tooltip" data-placement="bottom" title="{{ $row->name }}">
 						@else
 							No Image Avaiable
 						@endif

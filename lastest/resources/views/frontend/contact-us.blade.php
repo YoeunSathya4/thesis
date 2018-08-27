@@ -12,7 +12,6 @@
     $(document).ready(function() {
       $("#contact-form").submit(function(event){
         name = $("#name").val();
-        email = $("#email").val();
         phone = $("#phone").val();
         subject = $("#subject").val();
         message = $("#message").val();
@@ -20,7 +19,7 @@
         
         if(name != ""){
             
-                if(phone != ""){
+                if(phone != 0){
                 if(message != ""){
                   // if(g != ""){
                   //   //alert('Go!');
@@ -40,12 +39,12 @@
         }
       })
 
-      @if(Session::has('msg'))
-        toastr.success("{{ __('general.contact-successful-sent') }}");
-      @endif
-      @if (count($errors) > 0)
-        toastr.warning("{{ __('general.sorry') }}");
-      @endif
+      // @if(Session::has('msg'))
+      //   toastr.success("{{ __('general.contact-successful-sent') }}");
+      // @endif
+      // @if (count($errors) > 0)
+      //   toastr.warning("{{ __('general.sorry') }}");
+      // @endif
 
     });
     function isEmail(email) {
@@ -170,7 +169,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input name="phone" id="phone" class="form-control" required="required" placeholder="{{__('general.phone')}}">
+                                    <input pattern="[0-9]*" name="phone" id="phone" class="form-control" required="required" placeholder="{{__('general.phone')}}">
                                     <i class="fa fa-phone"></i>
                                 </div>
                             </div>
