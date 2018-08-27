@@ -36,10 +36,10 @@ class ProductController extends Controller
 
     public function index(){
         $data            = Model::select('*');
-        $limit      =   intval(isset($_GET['limit'])?$_GET['limit']:10); 
-        $key        =   isset($_GET['key'])?$_GET['key']:"";
-        $category   =   intval(isset($_GET['category'])?$_GET['category']:0); 
-        $subcategory    =   intval(isset($_GET['subcategory'])?$_GET['subcategory']:0);
+        $limit           =   intval(isset($_GET['limit'])?$_GET['limit']:10); 
+        $key             =   isset($_GET['key'])?$_GET['key']:"";
+        $category        =   intval(isset($_GET['category'])?$_GET['category']:0); 
+        $subcategory     =   intval(isset($_GET['subcategory'])?$_GET['subcategory']:0);
         $maincategory    =   intval(isset($_GET['maincategory'])?$_GET['maincategory']:0);
         $from=isset($_GET['from'])?$_GET['from']:"";
         $till=isset($_GET['till'])?$_GET['till']:"";
@@ -144,6 +144,8 @@ class ProductController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(420, 420)->save(public_path('uploads/product/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
 
 		$id=Model::insertGetId($data);
@@ -223,6 +225,8 @@ class ProductController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(420, 420)->save(public_path('uploads/product/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
         Model::where('id', $id)->update($data);
         $tracking_data = Model::find($id);

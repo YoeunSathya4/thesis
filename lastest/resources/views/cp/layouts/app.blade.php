@@ -134,18 +134,16 @@
                 </span>
                 </a>
             </li>
-           
-
-            <li class="@yield('active-main-menu-medai') red with-sub">
+           <li class="red @yield('active-main-menu-medai')">
+                <a href="{{ route('cp.promotion.index') }}">
                 <span>
-                    <i class=" font-icon fa fa-globe"></i>
-                    <span class="lbl"> Medai</span>
+                    <i class="fa fa-globe"></i>
+                    <span class="lbl">Promotion</span>
                 </span>
-                <ul>
-                    <!-- <li class=""><a href="{{ route('cp.announcement.index') }}"><span class="lbl">Announment</span></a></li> -->
-                    <li class=""><a href="{{ route('cp.promotion.index') }}"><span class="lbl">Promotion</span></a></li>
-                </ul>
+                </a>
             </li>
+
+            
 
             <li class="@yield('active-main-menu-product') red with-sub">
                 <span>

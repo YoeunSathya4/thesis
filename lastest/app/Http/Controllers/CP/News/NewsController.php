@@ -67,7 +67,7 @@ class NewsController extends Controller
     public function store(Request $request) {
         $user_id    = Auth::id();
         $now        = date('Y-m-d H:i:s');
-
+        //dd($request->all());
         $data = array(
                     'kh_title' =>   $request->input('kh_title'), 
                     'en_title' =>  $request->input('en_title'),
@@ -81,14 +81,12 @@ class NewsController extends Controller
                     'created_at' => $now
                 );
         
-        Session::flash('invalidData', $data );
+        Session::flash('invalidData', $request->all() );
         Validator::make(
-                        $data, 
+            $request->all(), 
                         [
-                           'image' => 'required',
-                           'image_detail' => 'required',
-                           'kh_title' => 'required',
-                           'en_title' => 'required',
+                           'kh_title'       => 'required',
+                           'en_title'       => 'required',
                            'kh_description' => 'required',
                            'en_description' => 'required'
                         ]);
@@ -104,6 +102,8 @@ class NewsController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(262, 205)->save(public_path('uploads/news/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';  
         }
 
         if($request->hasFile('image-detail')) {
@@ -111,6 +111,8 @@ class NewsController extends Controller
             $imagedetailname = time().'.'.$image_detail->getClientOriginalExtension(); 
             Image::make($image_detail->getRealPath())->resize(848, 475)->save(public_path('uploads/news/image-detail/'.$imagedetailname));
             $data['image_detail']=$imagedetailname;
+        }else{
+            $data['image_detail']='';
         }
 
 		$id=Model::insertGetId($data);
@@ -150,7 +152,7 @@ class NewsController extends Controller
         
 
         Validator::make(
-        				$data, 
+            $request->all(),  
 			        	[
                             
                            'kh_title' => 'required',
@@ -169,6 +171,8 @@ class NewsController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(262, 205)->save(public_path('uploads/news/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';  
         }
 
         if($request->hasFile('image-detail')) {
@@ -176,6 +180,8 @@ class NewsController extends Controller
             $imagedetailname = time().'.'.$image_detail->getClientOriginalExtension(); 
             Image::make($image_detail->getRealPath())->resize(848, 475)->save(public_path('uploads/news/image-detail/'.$imagedetailname));
             $data['image_detail']=$imagedetailname;
+        }else{
+            $data['image_detail']='';  
         }
 
         Model::where('id', $id)->update($data);

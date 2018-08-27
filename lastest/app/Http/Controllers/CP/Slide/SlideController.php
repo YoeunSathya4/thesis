@@ -80,7 +80,7 @@ class SlideController extends Controller
                         $request->all(), 
                         [
                             
-                            'name' => 'required|min:2|max:150'
+                            'name' => 'required'
                         ])->validate();
         if($request->input('active')=="")
         {
@@ -95,6 +95,8 @@ class SlideController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(1903, 700)->save(public_path('uploads/slide/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
 		$id=Model::insertGetId($data);
         $tracking_data = Model::find($id);
@@ -121,7 +123,7 @@ class SlideController extends Controller
         				$request->all(), 
 			        	[
                             
-                            'name' => 'required|min:1|max:150'
+                            'name' => 'required'
                             
                         ],
                         [
@@ -146,6 +148,8 @@ class SlideController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(1903, 700)->save(public_path('uploads/slide/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
        
         Model::where('id', $id)->update($data);
@@ -188,13 +192,14 @@ class SlideController extends Controller
             'msg' => 'Slide has been deleted'
         ]);
     }
+
     function updateStatus(Request $request){
         $user_id  = Auth::id();
         $now      = date('Y-m-d H:i:s');
-      $id   = $request->input('id');
-      $data = array('is_published' => $request->input('active'));
-      Model::where('id', $id)->update($data);
-      $tracking_data = Model::find($id);
+        $id   = $request->input('id');
+        $data = array('is_published' => $request->input('active'));
+        Model::where('id', $id)->update($data);
+        $tracking_data = Model::find($id);
       if($request->input('active') == 1){
         $tracking = new Tracking();
         $tracking->user_id = $user_id;

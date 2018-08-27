@@ -86,7 +86,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-3">
 		<div class="form-group">
 			
-			<input  type="text" class="form-control" id="key" placeholder="Key" value="{{ isset($appends['key'])?$appends['key']:'' }}">
+			<input  type="text" class="form-control" id="key" placeholder="Promotion name" value="{{ isset($appends['key'])?$appends['key']:'' }}">
 		</div>
 	</div>
 	
@@ -153,7 +153,7 @@
 					</td>
 					<td>
 						@if($row->image!="")
-							<img src="{{ asset ('public/uploads/promotion/image/'.$row->image) }}" style="max-width:250px" alt="" data-toggle="tooltip" data-placement="bottom" title="{{ $row->name }}">
+							<img src="{{ asset ('public/uploads/promotion/image/'.$row->image) }}" style="max-width:50px" alt="" data-toggle="tooltip" data-placement="bottom" title="{{ $row->name }}">
 						@else
 							No Image Avaiable
 						@endif

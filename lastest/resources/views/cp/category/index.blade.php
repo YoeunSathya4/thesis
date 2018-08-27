@@ -89,7 +89,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-2">
 		<div class="form-group">
 			
-			<input  type="text" class="form-control" id="key" placeholder="Key" value="{{ isset($appends['key'])?$appends['key']:'' }}">
+			<input  type="text" class="form-control" id="key" placeholder="Category Name" value="{{ isset($appends['key'])?$appends['key']:'' }}">
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-6 col-md-3">
@@ -149,7 +149,7 @@
 							<td>{{ $row->kh_name }}</td>
 							<td>
 								@if($row->image!="")
-									<img src="{{asset('public/uploads/category/image/'.$row->image)}}" class="img img-responsive" />
+									<img src="{{asset('public/uploads/category/image/'.$row->image)}}" width="50px" class="img img-responsive" />
 								@else
 									No Image Avaiable
 								@endif

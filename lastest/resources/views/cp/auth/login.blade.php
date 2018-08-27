@@ -59,7 +59,7 @@
     </form>
     @if(Auth::user())
     <script type="text/JavaScript">
-    window.location.replace('{{ route('cp.user.profile.edit') }}');
+    window.location.replace('{{ route('cp.profile.profile.edit') }}');
     </script>
      @endif
 @endsection

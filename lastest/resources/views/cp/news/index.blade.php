@@ -86,7 +86,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-3">
 		<div class="form-group">
 			
-			<input  type="text" class="form-control" id="key" placeholder="Key" value="{{ isset($appends['key'])?$appends['key']:'' }}">
+			<input  type="text" class="form-control" id="key" placeholder="News title" value="{{ isset($appends['key'])?$appends['key']:'' }}">
 		</div>
 	</div>
 	

@@ -89,6 +89,8 @@ class CategoryController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(263, 115)->save(public_path('uploads/category/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
         
 
@@ -136,6 +138,8 @@ class CategoryController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(263, 115)->save(public_path('uploads/category/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
         
         Model::where('id', $id)->update($data);

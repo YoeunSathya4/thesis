@@ -101,6 +101,8 @@ class PromotionController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(360, 300)->save(public_path('uploads/promotion/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
 
 		$id=Model::insertGetId($data);
@@ -157,6 +159,8 @@ class PromotionController extends Controller
             $imagename = time().'.'.$image->getClientOriginalExtension(); 
             Image::make($image->getRealPath())->resize(360, 300)->save(public_path('uploads/promotion/image/'.$imagename));
             $data['image']=$imagename;
+        }else{
+            $data['image']='';
         }
         Model::where('id', $id)->update($data);
         $tracking_data = Model::find($id);

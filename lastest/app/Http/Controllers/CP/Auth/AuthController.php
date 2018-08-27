@@ -23,7 +23,7 @@ class AuthController extends Controller {
         if (!Auth::guard('user')->check()) 
             return view('user/auth.login');
         else 
-            return redirect()->route('cp.user.profile');
+            return redirect()->route('cp.profile');
     }   
 
     protected function authenticate(Request $request) {
