@@ -7,7 +7,7 @@
             })
         })
           function search(){
-            key    = $('#key').val();
+            key    = $("#key").val();
             min     = $('#min').val();
             max     = $('#max').val();
 
@@ -59,19 +59,19 @@
                                         <div class="col-xs-12 col-sm-12 col-md-3">
                                             <div class="form-group">
                                                 
-                                                <input id="text-color" style="color: white;border: 1px solid #fff;"  type="text" class="form-control" id="key" placeholder="{{__('general.key')}}" value="{{isset($appends['key'])?$appends['key']:''}}">
+                                                <input style="color: white;border: 1px solid #fff;"  type="text" class="form-control" id="key" placeholder="{{__('general.key')}}" value="{{isset($appends['key'])?$appends['key']:''}}">
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3">
                                             <div class="form-group">
                                                 
-                                                <input id="text-color" style="color: white;border: 1px solid #fff;" type="text" class="form-control" id="min" placeholder="{{__('general.minimun-price')}}" value="{{isset($appends['min'])?$appends['min']:''}}">
+                                                <input  style="color: white;border: 1px solid #fff;" type="text" class="form-control" id="min" placeholder="{{__('general.minimun-price')}}" value="{{isset($appends['min'])?$appends['min']:''}}">
                                             </div>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-3">
                                             <div class="form-group">
                                                 
-                                                <input id="text-color" style="color: white;border: 1px solid #fff;" type="text" class="form-control" id="max" placeholder="{{__('general.maximun-price')}}" value="{{isset($appends['max'])?$appends['max']:''}}">
+                                                <input style="color: white;border: 1px solid #fff;" type="text" class="form-control" id="max" placeholder="{{__('general.maximun-price')}}" value="{{isset($appends['max'])?$appends['max']:''}}">
                                             </div>
                                         </div>
                                         <div class="ccol-xs-12 col-sm-12 col-md-3">
